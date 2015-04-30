@@ -20,32 +20,98 @@ Basics
 
 d3 needs 3 pieces of information to create a circle:
 <div class="row">
-    <div class="col-md-8" class="input_are">
+    <div class="col-md-6" class="input_are">
+        <div class="row">
+            <div class="col-md-4">
+            cx
+            </div>
+            <div class="col-md-5">
+            Starting x for the circle's center
+            </div>
+            <div class="col-md-3">
+
+        <select class="form-control" id="cxinput">
+        <option>5</option><option>20</option> <option selected>40</option><option>80</option><option>100</option>  <option>150</option> 
+</select>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-4">
             cy
             </div>
-            <div class="col-md-4">
+            <div class="col-md-5">
             Starting y for the circle's center
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
 
-        <select class="form-control" id="cy_input">
-        <option>10</option>
-        <option>20</option> 
+        <select class="form-control" id="cyinput">
+        <option>5</option><option>20</option> <option selected>40</option><option>80</option><option>100</option>  <option>150</option> 
 </select>
             </div>
         </div>
-    </div>
-    <div class="col-md-4" class="output_area">
-(svg area)
+        <div class="row">
+            <div class="col-md-4">
+            r
+            </div>
+            <div class="col-md-5">
+            The circle's radius
+            </div>
+            <div class="col-md-3">
+
+        <select class="form-control" id="rinput">
+        <option>5</option><option>20</option> <option selected>40</option><option>80</option><option>100</option>  <option>150</option> 
+</select>
+            </div>
+        </div>
+
+
+</div>
+    <div class="col-md-6" id="simplecirclearea">
     </div>
 </div>
+
+
 
 </div>
 
 <script type="text/javascript">
-// Your beautiful D3 code will go here
+var holder = d3.select("#simplecirclearea")
+      .append("svg")
+      .attr("width", 400)    
+      .attr("height", 200); 
+
+// draw the circle
+holder.append("circle")
+  .attr("cx", 40)
+  .attr("cy", 40) 
+  .style("fill", "red")   
+  .style("stroke", "blue") 
+  .attr("r",  20);
+
+// when the input range changes update the circle 
+d3.select("#cxinput").on("input", function() {
+  holder.select("circle") 
+    .attr("cx", this.value);
+});
+d3.select("#cyinput").on("input", function() {
+  holder.select("circle") 
+    .attr("cy", this.value);
+});
+d3.select("#rinput").on("input", function() {
+  holder.select("circle") 
+    .attr("r", this.value);
+});
+
+// update the elements
+function update(radius) {
+
+  // update the circle radius
+  holder.select("circle") 
+    .attr("r", radius);
+}
+
+
 </script>
 
 
