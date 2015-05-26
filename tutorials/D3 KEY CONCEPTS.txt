@@ -1,0 +1,22 @@
+D3 KEY CONCEPTS
+
+The "sandwich" needs to visually say, slow down,
+stop and learn the:
+- math (high school math)
+- patterns (also works with the metaphor: sandwiches are about patterns)
+
+
+Learning D3 is about:
+
+1) Learning some key patterns you'll use over and over
+Learning D3 isn't about learning a specific command or specific tricks,
+it's about learning key patterns
+so that when you see code, you don't see individual lines, you see a pattern
+(cooking metaphor?)
+(And learning patterns in small bites, so you don't get overwhelmed)
+
+2) Relearning basic high school math – e.g., simple geometry
+The hardest thing about D3 is that you have to use math to tell it what you want to do.
+The math isn't that hard.
+The idea is hard, because you don't normally use math to tell a computer where to put things
+
