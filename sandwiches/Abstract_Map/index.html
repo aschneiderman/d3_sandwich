@@ -20,7 +20,7 @@
 <div class="row">
   <div class="col-md-4"><h2>Abstract State Map</h2>  
 <p> Want to create an abstract map of some states or any other data you might have? Once you understand a few D3 tricks, it's pretty easy to do.</p>
-<p>Difficulty: intermediate</p>
+<p>Difficulty: intermediate.</p>
 </div>
   <div class="col-md-8"> <img src="abstract_state_snapshot.jpg" > </div>
 </div>
@@ -30,7 +30,21 @@
 
 <div id="sandwich-columns" class="container">
 <div class="row">
-  <div class="col-md-4">1)   Prep</div>
+  <div class="col-md-4"><div class="recipe-step-header">1)  Set up the Map's Style</div>
+  <div class="recipe-step-body"><p>First we need to set up the colors, etc. for the map pieces.</p>
+  <p> The one you're probably most interested in:  state--selected rect . By changing the color, you can change the color of the selected states.</p>
+  <p>Let's play with the color of the states that get selected by changing state--selected rect:</p>
+ <select class="form-control" id="cxinput">
+        <option>Green</option><option>Orange</option> <option selected>Purple</option><option>Brown</option><option>Black</option>  
+</select>
+  <script type="text/javascript">
+// Your beautiful D3 code will go here
+
+</script>
+</br>
+  <p> Don't know about CSS styles? <br/>Here's the  <a href="tutorials/css.html">least you need to know</a>.</p>
+  </div>
+  </div>
   <div class="col-md-8">
   <pre>
 &lt;!DOCTYPE html&gt;
@@ -56,7 +70,15 @@
 &lt;/style&gt;
 &lt;svg width="960" height="500"&gt;&lt;/svg&gt;</pre></div></div>
 <div class="row">
-  <div class="col-md-4">2) Think some thoughts</div>
+  <div class="col-md-4"><div class="recipe-step-header">2) Create the Map</div>
+  <div class="recipe-step-body"><p>The key to this data visualization is a trick: creating the state map almost like old school 
+   <a href="">ASCII art</a>.</p>
+  <p> The one you're probably most interested in:  state--selected rect . By changing the color, you can change the color of the selected states.</p>
+  <p> <a href=""> Anatomy of the Trick</a></p>
+  </div>
+  
+  
+  </div>
   <div class="col-md-8">
   <pre>&lt;script id="grid" type="text/plain"&gt;
                               ME
@@ -67,13 +89,8 @@ CA UT CO NE MO KY WV VA MD DE
    AZ NM KS AR TN NC SC
          OK LA MS AL GA
 HI AK    TX             FL
-&lt;/script&gt;</pre></div></div>
-
-
-<div class="row">
-  <div class="col-md-4">3) And the rest of it</div>
-  <div class="col-md-8">
-<pre>&lt;script src="http://d3js.org/d3.v3.min.js"&gt;&lt;/script&gt;
+&lt;/script&gt;
+&lt;script src="http://d3js.org/d3.v3.min.js"&gt;&lt;/script&gt;
 &lt;script&gt;
 
 var states = [],
@@ -88,6 +105,17 @@ d3.select("#grid").text().split("\n").forEach(function(line, i) {
     y: i
   });
 });
+</pre></div></div>
+
+
+<div class="row">
+  <div class="col-md-4"> <div class="recipe-step-header">3) All the Rest of It</div>
+  <div class="recipe-step-body"><p>{I need to break down the rest of the script}</p>
+  </div>
+  
+  </div>
+  <div class="col-md-8">
+<pre>
 
 var svg = d3.select("svg"),
     width = +svg.attr("width"),

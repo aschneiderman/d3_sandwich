@@ -45,5 +45,13 @@ h1 {
 
 
 pre {
-	background-color: #FFFFF5;
+	background-color: #FFFFFA;
+}
+
+.recipe-step-header  {
+		  font-size: 25px;
+}	
+
+.recipe-step-body  {
+	font-size: 16px;
 }
