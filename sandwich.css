@@ -21,6 +21,29 @@ h1 {
 
 #sandwich-border {
 	border-bottom: 1px solid #ccc;
-	padding-top: 10px;
-		margin-right: 10px;
+	padding-top: 30px;
+		margin-right: 50px;
+}
+
+
+#sandwich-overview  {
+	/* border-bottom: 1px solid #ccc; */
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+
+}
+
+#sandwich-overview  p {
+		font-size: 18px;
+}
+
+
+#sandwich-overview  h2 {
+	  font-size: 50px;
+		/*color: #99FF33;  */
+}
+
+
+pre {
+	background-color: #FFFFF5;
 }
