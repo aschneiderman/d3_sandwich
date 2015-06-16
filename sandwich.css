@@ -1,4 +1,3 @@
-
 body {
   font-family: "Helvetica Neue", Helvetica, sans-serif;
 	margin-right: 10px;
@@ -43,6 +42,7 @@ h1 {
 		/*color: #99FF33;  */
 }
 
+.row-top-buffer { margin-top:20px; }  /* Apparently, this is the best way to add a margin between rows in bootstrap */
 
 pre {
 	background-color: #FFFFFA;
