@@ -35,7 +35,7 @@
 </div>
 
 <div id="sandwich-overview" > 
-  <h2>Abstract State Map</h2>  
+  <h2>Abstract State Map:  Other Abstract Maps</h2>  
 </div>
 
 <svg width="960" height="500"></svg>
@@ -100,7 +100,7 @@ state.append("text")
 
 <div id="sandwich-columns" class="container">
 <div class="row">
-  <div class="col-md-6"><div class="recipe-step-header">Set up the Map's Style</div>
+  <div class="col-md-6"><div class="recipe-step-header">1) Set up the Map's Colors and Other Styles</div>
   <div class="recipe-step-body"><p>First we need to set up the colors, etc. for the map pieces.</p>
   <p> The one you're probably most interested in:  state--selected rect . By changing the color, you can change the color of the selected states.</p>
   <p>Let's play with the color of the states that get selected by changing state--selected rect:</p>
@@ -148,6 +148,8 @@ d3.select("#state_color").on("change",  function() {
   <pre>
 &lt;!DOCTYPE html&gt;
 &lt;meta charset="utf-8"&gt;
+
+// ----- Set the colors & other stypes for the map --------------------
 &lt;style&gt;
 
 .state rect {
@@ -167,7 +169,14 @@ d3.select("#state_color").on("change",  function() {
   fill: white;
 }
 &lt;/style&gt;
-&lt;svg width="960" height="500"&gt;&lt;/svg&gt;</pre></div></div>
+
+&lt;script src="http://d3js.org/d3.v3.min.js"&gt;&lt;/script&gt;
+
+// ----- Set the states that are selected -------------------------------
+&lt;style&gt;
+var selectedStates = ["MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT"];
+&lt;/style&gt;
+</pre></div></div>
 
 
 
