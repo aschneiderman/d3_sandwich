@@ -18,7 +18,7 @@
 }
 
 .state--selected rect {
-  fill: green;
+  fill:  purple;
 }
 
 .state--selected text {
@@ -93,6 +93,7 @@ state.append("text")
     .attr("dy", ".35em")
     .text(function(d) { return d.name; });
 
+//d3.selectAll('.state rect').style("fill", "orange");
 </script>
 
 
@@ -108,7 +109,7 @@ state.append("text")
  <div class="form-group">
     <label for="state_color">state color:</label>
     <select class="form-control" id="state_color">
-
+ <option> Yellow</option>
         <option>Green</option><option>Orange</option> <option selected>Purple</option><option>Brown</option><option>Black</option>  
 </select> 
 </div>
@@ -118,7 +119,6 @@ state.append("text")
         <option>Green</option><option>Orange</option> <option selected>Purple</option><option>Brown</option><option>Black</option>  
 </select> 
 </div>
-  <button  class="btn btn-default" id="update_colors">Change!</button>
 </form>
 
 
@@ -127,17 +127,20 @@ state.append("text")
 
 
 d3.select("#state_color").on("change",  function() {
-     update_colors(this.value);
+     update_state_colors(this.value);
   });
 
-  d3.select("#update_colors").on("click", function() {
-     update_colors(this.value);
+  d3.select("#selected_state_color").on("click", function() {
+     update_selected_colors(this.value);
   });
 
-  function  update_colors(value) {
-    d3.select('.state').style("fill", 'Red')
+  function  update_state_colors(value) {
+    d3.selectAll('.state rect').style("fill",value); 
   };
 
+  function  update_selected_colors(value) {
+    d3.selectAll('.state--selected rect').style("fill",value); 
+  };
 
 </script>
 </br>
