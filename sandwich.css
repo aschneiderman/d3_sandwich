@@ -56,3 +56,32 @@ pre {
 .recipe-step-body  {
 	font-size: 16px;
 }
+
+
+/* ------ New Approach (without Boot Camp)   */
+
+#container {
+	width: 100%;
+	margin: 0px;
+}
+
+.home_row {
+	float: left;
+	width: 100%;
+	margin: 0;
+}
+
+.home_column1 {
+	float: left;
+	width:  50%;
+	margin: 0;
+	padding:  1em;
+}
+
+.home_column2 {
+	margin-left:  50%;   /*  Change this to the width of my left column */
+}
+
+#sandwich_footer {
+	clear: left;
+}
