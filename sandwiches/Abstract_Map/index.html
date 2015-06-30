@@ -5,7 +5,6 @@
     <title> Sandwich Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="http://d3js.org/d3.v3.min.js"></script>				<!-- d3 library -->
-    <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">	<!-- Bootstrap CSS -->
     <link href="../../sandwich.css" rel="stylesheet" media="screen">			<!-- sandwich's CSS -->
 
 </head>
@@ -17,20 +16,19 @@
 
 <div id="sandwich-overview" > 
 <div class="container">
-<div class="row">
-  <div class="col-md-6"><h2>Abstract State Map</h2>  
+<div class="recipe_summary_row">
+  <div class="recipe_summary_column1"><h2>Abstract State Map</h2>  
 <p> Want to create an abstract map of some states or any other data you might have? Once you understand a few D3 tricks, it's  not too hard to do.</p>
 <p>Difficulty: intermediate.</p>
 </div>
-  <div class="col-md-6"> <img src="abstract_state_snapshot.jpg" > </div>
+  <div class="recipe_summary_column2"> <img src="abstract_state_snapshot.jpg" > </div>
 </div>
 </div>
 </div>
 
 
-<div id="sandwich-columns" class="container">
-<div class="row">
-  <div class="col-md-6"><h3>Today's Lesson: You Don't Have To Bake Your Own Bread to Make Great Sandwiches</h3>
+<div class="recipe_summary_row"><div class="recipe_summary_column1">
+  <h3>Today's Lesson: You Don't Have To Bake Your Own Bread to Make Great Sandwiches</h3>
 	  <div class="recipe-step-body"><p> See all that code to right of this text?  It's what creates the abstract state map.  
 		  Feeling a little intimidated  at making sense of it all?</p>
 		  <p> But no one expects you need to  know how to bake bread from scratch  before you can make a real world sandwich.  Why should learning D3 be any different?</p>
@@ -47,9 +45,9 @@
 		  <br/>
 		  <p> </p>
 <p>(<a href="index_original_approach.html">Original</a> Approach)</p>
+	</div>
   </div>
-  </div>
-  <div class="col-md-6">
+  <div class="recipe_summary_column2">
   <pre>
 &lt;!DOCTYPE html&gt;
 &lt;meta charset="utf-8"&gt;

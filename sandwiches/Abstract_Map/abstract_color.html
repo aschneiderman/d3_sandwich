@@ -5,7 +5,6 @@
     <title> Sandwich Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="http://d3js.org/d3.v3.min.js"></script>				<!-- d3 library -->
-    <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">	<!-- Bootstrap CSS -->
     <link href="../../sandwich.css" rel="stylesheet" media="screen">			<!-- sandwich's CSS -->
 <style>
 .state rect {
@@ -18,7 +17,7 @@
 }
 
 .state--selected rect {
-  fill:  purple;
+  fill: #9f4a6c;
 }
 
 .state--selected text {
@@ -98,10 +97,11 @@ state.append("text")
 
 
 
+<div id="sandwich-overview" > 
+<div class="container">
+<div class="recipe_row">
+  <div class="recipe_column1"><h3> 1) Set up the Map's Colors and Other Styles</h3>  
 
-<div id="sandwich-columns" class="container">
-<div class="row">
-  <div class="col-md-6"><div class="recipe-step-header">1) Set up the Map's Colors and Other Styles</div>
   <div class="recipe-step-body"><p>First we need to set up the colors, etc. for the map pieces.</p>
   <p> The one you're probably most interested in:  state--selected rect . By changing the color, you can change the color of the selected states.</p>
   <p>Let's play with the color of the states that get selected by changing state--selected rect:</p>
@@ -119,6 +119,16 @@ state.append("text")
         <option>Green</option><option>Orange</option> <option selected>Purple</option><option>Brown</option><option>Black</option>  
 </select> 
 </div>
+ <div class="form-group">
+    <label for="selected_state">   states:</label>
+    <input type="checkbox" name="states_chosen" value="AZ">AZ</input>
+    <input type="checkbox" name="states_chosen" value="CA" checked>CA</input>
+    <input type="checkbox" name="states_chosen" value="CT">CT</input>
+    <input type="checkbox" name="states_chosen" value="MA" checked>MA</input>
+    <input type="checkbox" name="states_chosen" vaue="MD" checked>MD</input>
+    <input type="checkbox" name="states_chosen" value="NY">NY</input>
+    <input type="checkbox" name="states_chosen" value="TX" checked>TX</input>
+</div>
 </form>
 
 
@@ -135,10 +145,14 @@ d3.select("#state_color").on("change",  function() {
   });
 
   function  update_state_colors(value) {
+// can't figure out why doesn't work:
+  //	  document.getElementById('state rect').style.fill = value;  // Change the 'state' style's color to the color the user selected  
     d3.selectAll('.state rect').style("fill",value); 
+    d3.select('#style-normal').text("fill:  " + value ).style("background-color", '#FFFF66');
   };
 
   function  update_selected_colors(value) {
+    d3.select('#style-selected').text("fill:  " + value ).style("background-color", '#FFFF66');
     d3.selectAll('.state--selected rect').style("fill",value); 
   };
 
@@ -152,7 +166,7 @@ d3.select("#state_color").on("change",  function() {
 
   </div>
   </div>
-  <div class="col-md-6">
+  <div class="recipe_column2">
   <pre>
 &lt;!DOCTYPE html&gt;
 &lt;meta charset="utf-8"&gt;
@@ -161,7 +175,7 @@ d3.select("#state_color").on("change",  function() {
 &lt;style&gt;
 
 .state rect {
-  fill: #dedede;
+  <b id= "style-normal">fill: #dedede;</b>
 }
 
 .state text {
@@ -170,7 +184,7 @@ d3.select("#state_color").on("change",  function() {
 }
 
 .state--selected rect {
-  fill: #9f4a6c;
+  <b id="style-selected">fill: #9f4a6c;</b>
 }
 
 .state--selected text {
@@ -181,8 +195,8 @@ d3.select("#state_color").on("change",  function() {
 &lt;script src="http://d3js.org/d3.v3.min.js"&gt;&lt;/script&gt;
 
 // ----- Set the states that are selected -------------------------------
-&lt;style&gt;
-var selectedStates = ["MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT"];
+&ltscript&gt;
+var selecteedStates = ["MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT"];
 &lt;/style&gt;
 </pre></div></div>
 

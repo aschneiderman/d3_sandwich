@@ -46,6 +46,8 @@ h1 {
 
 pre {
 	background-color: #FFFFFA;
+	padding-left: 5px;
+	margin-left: 5px;
 }
 
 .recipe-step-header  {
@@ -79,6 +81,23 @@ pre {
 }
 
 .home_column2 {
+	margin-left:  50%;   /*  Change this to the width of my left column */
+}
+
+.recipe_summary_row, .recipe_row {
+	float: left;
+	width: 100%;
+	margin: 0;
+}
+
+.recipe_summary_column1, .recipe_column1 {
+	float: left;
+	width:  50%;
+	margin: 0;
+	padding:  1em;
+}
+
+.recipe_summary_column2, .recipe_column2 {
 	margin-left:  50%;   /*  Change this to the width of my left column */
 }
 
