@@ -135,13 +135,18 @@ d3.select("#state_color").on("change",  function() {
   });
 
   function  update_state_colors(value) {
-    d3.selectAll('.state rect').style("fill",value); 
+	document.getElementById('state').style.fill = value;  // Change the 'state' style's color to the color the user selected
+    #d3.selectAll('.state rect').style("fill",value); 
   };
 
   function  update_selected_colors(value) {
-    d3.selectAll('.state--selected rect').style("fill",value); 
+    #d3.selectAll('.state--selected rect').style("fill",value); 
+	  document.getElementById('state--selected rect').style.fill = value;  // Change the 'state--selected' style's color to the color the user selected
   };
 
+  function update_which_states_selected  {
+	  d3.select('#state-selected-array').style.fill = 'orange';
+	  // Plus:  need code to clear out old states selected and replace with new states selected
 </script>
 </br>
   <p> Don't know about CSS styles? <br/>Here's the  <a href="tutorials/css.html">least you need to know</a>.</p>
@@ -161,7 +166,7 @@ d3.select("#state_color").on("change",  function() {
 &lt;style&gt;
 
 .state rect {
-  fill: #dedede;
+  <b id='state-color'>fill: #dedede;</b>
 }
 
 .state text {
@@ -170,7 +175,7 @@ d3.select("#state_color").on("change",  function() {
 }
 
 .state--selected rect {
-  fill: #9f4a6c;
+  <b id='state-selected-color'>fill: #9f4a6c;</b>
 }
 
 .state--selected text {
@@ -182,7 +187,7 @@ d3.select("#state_color").on("change",  function() {
 
 // ----- Set the states that are selected -------------------------------
 &lt;style&gt;
-var selectedStates = ["MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT"];
+<b id='selected-states-array'>var selectedStates = ["MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT"];</b>
 &lt;/style&gt;
 </pre></div></div>
 
