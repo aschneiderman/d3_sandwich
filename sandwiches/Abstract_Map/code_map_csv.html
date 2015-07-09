@@ -90,7 +90,7 @@ svg_area.selectAll("text")
   .attr("x", function(d,i)  { return d.col * width + 108;})
   .attr("y", function(d,i) {return d.row * height +  26;})
   .style("font",   "16px sans-serif")
-  .style("fill", "white")
+  .style("fill", "LightGoldenRodYellow")
   .style("pointer-events", "none")	// If you put the mouse over one of the states, this prevents it from treating it like text (reword)
   .text(function (d) { return d.state; });
 
@@ -100,7 +100,7 @@ d3.csv("state_scores.csv", function(state_data) {
   var state_rects =  svg_area.selectAll("rect")
       			     .data(state_data, function(d) { return d.state; });   // Join the file data with the rect's data, using state as the key
 
-  state_rects.style("fill", function(d) { return d.score > 10? "purple": "orange"; }  );
+  state_rects.style("fill", function(d) { return d.score > 10? "YellowGreen": "orange"; }  );
 });
 
 </script>
