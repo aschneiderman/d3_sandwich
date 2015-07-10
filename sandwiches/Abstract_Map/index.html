@@ -1,145 +1,40 @@
-
-<!DOCTYPE html>
+<DOCTYPE html>
+<meta charset="utf-8">
 <html>
 <head>
-    <title> Sandwich Template</title>
+    <title> Abstract Maps </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="http://d3js.org/d3.v3.min.js"></script>				<!-- d3 library -->
     <link href="../../sandwich.css" rel="stylesheet" media="screen">			<!-- sandwich's CSS -->
 
 </head>
 <body>
+<div id="container">
 <div id="sandwich-heading">
 <h1> <img src="../../sandwich_icon.jpeg"  height="50" width="50">  d3 sandwich </h1>
 <div id="sandwich-border"></div>
 </div>
 
-<div id="sandwich-overview" > 
-<div class="container">
-<div class="recipe_summary_row">
-  <div class="recipe_summary_column1"><h2>Abstract State Map</h2>  
-<p> Want to create an abstract map of some states or any other data you might have? Once you understand a few D3 tricks, it's  not too hard to do.</p>
-<p>Difficulty: intermediate.</p>
+<div class="home_row"><div class="home_column1">
+<h2> Abstract Maps </h2>
+<p>
+  not sure what to put in the index page. At a minimum, a link to each of the recipes.
+</p>
+<ul>
+  <li> <a href="abstract_state_tut.html">Abstract State Map </a></li>
+  <li>Variation #1: <a href=" abstract_state_scores.html">Scores</a></li>
+  <li>Variation #2: <a href=" abstract_state_csv.html">Reading scores from a CSV file</li>
+</ul>
 </div>
-  <div class="recipe_summary_column2"> <img src="abstract_state_snapshot.jpg" > </div>
+<div class="home_column2" class="homepage_picture"> <img align=left width=400 height=266
+   src= "abstract_state_snapshot.jpg" />
 </div>
-</div>
-</div>
-
-
-<div class="recipe_summary_row"><div class="recipe_summary_column1">
-  <h3>Today's Lesson: You Don't Have To Bake Your Own Bread to Make Great Sandwiches</h3>
-	  <div class="recipe-step-body"><p> See all that code to right of this text?  It's what creates the abstract state map.  
-		  Feeling a little intimidated  at making sense of it all?</p>
-		  <p> But no one expects you need to  know how to bake bread from scratch  before you can make a real world sandwich.  Why should learning D3 be any different?</p>
-		  <br/>
-		  <h4>Abstract State Map Recipes</h4>
-		  <p> Here are 3 recipes, each of which creates something tasty and increases your skill just a bit without forcing you to understand all of the code all at once:</p>
-		  <ul>
-			  <li> <a href="abstract_color.html">Recipe #1</a>: make an abstract state map using different colors and selecting different states</li>
-			  <li> <a href="abstract_multiple.html">Recipe #2</a>: add more than one abstract state map to a page</li>
-		  <li><a href="abstract_other.html">Recipe #3</a>: make an abstract map of thing other than states (aka "making your own sandwhich bread")</li>
-		   </ul>
-		  <p>The most important thing you need to learn to make a tasty D3 sandwich is what you need to sweat and what you don't need to sweat when you're first getting started.</p>
-
-		  <br/>
-		  <p> </p>
-<p>(<a href="index_original_approach.html">Original</a> Approach)</p>
-	</div>
-  </div>
-  <div class="recipe_summary_column2">
-  <pre>
-&lt;!DOCTYPE html&gt;
-&lt;meta charset="utf-8"&gt;
-
-// ----- Set the colors & other stypes for the map --------------------
-&lt;style&gt;
-
-.state rect {
-  fill: #dedede;
-}
-
-.state text {
-  font: 12px sans-serif;
-  text-anchor: middle;
-}
-
-.state--selected rect {
-  fill: #9f4a6c;
-}
-
-.state--selected text {
-  fill: white;
-}
-&lt;/style&gt;
-
-&lt;script src="http://d3js.org/d3.v3.min.js"&gt;&lt;/script&gt;
-
-// ----- Set the states that are selected -------------------------------
-&lt;style&gt;
-var selectedStates = ["MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT"];
-&lt;/style&gt;
-
-
-// ----- Create the abstract state map ----------------------------------
-&lt;svg width="960" height="500"&gt;&lt;/svg&gt;
-  &lt;script id="grid" type="text/plain"&gt;
-                              ME
-               WI          VT NH
-WA ID MT ND MN IL MI    NY MA
-OR NV WY SD IA IN OH PA NJ CT RI
-CA UT CO NE MO KY WV VA MD DE
-   AZ NM KS AR TN NC SC
-         OK LA MS AL GA
-HI AK    TX             FL
-&lt;/script&gt;
-&lt;script&gt;
-
-var states = [];
-d3.select("#grid").text().split("\n").forEach(function(line, i) {
-  var re = /\w+/g, m;
-  while (m = re.exec(line)) states.push({
-    name: m[0],
-    selected: selectedStates.indexOf(m[0]) &gt;= 0,
-    x: m.index / 3,
-    y: i
-  });
-});
-
-var svg = d3.select("svg"),
-    width = +svg.attr("width"),
-    height = +svg.attr("height");
-
-var gridWidth = d3.max(states, function(d) { return d.x; }) + 1,
-    gridHeight = d3.max(states, function(d) { return d.y; }) + 1,
-    cellSize = 40;
-
-var state = svg.append("g")
-    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
-  .selectAll(".state")
-    .data(states)
-  .enter().append("g")
-    .attr("class", function(d) { return "state" + (d.selected ? " state--selected" : ""); })
-    .attr("transform", function(d) { return "translate(" + (d.x - gridWidth / 2) * cellSize + "," + (d.y - gridHeight / 2) * cellSize + ")"; });
-
-state.append("rect")
-    .attr("x", -cellSize / 2)
-    .attr("y", -cellSize / 2)
-    .attr("width", cellSize - 1)
-    .attr("height", cellSize - 1);
-
-state.append("text")
-    .attr("dy", ".35em")
-    .text(function(d) { return d.name; });
-
-&lt;/script&gt;</pre></div></div>
 
 
 </div>
 
 
-
-<script src="http://code.jquery.com/jquery.js"></script>	<!-- Jquery JavaScript library: needed by Bootstrap's JavaScript -->
-<script src="../../bootstrap/js/bootstrap.min.js"></script>	<!-- Bootstrap JavaScript -->
+<div id= "sandwich_footer">
+</div>
 </body>
 </html>

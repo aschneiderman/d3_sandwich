@@ -1,7 +1,7 @@
 body {
   font-family: "Helvetica Neue", Helvetica, sans-serif;
-	margin-right: 10px;
-		margin-left: 10px;
+    margin-right: 10px;
+        margin-left: 10px;
   }
 
 h1 {
@@ -13,94 +13,96 @@ h1 {
  border-bottom-color:#ccc;  bottom:1px
 }
 
-#sandwich-heading  {  
-	padding-bottom: 25px;
+#sandwich-heading  {
+    padding-bottom: 25px;
 
 }
 
 #sandwich-border {
-	border-bottom: 1px solid #ccc;
-	padding-top: 30px;
-		margin-right: 50px;
+    border-bottom: 1px solid #ccc;
+    padding-top: 30px;
+        margin-right: 50px;
 }
 
 
 #sandwich-overview  {
-	/* border-bottom: 1px solid #ccc; */
-	padding-bottom: 10px;
-	margin-bottom: 10px;
+    /* border-bottom: 1px solid #ccc; */
+    padding-bottom: 10px;
+    margin-bottom: 10px;
 
 }
 
 #sandwich-overview  p {
-		font-size: 18px;
+        font-size: 18px;
 }
 
 
 #sandwich-overview  h2 {
-	  font-size: 50px;
-		/*color: #99FF33;  */
+      font-size: 50px;
+        /*color: #99FF33;  */
 }
 
 .row-top-buffer { margin-top:20px; }  /* Apparently, this is the best way to add a margin between rows in bootstrap */
 
 pre {
-	background-color: #FFFFFA;
-	padding-left: 5px;
-	margin-left: 5px;
+    background-color: #FFFCF1 ;
+    font-size: 14px;
+    font-family: Arial;
+    padding-left: 5px;
+    margin-left: 5px;
 }
 
 .recipe-step-header  {
-	  font-size: 25px;
-	  padding-bottom:  10px;
-}	
+      font-size: 25px;
+      padding-bottom:  10px;
+}
 
 .recipe-step-body  {
-	font-size: 16px;
+    font-size: 16px;
 }
 
 
 /* ------ New Approach (without Boot Camp)   */
 
 #container {
-	width: 100%;
-	margin: 0px;
+    width: 100%;
+    margin: 0px;
 }
 
 .home_row {
-	float: left;
-	width: 100%;
-	margin: 0;
+    float: left;
+    width: 100%;
+    margin: 0;
 }
 
 .home_column1 {
-	float: left;
-	width:  50%;
-	margin: 0;
-	padding:  1em;
+    float: left;
+    width:  50%;
+    margin: 0;
+    padding:  1em;
 }
 
-.home_column2 {
-	margin-left:  50%;   /*  Change this to the width of my left column */
+.home {
+    margin-left:  50%;   /*  Change this to the width of my left column */
 }
 
 .recipe_summary_row, .recipe_row {
-	float: left;
-	width: 100%;
-	margin: 0;
+    float: left;
+    width: 100%;
+    margin: 0;
 }
 
-.recipe_summary_column1, .recipe_column1 {
-	float: left;
-	width:  50%;
-	margin: 0;
-	padding:  1em;
+.recipe_summary_text, .recipe_text {
+    float: left;
+    width:  50%;
+    margin: 0;
+    padding:  1em;
 }
 
-.recipe_summary_column2, .recipe_column2 {
-	margin-left:  50%;   /*  Change this to the width of my left column */
+.recipe_summary_code, .recipe_code {
+    margin-left:  50%;   /*  Change this to the width of my left column */
 }
 
 #sandwich_footer {
-	clear: left;
+    clear: left;
 }
