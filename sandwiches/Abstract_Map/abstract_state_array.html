@@ -1,0 +1,129 @@
+﻿<DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+  <title>Abstract State Map: Basic Recipe</title>
+  <script src="http://d3js.org/d3.v3.min.js"></script>        <!-- d3 library -->
+  <!-- pure css:  Temporary fix to get interactive forms to look good  -->
+  <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+  <link href="../../sandwich.css" rel="stylesheet" media="screen">      <!-- sandwich's CSS -->
+  <script src="abstract_state.js"></script>
+</head>
+<body>
+  <div id="container">
+
+<!--
+THINGS TO DO NEXT:
+- Turn the state map into several JavaScript functions in a separate file
+- Read in checkboxes and turn them into an array
+ -->
+
+    <div id="sandwich-heading">
+      <h1> <img src="../../sandwich_icon.jpeg"  height="50" width="50">  d3 sandwich </h1>
+      <div id="sandwich-border"></div>
+    </div>
+
+      <h2> Abstract State Map: Store Data in an Array </h2>
+<p>
+  Here is where I'm going to put in the text about why we need to store data in arrays, including why a single variable
+  doesn't cut it.
+</p>
+
+<p>
+  NOTE: use abstract_color.html to learn about how to create a form
+</p>
+
+    <div class="recipe_row">
+      <div class="recipe_text">
+        <h3>Interactive Stuff</h3>
+        <p>
+          Put the interactive stuff here
+        </p>
+      </div>
+      <div class="recipe_code">
+        <br/>    <!-- br is a temp fix; fix the css so it isn't needed -->
+        <pre>
+// States that will be given a different color
+var selected_states = [ {"state": "ME"},  {"state": "NJ"} ];
+        </pre>
+      </div>
+
+    </div>
+
+    <div class="recipe_row">
+      <div class="recipe_text">
+    Checkboxes will go here
+      </div>
+      <div class="recipe_code">
+    <svg id='map_1' width="960" height="400"></svg>        <!-- SVG graphics will go here  -->        
+      </div>
+    </div>
+
+
+    <svg width="960" height="400" id="selected_states"></svg>        <!-- SVG graphics will go here  -->
+
+    <script type="text/javascript">
+    make_map('#map_1', get_states(), get_selected_states() );
+
+
+    var selected_states = [ {"state": "ME"},  {"state": "NY"} ];
+
+    var  state_map = [
+      { "state": "ME", "row": 0, "col": 10 },
+      { "state": "VT", "row": 1, "col": 9 },
+      { "state": "NH", "row": 1, "col": 10 },
+      { "state": "NY", "row": 2, "col": 8 },
+      { "state": "MA", "row": 2, "col": 9 },
+      { "state": "PA", "row": 3, "col": 7 },
+      { "state": "NJ", "row": 3, "col": 8 },
+      { "state": "CT", "row": 3, "col": 9 },
+      { "state": "RI", "row": 3, "col": 10 },
+      { "state": "VA", "row": 4, "col": 7 },
+      { "state": "MD", "row": 4, "col": 8 },
+      { "state": "DE", "row": 4, "col": 9 },
+    ];
+
+    make_map('#selected_states', state_map, selected_states );
+
+    </script>
+
+    <div class="recipe_row">
+      <div class="recipe_text">
+        <h3>Interactive Stuff</h3>
+        <p>
+          Put the interactive stuff here
+        </p>
+      </div>
+      <div class="recipe_code">
+        <br/>    <!-- br is a temp fix; fix the css so it isn't needed -->
+    <pre>
+var  state_map = [
+{ "state": "ME", "row": 0, "col": 10 },
+{ "state": "VT", "row": 1, "col": 9 },
+{ "state": "NH", "row": 1, "col": 10 },
+{ "state": "NY", "row": 2, "col": 8 },
+{ "state": "MA", "row": 2, "col": 9 },
+{ "state": "PA", "row": 3, "col": 7 },
+{ "state": "NJ", "row": 3, "col": 8 },
+{ "state": "CT", "row": 3, "col": 9 },
+{ "state": "RI", "row": 3, "col": 10 },
+{ "state": "VA", "row": 4, "col": 7 },
+{ "state": "MD", "row": 4, "col": 8 },
+{ "state": "DE", "row": 4, "col": 9 },
+];
+
+    </pre>
+
+    </div>
+  </div>
+
+  <svg width="960" height="400" id="states"></svg>        <!-- SVG graphics will go here  -->
+
+
+
+
+    <div id= "sandwich_footer">
+    </div>
+  </div>
+</body>
+</html>
