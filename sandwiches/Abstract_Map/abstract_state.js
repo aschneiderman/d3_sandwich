@@ -61,7 +61,7 @@ function get_states() {
 };
 
 
-function make_map(map_name,state_map, selected_states)  {
+function make_map(map_name,state_map, selected_states, x_offset, y_offset)  {
 
   var width = 40, height = 40, cellsize = 39;
 
@@ -72,8 +72,8 @@ function make_map(map_name,state_map, selected_states)  {
       .data(state_map)
     .enter()
     .append("rect")
-      .attr("x", function(d,i)  { return d.col * width + 100;})
-      .attr("y", function(d,i) {return d.row * height;})
+      .attr("x", function(d,i)  { return d.col * width + 100 + x_offset;})
+      .attr("y", function(d,i) {return d.row * height + y_offset;})
       .attr("width", cellsize)
       .attr("height", cellsize)
       .style("fill", "DarkRed");
@@ -84,8 +84,8 @@ function make_map(map_name,state_map, selected_states)  {
     .data(state_map)
     .enter()
     .append("text")
-      .attr("x", function(d,i)  { return d.col * width + 108;})
-      .attr("y", function(d,i) {return d.row * height +  26;})
+      .attr("x", function(d,i)  { return d.col * width + 108 + x_offset;})
+      .attr("y", function(d,i) {return d.row * height +  26; + y_offset})
       .text(function (d) { return d.state; })
       .style("font",   "16px sans-serif")
       .style("fill", "White")
