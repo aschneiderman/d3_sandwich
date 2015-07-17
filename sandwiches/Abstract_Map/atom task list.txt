@@ -1,0 +1,19 @@
+LITTLE TASKS
+
+Here are the little tasks I will use as my canvas for developing the voice commands I need to make Atom run smoothly:
+- Cleanup my CSS
+- Writing the instructions part of the sandwiches: big picture, maybe the weirdness of the enter business?
+-Begin work on the recipe variation where all you do is add a filter to the selected state data
+
+
+
+
+
+
+
+THINGS I NEED TO FIGURE OUT
+- being able to jump to the next comma/quote – or delete between two delimiters
+- how to navigate to and open files
+
+-beautify scripts?
+-How to move around large chunks of text: early in the week: get on the discussion list and ask for advice
