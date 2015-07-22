@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resources for learning D3.JS, HTML, CSS, JavaScript, DOM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://d3js.org/d3.v3.min.js"></script>				<!-- d3 library -->
+    <link href="../sandwich.css" rel="stylesheet" media="screen">			<!-- sandwich's CSS -->
+</head>
+<body>
+<div id="sandwich-heading">
+<h1> <img src="../sandwich_icon.jpeg"  height="50" width="50">  d3 sandwich </h1>
+<div id="sandwich-border"></div>
+</div>
+
+<h2>How to Select Stuff in D3 Using CSS "Selectors"</h2>
+
+<p>
+  NOTE: at some point need to turn this into a polished page that the tutorial. For now,
+  it's a place to dump my notes as I learn more about how to use the hooks that are built into CSS
+  for selecting elements on a webpage with the help of what are called CSS "selectors."
+</p>
+<h3>Examples</h3>
+
+d3.selection('form input[type="text"]')<br/>
+d3.selection('form input[type="submit"]'), Which gets you the submit button<br/>
+d3.selection('Label[for="contact"]')'<br/>
+d3.selection('input[type=checkbox]')<br/>
+d3.selection(".button-all, .button-large")<br/>
+
+</body>
+</html>
