@@ -1,5 +1,13 @@
 Battle Plan
 
+Look for examples of Atom snippets, where they are more than one snippet per text/HTML etc.
+
+Voice commands to add:
+- "insert after three underscores"
+
+- Deleting between delimiters, such as the text in a link
+
+
 Overall
 •	adding the text: have fun with it!
 •	add new navigation/selection commands as I go – that should be my focus, not getting it done quickly
@@ -14,7 +22,7 @@ abstract map page:
 or just: "here's something you can't do in Excel/tableau…"
 
 
-"Abstract State Map: the Basic Recipe"
+Abstract State Map: the Basic Recipe
 
 Now It's Your Turn…
 •           Change which states are selected (here's how)
