@@ -18,105 +18,69 @@
     </div>
 
       <h2> Abstract State Map: Store Data in an Array </h2>
-<p>
-  Here is where I'm going to put in the text about why we need to store data in arrays, including why a single variable
-  doesn't cut it.
-</p>
+          <div class="home_row">
+            <div class="home_column1">
+
+      <p>You could create an abstract state map by manually writing code for every state rectangle and state label on the map. But there's a much easier way: create the D3/JavaScript equivalent of a table that stores the data you need to create the map.</p>
+
+<p> What data do we need to have to create the map? Well, the abstract state map is essentially a grid:</p>
+      <table border= 1>
+      <tr><td>Row &nbsp;</td><td>&nbsp;0 &nbsp;</td><td>&nbsp;1 &nbsp;</td><td width="150" style="text-align: center"> &nbsp; 2 &nbsp; 3  &nbsp;  4  &nbsp; 5  &nbsp; 6 &nbsp; </td><td>&nbsp;7 &nbsp;</td><td>&nbsp;8 &nbsp;</td><td>&nbsp;9 &nbsp;</td><td> 10&nbsp;</td></tr>
+      <tr><td>0</td><td> </td><td> </td><td style="text-align: center"> ...</td><td> </td><td> </td><td> </td><td>ME</td></tr>
+      <tr><td>1</td><td> </td><td> </td><td style="text-align: center"> ...</td><td> </td><td> </td><td> VT</td><td>NH</td></tr>
+      <tr><td>2</td><td> WA</td><td> ID</td><td style="text-align: center"> ...</td><td> </td><td> NY</td><td> MA</td><td></td></tr>
+      </table>
+
+      </div>
+      <div class="home_column2" class="homepage_picture"> <img align=left width=400 height=266
+       src= "abstract_state_snapshot.jpg" />
+      </div>
+    </div>
+    <br/>
+
+    <p> So for each state, you need to know:</p>
+<ul><li> The state's name</li>
+<li> The state's row on the grid</li>
+<li> the state's column on the grid</li></ul>
 
 
 <div class="recipe_row">
   <div class="recipe_text">
-    <h3>Interactive Stuff</h3>
-    <form>
-      <table>
-        <tr><td>
-          State
-        </td><td>
-          Row
-        </td><td>
-          Column
-        </td>
 
-        </tr>
-        <tr>
-          <td>ME</td>
-          <td ><input type="text" class="state_input" value="0"  onChange="updateRow('ME', this)"></td>
-          <td><input type="text" class="state_input" id='ME_col' value="10" onChange="updateCol('ME', this)"></td>
-        </tr>
-        <tr>
-          <td>VT</td>
-          <td><input type="text" class="state_input" value="1"  onChange="updateRow('VT', this)"></td>
-          <td><input type="text" class="state_input" value="9"  onChange="updateCol('VT', this)"></td>
-        </tr>
-        <tr>
-          <td>NH</td>
-          <td><input type="text" class="state_input" value="1"  onChange="updateRow('NH', this)"></td>
-          <td><input type="text" class="state_input" value="10" onChange="updateCol('NH', this)"></td>
-        </tr>
-        <tr>
-          <td>NY</td>
-          <td><input type="text" class="state_input" value="2"  onChange="updateRow('NY', this)"></td>
-          <td><input type="text" class="state_input" value="8" onChange="updateCol('NY', this)"></td>
-        </tr>
-        <tr>
-          <td>MA</td>
-          <td><input type="text" class="state_input" value="2"  onChange="updateRow('MA', this)"></td>
-          <td><input type="text" class="state_input" value="9"  onChange="updateCol('MA', this)"></td>
-        </tr>
-        <tr>
-          <td>PA</td>
-          <td><input type="text" class="state_input" value="3"  onChange="updateRow('PA', this)"></td>
-          <td><input type="text" class="state_input" value="7"  onChange="updateCol('PA', this)"></td>
-        </tr>
-
-      </table>
-
-    </form>
-  </div>
-  <div class="recipe_code">
-    <br/>    <!-- br is a temp fix; fix the css so it isn't needed -->
+<p> Here's the code that stores the info needed to create the state map. Before we explain what each line does, let's spend a little time playing with it.</p>
+<p> Try changing a few states' rows and columns and see what happens to the abstract state map.</p>
+</div>
+<div class="recipe_code">
+  <br/>    <!-- br is a temp fix; fix the css so it isn't needed -->
 <pre>
-var  state_map = [
-<b id="ME_code">{ "state": "ME", "row": 0, "col": 10 }</b>,
-    { "state": "VT", "row": 1, "col": 9 },
-    { "state": "NH", "row": 1, "col": 10 },
-    { "state": "NY", "row": 2, "col": 8 },
-    { "state": "MA", "row": 2, "col": 9 },
-    { "state": "PA", "row": 3, "col": 7 },
-    { "state": "NJ", "row": 3, "col": 8 },
-    { "state": "CT", "row": 3, "col": 9 },
-    { "state": "RI", "row": 3, "col": 10 },
-    { "state": "VA", "row": 4, "col": 7 },
-    { "state": "MD", "row": 4, "col": 8 },
-    { "state": "DE", "row": 4, "col": 9 },
-];
-</pre>
-
+<b>var  state_map = [</b>
+  <b id="ME_code">{ "state": "ME", "row": 0, "col": 10 }</b>,
+  <b id="VT_code">{ "state": "VT", "row": 1, "col": 9 }</b>,
+  <b id="NH_code">{ "state": "NH", "row": 1, "col": 10 }</b>,
+  <b id="WA_code">{ "state": "WA", "row": 2, "col": 0 }</b>,
+  <b id="ID_code">{ "state": "ID", "row": 2, "col": 1 }</b>,
+  <b id="NY_code">{ "state": "NY", "row": 2, "col": 8 }</b>,
+<b>];</b></pre>
 </div>
-</div>
-
-    <svg width="960" height="400" id="selected_states"></svg>        <!-- SVG graphics will go here  -->
+</div>  <!-- recipe_row -->
 
 
+<div class="recipe_row">
+  <div class="recipe_text">
+
+    <svg width="960" height="220" id="selected_states"></svg>        <!-- SVG graphics will go here  -->
   <script type="text/javascript">
-
-
   var selected_states = [];
   var  state_map = [
-    { "state": "ME", "row": 0, "col": 10 },
-    { "state": "VT", "row": 1, "col": 9 },
-    { "state": "NH", "row": 1, "col": 10 },
-    { "state": "NY", "row": 2, "col": 8 },
-    { "state": "MA", "row": 2, "col": 9 },
-    { "state": "PA", "row": 3, "col": 7 },
-    { "state": "NJ", "row": 3, "col": 8 },
-    { "state": "CT", "row": 3, "col": 9 },
-    { "state": "RI", "row": 3, "col": 10 },
-    { "state": "VA", "row": 4, "col": 7 },
-    { "state": "MD", "row": 4, "col": 8 },
-    { "state": "DE", "row": 4, "col": 9 },
+      { "state": "ME", "row": 0, "col": 10 },
+      { "state": "VT", "row": 1, "col": 9 },
+      { "state": "NH", "row": 1, "col": 10 },
+      { "state": "WA", "row": 2, "col": 0 },
+      { "state": "ID", "row": 2, "col": 1 },
+      { "state": "NY", "row": 2, "col": 8 },
   ];
-  var x_offset = 300, y_offset=0;
+
+  var x_offset = 0, y_offset=0;
   make_map('#selected_states', state_map, selected_states,x_offset, y_offset);
 
   var width = 40, height = 40, cellsize = 39;
@@ -182,66 +146,147 @@ d3.select("#state_color").on("change",  function() {
 
 </script>
 
+</div>
+<div class="recipe_code">
+  <form>
+    <table class="input_table">
+      <tr><td>
+        State
+      </td><td>
+        Row
+      </td><td>
+        Column
+      </td>
+      </tr>
+      <tr>
+        <td>ME</td>
+        <td ><input type="text" class="state_input" value="0"  onChange="updateRow('ME', this)"></td>
+        <td><input type="text" class="state_input" id='ME_col' value="10" onChange="updateCol('ME', this)"></td>
+      </tr>
+      <tr>
+        <td>VT</td>
+        <td><input type="text" class="state_input" value="1"  onChange="updateRow('VT', this)"></td>
+        <td><input type="text" class="state_input" value="9"  onChange="updateCol('VT', this)"></td>
+      </tr>
+      <tr>
+        <td>NH</td>
+        <td><input type="text" class="state_input" value="1"  onChange="updateRow('NH', this)"></td>
+        <td><input type="text" class="state_input" value="10" onChange="updateCol('NH', this)"></td>
+      </tr>
+      <tr>
+        <td>WA</td>
+        <td><input type="text" class="state_input" value="2"  onChange="updateRow('WA', this)"></td>
+        <td><input type="text" class="state_input" value="0" onChange="updateCol('WA', this)"></td>
+      </tr>
+      <tr>
+        <td>ID</td>
+        <td><input type="text" class="state_input" value="2"  onChange="updateRow('ID', this)"></td>
+        <td><input type="text" class="state_input" value="1" onChange="updateCol('ID', this)"></td>
+      </tr>
+      <tr>
+        <td>NY</td>
+        <td><input type="text" class="state_input" value="2"  onChange="updateRow('NY', this)"></td>
+        <td><input type="text" class="state_input" value="8" onChange="updateCol('NY', this)"></td>
+      </tr>
+    </table>
+  </form>
+</div>
+</div>  <!-- recipe_row -->
 
 
+<div class="recipe_row">
+  <div class="recipe_text">
+<p>The code above was just a sample that creates data for a few states.  This code creates the data for all
+  52 states.</p>
+  <p>
+    How does it work?
+  </p>
+  <p>To store the info about the map, we  need to store a couple of pieces of info about each state.</p>
+<p>    To do that, we create a <b>variable</b> called state_map:</p>
+<ul><li><b>var</b> tells D3 to create a variable</li>
+  <li> Why did we call it "state_map" instead of "state map"?  Because  a variable's name can't have a space in it</li>
+<li> How does JavaScript know when we're done defining the variable state_map? Because all the way at the end there's a semi-colon  -- it's like putting a period at the end of a sentence</li></ul>
 
-    <div class="recipe_row">
-      <div class="recipe_text">
-        <h3>Interactive Stuff</h3>
+<p>  state_map is an <b>array</b> of <b>objects</b>.</p>
 
-        <form class="form-inline">
-         <div class="form-group">
-            <label for="selected_state">   states:</label>
-            <input type="checkbox" name="states_chosen" value="AZ">AZ</input>
-            <input type="checkbox" name="states_chosen" value="CA" checked>CA</input>
-            <input type="checkbox" name="states_chosen" value="CT">CT</input>
-            <input type="checkbox" name="states_chosen" value="MA" checked>MA</input>
-            <input type="checkbox" name="states_chosen" vaue="MD" checked>MD</input>
-            <input type="checkbox" name="states_chosen" value="NY">NY</input>
-            <input type="checkbox" name="states_chosen" value="TX" checked>TX</input>
-        </div>
-        </form>
+  <p> An <b>array</b> is basically just a list – in this case a list of the states.
+<ul><li>    We tell D3/JavaScript we want to create an array by using brackets ( [] ). </li>
+  <li>Each item in the array is separated by a comma</li></ul>
 
+<p> Because we want to store several pieces of info for each state, each item in the array will
+  be an <b>object</b>. The curly brackets ( { ) tells D3/JavaScript we want to create objects.</p>
+<p>    Each object can store several pieces of info, called <b> attributes</b>.  So for example, the first object in state_map  has three attributes:</p>
+  <ul><li> state: "ME"</li>
+  <li> row: 0</li>
+  <li>col: 10</li></ul>
+  <p> If you look back at the grid at the top of the page, you'll see that this object captures all the info D3 needs to know about the state of Maine (ME).</p>
 
-      </div>
-      <div class="recipe_code">
-        <br/>    <!-- br is a temp fix; fix the css so it isn't needed -->
-        <pre>
-// States that will be given a different color
-<b id="selected_estate_code">var selected_states = [ {"state": "ME"},  {"state": "NJ"} ];</b>
-        </pre>
-      </div>
-
+<p>One last thing.  You might be wondering, does it matter what order the states' objects are in state_map?
+  Nope.  You could change around the order and the map would come out the same.  Why? Because when the abstract state map is created, it
+  places each state using the row and column  info that's in the object for that state, not the order the objects are in. </p>
     </div>
+    <div class="recipe_code">
+      <br/>    <!-- br is a temp fix; fix the css so it isn't needed -->
+    <pre>
+  var  state_map = [
+  { "state": "ME", "row": 0, "col": 10 },
+  { "state": "WI", "row": 1, "col": 5 },
+  { "state": "VT", "row": 1, "col": 9 },
+  { "state": "NH", "row": 1, "col": 10 },
+  { "state": "WA", "row": 2, "col": 0 },
+  { "state": "ID", "row": 2, "col": 1 },
+  { "state": "MT", "row": 2, "col": 2 },
+  { "state": "ND", "row": 2, "col": 3 },
+  { "state": "MN", "row": 2, "col": 4 },
+  { "state": "IL", "row": 2, "col": 5 },
+  { "state": "MI", "row": 2, "col": 6 },
+  { "state": "NY", "row": 2, "col": 8 },
+  { "state": "MA", "row": 2, "col": 9 },
+  { "state": "OR", "row": 3, "col": 0 },
+  { "state": "NV", "row": 3, "col": 1 },
+  { "state": "WY", "row": 3, "col": 2 },
+  { "state": "SD", "row": 3, "col": 3 },
+  { "state": "IA", "row": 3, "col": 4 },
+  { "state": "IN", "row": 3, "col": 5 },
+  { "state": "OH", "row": 3, "col": 6 },
+  { "state": "PA", "row": 3, "col": 7 },
+  { "state": "NJ", "row": 3, "col": 8 },
+  { "state": "CT", "row": 3, "col": 9 },
+  { "state": "RI", "row": 3, "col": 10 },
+  { "state": "CA", "row": 4, "col": 0 },
+  { "state": "UT", "row": 4, "col": 1 },
+  { "state": "CO", "row": 4, "col": 2 },
+  { "state": "NE", "row": 4, "col": 3 },
+  { "state": "MO", "row": 4, "col": 4 },
+  { "state": "KY", "row": 4, "col": 5 },
+  { "state": "WV", "row": 4, "col": 6 },
+  { "state": "VA", "row": 4, "col": 7 },
+  { "state": "MD", "row": 4, "col": 8 },
+  { "state": "DE", "row": 4, "col": 9 },
+  { "state": "AZ", "row": 5, "col": 1 },
+  { "state": "NM", "row": 5, "col": 2 },
+  { "state": "KS", "row": 5, "col": 3 },
+  { "state": "AR", "row": 5, "col": 4 },
+  { "state": "TN", "row": 5, "col": 5 },
+  { "state": "NC", "row": 5, "col": 6 },
+  { "state": "SC", "row": 5, "col": 7 },
+  { "state": "OK", "row": 6, "col": 3 },
+  { "state": "LA", "row": 6, "col": 4 },
+  { "state": "MS", "row": 6, "col": 5 },
+  { "state": "AL", "row": 6, "col": 6 },
+  { "state": "GA", "row": 6, "col": 7 },
+  { "state": "HI", "row": 7, "col": 0 },
+  { "state": "AK", "row": 7, "col": 1 },
+  { "state": "TX", "row": 7, "col": 3 },
+  { "state": "FL", "row": 7, "col": 8 }
+];</pre>
+    </div>
+    </div>  <!-- recipe_row -->
 
-    <svg id='map_1' width="960" height="400"></svg>        <!-- SVG graphics will go here  -->
-    <script type="text/javascript">
-      make_map('#map_1', get_states(), get_selected_states(),0,0 );
-
-    d3.select("#state_color").on("change",  function() {
-         update_state_colors(this.value);
-      });
-
-      d3.select("#selected_state_color").on("click", function() {
-         update_selected_colors(this.value);
-      });
-
-      function  update_state_colors(value) {
-    // can't figure out why doesn't work:
-      //	  document.getElementById('state rect').style.fill = value;  // Change the 'state' style's color to the color the user selected
-        d3.selectAll('.state rect').style("fill",value);
-        d3.select('#style-normal').text("fill:  " + value ).style("background-color", '#FFFF66');
-      };
-
-      function  update_selected_colors(value) {
-        d3.select('#style-selected').text("fill:  " + value ).style("background-color", '#FFFF66');
-        d3.selectAll('.state--selected rect').style("fill",value);
-      };
-
-    </script>
-
-
-
+<p>
+  This code creates the data needed for building the map. But how do we actually build the map?
+</p>
+ Up Next: <a href="abstract_state_rects.html">Using the Array to Create the States on the Map</a>
 
         <div id= "sandwich_footer">
         </div>

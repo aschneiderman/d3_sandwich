@@ -1,0 +1,250 @@
+﻿<DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Abstract State Map: Basic Recipe</title>
+  <script src="http://d3js.org/d3.v3.min.js"></script>        <!-- d3 library -->
+  <link href="../../sandwich.css" rel="stylesheet" media="screen">      <!-- sandwich's CSS -->
+  <script src="abstract_state.js"></script>
+</head>
+<body>
+  <div id="container">
+
+    <div id="sandwich-heading">
+      <h1> <img src="../../sandwich_icon.jpeg"  height="50" width="50">  d3 sandwich </h1>
+      <div id="sandwich-border"></div>
+    </div>
+
+      <h2> Abstract State Map: Store Data in an Array </h2>
+          <div class="home_row">
+            <div class="home_column1">
+
+      <p>You could create an abstract state map by manually writing code for every state rectangle and state label on the map. But there's a much easier way: create the JavaScript equivalent of a table that stores the data you need to create the map.</p>
+
+      <p> The map is essentially a grid that looks something like this:</p>
+      <table border= 1>
+      <tr><td>Row &nbsp;</td><td>&nbsp;0 &nbsp;</td><td>&nbsp;1 &nbsp;</td><td width="150" style="text-align: center"> &nbsp; 2 &nbsp; 3  &nbsp;  4  &nbsp; 5  &nbsp; 6 &nbsp; </td><td>&nbsp;7 &nbsp;</td><td>&nbsp;8 &nbsp;</td><td>&nbsp;9 &nbsp;</td><td> 10&nbsp;</td></tr>
+      <tr><td>0</td><td> </td><td> </td><td style="text-align: center"> ...</td><td> </td><td> </td><td> </td><td>ME</td></tr>
+      <tr><td>1</td><td> </td><td> </td><td style="text-align: center"> ...</td><td> </td><td> </td><td> VT</td><td>NH</td></tr>
+      <tr><td>2</td><td> WA</td><td> ID</td><td style="text-align: center"> ...</td><td> </td><td> NY</td><td> MA</td><td></td></tr>
+      </table>
+
+      </div>
+      <div class="home_column2" class="homepage_picture"> <img align=left width=400 height=266
+       src= "abstract_state_snapshot.jpg" />
+      </div>
+    </div>
+    <br/>
+
+    <p> So for each state, you need to know:</p>
+<ul><li> The state's name</li>
+<li> The state's row on the grid</li>
+<li> the state's column on the grid</li></ul>
+<p>D3 is built on top of JavaScript, and JavaScript gives you a couple of ways to store info.</p>
+
+<p> If you just want to store one piece of info, such as Washington (WA)'s row,
+  <br/> you could use a simple variable:</p>
+<p>
+var WA_row = 2;
+</p>
+
+<p>This tells D3/JavaScript to create a variable called "WA_row" and give it a value of 2.</p>
+<ul><li> A variable's name can have a space in it, which is why we used an underscore ( _ )</li>
+<li> The semi-colon tells JavaScript that the line of code is finished;
+  <br/> it's like a period at the end of a sentence</li></ul>
+
+<div class="recipe_row">
+<div class="recipe_text">
+  <p>But in our case we want to store a couple of pieces of info about each state. To do that, we create an <b>array</b> of <b>objects</b> – we called ours state_map.</p>
+  <p> An <b>array</b> is basically just a list – in this case a list of the states. We tell D3/JavaScript we want to create an array by using brackets ( [] ). </p>
+  <p> The curly bracket ( { ) tells D3/JavaScript we want to create an <b>object</b>. </p>
+  <p>Unlike a regular variable, an object can have more than one value, each associated with an object's <b> attribute</b>. Our variable state_map has 3 attributes: state, row, col.</p>
+</div>
+<div class="recipe_code">
+  <pre>
+    var  state_map = [
+        { "state": "ME", "row": 0, "col": 10 },
+        { "state": "WI", "row": 1, "col": 5 },
+        { "state": "VT", "row": 1, "col": 9 },
+        { "state": "NH", "row": 1, "col": 10 },
+        { "state": "WA", "row": 2, "col": 0 },
+        { "state": "ID", "row": 2, "col": 1 },
+        { "state": "NY", "row": 2, "col": 8 },
+    ];
+
+</pre>
+</div>
+</div>  <!-- recipe_row -->
+
+
+
+<div class="recipe_row">
+  <div class="recipe_text">
+    <h3>Interactive Stuff</h3>
+    <form>
+      <table>
+        <tr><td>
+          State
+        </td><td>
+          Row
+        </td><td>
+          Column
+        </td>
+
+        </tr>
+        <tr>
+          <td>ME</td>
+          <td ><input type="text" class="state_input" value="0"  onChange="updateRow('ME', this)"></td>
+          <td><input type="text" class="state_input" id='ME_col' value="10" onChange="updateCol('ME', this)"></td>
+        </tr>
+        <tr>
+          <td>VT</td>
+          <td><input type="text" class="state_input" value="1"  onChange="updateRow('VT', this)"></td>
+          <td><input type="text" class="state_input" value="9"  onChange="updateCol('VT', this)"></td>
+        </tr>
+        <tr>
+          <td>NH</td>
+          <td><input type="text" class="state_input" value="1"  onChange="updateRow('NH', this)"></td>
+          <td><input type="text" class="state_input" value="10" onChange="updateCol('NH', this)"></td>
+        </tr>
+        <tr>
+          <td>NY</td>
+          <td><input type="text" class="state_input" value="2"  onChange="updateRow('NY', this)"></td>
+          <td><input type="text" class="state_input" value="8" onChange="updateCol('NY', this)"></td>
+        </tr>
+        <tr>
+          <td>MA</td>
+          <td><input type="text" class="state_input" value="2"  onChange="updateRow('MA', this)"></td>
+          <td><input type="text" class="state_input" value="9"  onChange="updateCol('MA', this)"></td>
+        </tr>
+        <tr>
+          <td>PA</td>
+          <td><input type="text" class="state_input" value="3"  onChange="updateRow('PA', this)"></td>
+          <td><input type="text" class="state_input" value="7"  onChange="updateCol('PA', this)"></td>
+        </tr>
+
+      </table>
+
+    </form>
+  </div>
+  <div class="recipe_code">
+    <br/>    <!-- br is a temp fix; fix the css so it isn't needed -->
+<pre>
+var  state_map = [
+<b id="ME_code">{ "state": "ME", "row": 0, "col": 10 }</b>,
+    { "state": "VT", "row": 1, "col": 9 },
+    { "state": "NH", "row": 1, "col": 10 },
+    { "state": "NY", "row": 2, "col": 8 },
+    { "state": "MA", "row": 2, "col": 9 },
+    { "state": "PA", "row": 3, "col": 7 },
+    { "state": "NJ", "row": 3, "col": 8 },
+    { "state": "CT", "row": 3, "col": 9 },
+    { "state": "RI", "row": 3, "col": 10 },
+    { "state": "VA", "row": 4, "col": 7 },
+    { "state": "MD", "row": 4, "col": 8 },
+    { "state": "DE", "row": 4, "col": 9 },
+];
+</pre>
+
+</div>
+</div>
+
+    <svg width="960" height="400" id="selected_states"></svg>        <!-- SVG graphics will go here  -->
+
+
+  <script type="text/javascript">
+
+
+  var selected_states = [];
+  var  state_map = [
+    { "state": "ME", "row": 0, "col": 10 },
+    { "state": "VT", "row": 1, "col": 9 },
+    { "state": "NH", "row": 1, "col": 10 },
+    { "state": "NY", "row": 2, "col": 8 },
+    { "state": "MA", "row": 2, "col": 9 },
+    { "state": "PA", "row": 3, "col": 7 },
+    { "state": "NJ", "row": 3, "col": 8 },
+    { "state": "CT", "row": 3, "col": 9 },
+    { "state": "RI", "row": 3, "col": 10 },
+    { "state": "VA", "row": 4, "col": 7 },
+    { "state": "MD", "row": 4, "col": 8 },
+    { "state": "DE", "row": 4, "col": 9 },
+  ];
+  var x_offset = 300, y_offset=0;
+  make_map('#selected_states', state_map, selected_states,x_offset, y_offset);
+
+  var width = 40, height = 40, cellsize = 39;
+
+
+function updateRow(state, input_text)  {
+  var row = input_text.value;
+  var selected_state = [{'state': state}];
+  var states =  d3.select('#selected_states');
+  states.selectAll("rect")
+    .data( selected_state, function(d) { return d.state; })
+    .attr("y", function(d,i) {return row * height + y_offset;})
+  selected = states.selectAll("text")
+    .data( selected_state, function(d) { return d.state; });
+  selected.attr("y", function(d,i) {return row * height +  26 + y_offset;});
+
+  state_code = '#' + state + "_code";
+  col = rr = d3.select('#ME_col')[0][0].value;
+  new_code = '    { "state": "' + state + '", "row": ' + row + ', "col":'+ col + ' }';
+  /*
+  the solution:  storethe stsrting values in an array, then update them and then update
+  - the text
+
+  */
+  d3.select(state_code).text(new_code ).style("background-color", '#FFFF66');
+  // d3.select(state_code).text("row is now:  " + value ).style("background-color", '#FFFF66');
+
+};
+
+function updateCol(state, input_text)  {
+  var col = input_text.value;
+  var selected_state = [{'state': state}];
+  var states =  d3.select('#selected_states');
+  states.selectAll("rect")
+    .data( selected_state, function(d) { return d.state; })
+    .attr("x", function(d,i) {return col * width + 100 + x_offset;})
+  states.selectAll("text")
+    .data( selected_state, function(d) { return d.state; })
+      .attr("x", function(d,i)  { return col * width + 108 + x_offset;});
+};
+
+
+
+d3.select("#state_color").on("change",  function() {
+     update_state_colors(this.value);
+  });
+
+  d3.select("#selected_state_color").on("click", function() {
+     update_selected_colors(this.value);
+  });
+
+  function  update_state_colors(value) {
+// can't figure out why doesn't work:
+  //	  document.getElementById('state rect').style.fill = value;  // Change the 'state' style's color to the color the user selected
+    d3.selectAll('.state rect').style("fill",value);
+    d3.select('#style-normal').text("fill:  " + value ).style("background-color", '#FFFF66');
+  };
+
+  function  update_selected_colors(value) {
+    d3.select('#style-selected').text("fill:  " + value ).style("background-color", '#FFFF66');
+    d3.selectAll('.state--selected rect').style("fill",value);
+  };
+
+</script>
+
+
+
+
+
+
+        <div id= "sandwich_footer">
+        </div>
+      </div>
+    </body>
+    </html>
