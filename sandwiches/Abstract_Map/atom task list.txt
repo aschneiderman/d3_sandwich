@@ -1,71 +1,36 @@
-Battle Plan
+﻿Battle Plan: Atom Task List
 
 
+When Ben starts working on it, 
+Stop and learn how to create atom scripts:
+
+ATOM CUSTOM COMMANDS
+- Cut/Copy to bookmark
+Once that is working:
+Command for easily moving recipe step text from Atom to Word
+(Precursor: add ending comments to each div tag, so I can search by them)
+
+- Grab everything inside quotes
+- Change  Delimeter one so that it includes the tags
+
+
+
+
+ATOM SNIPPETS
+- Figure out how to get Atom snippets that actually work properly
 Look for examples of Atom snippets, where they are more than one snippet per text/HTML etc.
 
-Voice commands to add:
-- "insert after three underscores"
 
+
+
+VOCOLA VOICE COMMANDS
+- how to navigate to and open files
+- "insert after three underscores"
 - Deleting between delimiters, such as the text in a link
 
 
-Overall
-•	adding the text: have fun with it!
-•	add new navigation/selection commands as I go – that should be my focus, not getting it done quickly
-•	create functions to encapsulate the work I'll do frequently, such as highlighting sample code
-
-Start with basic recipe overview,
-including core idea: abstract map
-
-abstract map page:
-(fix the visual hierarchy of the headers)
-"there are plenty of tools to create detailed maps. But what if you want to do something more abstract? Excel/Tableau can't hack it, but D3 can get it done"
-or just: "here's something you can't do in Excel/tableau…"
 
 
-Abstract State Map: the Basic Recipe
-
-Now It's Your Turn…
-•           Change which states are selected (here's how)
-•           change the color of the normal and selected states (here's how)
-if you're not sure how, go back to the recipe steps for ___ and ___and check out the code.
-
-
-Recipe Variation #1: Scores
-In the basic recipe, you just gave the page a list of which states to select. Sometimes that useful – e.g., if you have a list of states who didn't have gay marriage. But more often you want to select based on some data, such as highlighting scores
-(do short version on top page, slightly longer version on the recipe page)
-
-
-Recipe Variation #2: Reading Scores from a CSV File
-most the time, you will want to read the scores in from a CSV file – from Excel, etc. That way you don't have to change the data visualization at all, just get a new copy of the data and you're good to go
-
-
-
-
-custom grid  --> abstract map
-"to create a grid, you’ll need:
-the row and column of the state
-the name of the state"
-"a variable won’t cut it, so an array of objects"
-(Google JavaScript data types, and to get names right)
-NOTE:
-D3.select("div").style…  .Background color…    .on("click", function());
-e.g.: function () {console.log("you clicked a div")});
-
-Recipe Steps:
-instead of doing array, then create rectangles as a separate step,
-put them together as one step
-
-
-– – – – – –
-
-
-
-
-
-THINGS I NEED TO FIGURE OUT
-- delete between two delimiters
-- how to navigate to and open files
-
+ATOM PACKAGES
 -beautify scripts?
--How to move around large chunks of text: early in the week: get on the discussion list and ask for advice
+

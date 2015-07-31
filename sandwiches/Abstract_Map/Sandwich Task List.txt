@@ -1,0 +1,46 @@
+﻿Battle Plan: Sandwich Task List
+
+CODING
+- create functions to encapsulate the work I'll do frequently, such as highlighting sample code
+
+- creating a code writer .html, which I can use for 
+creating input forms 
+Creating  Input form based on selected array of objects
+Given an array of objects, create the pre stuff on the side, the input form, etc
+
+
+- Fixing the Form so I can have multiple forms and associated svg areas:
+Parent element, attar from it, to get svg for a form
+How to get this's parent, to get the id of it 
+http://stackoverflow.com/questions/20641953/how-to-select-parent-element-of-current-element-in-d3-js
+http://stackoverflow.com/questions/992115/custom-attributes-yea-or-nay
+http://idratherbewriting.com/events-and-listeners-javascript/
+
+
+
+
+
+TEXT
+
+abstract map page:
+(fix the visual hierarchy of the headers)
+"there are plenty of tools to create detailed maps. But what if you want to do something more abstract? Excel/Tableau can't hack it, but D3 can get it done"
+or just: "here's something you can't do in Excel/tableau…"
+
+
+Abstract State Map: the Basic Recipe
+
+Now It's Your Turn…
+•           Change which states are selected (here's how)
+•           change the color of the normal and selected states (here's how)
+if you're not sure how, go back to the recipe steps for ___ and ___and check out the code.
+
+
+Array:
+"a variable won’t cut it, so an array of objects"
+(Google JavaScript data types, and to get names right)
+
+Rectangles: (I think)
+D3.select("div").style…  .Background color…    .on("click", function());
+e.g.: function () {console.log("you clicked a div")});
+
