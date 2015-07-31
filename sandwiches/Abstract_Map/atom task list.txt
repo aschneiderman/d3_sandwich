@@ -1,7 +1,7 @@
 ﻿Battle Plan: Atom Task List
 
 
-When Ben starts working on it, 
+When Ben starts working on it,
 Stop and learn how to create atom scripts:
 
 ATOM CUSTOM COMMANDS
@@ -34,3 +34,7 @@ VOCOLA VOICE COMMANDS
 ATOM PACKAGES
 -beautify scripts?
 
+
+
+Eventually, switch to using the following for synchronizing atom across computers:
+https://github.com/Hackafe/atom-sync-settings
