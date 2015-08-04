@@ -1,9 +1,5 @@
 ﻿Battle Plan: Atom Task List
 
-
-When Ben starts working on it,
-Stop and learn how to create atom scripts:
-
 ATOM CUSTOM COMMANDS
 - Cut/Copy to bookmark
 Once that is working:
@@ -14,13 +10,7 @@ Command for easily moving recipe step text from Atom to Word
 - Change  Delimeter one so that it includes the tags
 
 
-
-
-ATOM SNIPPETS
-- Figure out how to get Atom snippets that actually work properly
-Look for examples of Atom snippets, where they are more than one snippet per text/HTML etc.
-
-
+Then: switch back to working on Sandwich reusable code
 
 
 VOCOLA VOICE COMMANDS
@@ -33,8 +23,6 @@ VOCOLA VOICE COMMANDS
 
 ATOM PACKAGES
 -beautify scripts?
-
-
 
 Eventually, switch to using the following for synchronizing atom across computers:
 https://github.com/Hackafe/atom-sync-settings
