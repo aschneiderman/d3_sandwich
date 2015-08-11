@@ -45,3 +45,9 @@ Array:
 Rectangles: (I think)
 D3.select("div").style…  .Background color…    .on("click", function());
 e.g.: function () {console.log("you clicked a div")});
+
+
+
+
+UPCOMING "KNIFE SKILLS"
+- Banging out Sandwiches without Burning out
