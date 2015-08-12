@@ -1,20 +1,5 @@
 ﻿Battle Plan: Sandwich Task List
 
-TEXT
-
-abstract map Recipe:
-(fix the visual hierarchy of the headers)
-"there are plenty of tools to create detailed maps. But what if you want to do something more abstract? Excel/Tableau can't hack it, but D3 can get it done"
-or just: "here's something you can't do in Excel/tableau…"
-
-
-Now It's Your Turn…
-•           Change which states are selected (here's how)
-•           change the color of the normal and selected states (here's how)
-if you're not sure how, go back to the recipe steps for ___ and ___and check out the code.
-
-
-
 CODING
 - create functions to encapsulate the work I'll do frequently, such as highlighting sample code
 
@@ -38,7 +23,8 @@ make sure that we end up using "map"
 
 
 
-
+FORMATTING
+- For each major semantic div, put a closing comment on the closing div
 
 Array:
 "a variable won’t cut it, so an array of objects"

@@ -1,5 +1,12 @@
 ﻿Battle Plan: Atom Task List
 
+VOCOLA VOICE COMMANDS
+- Delete back 2 words
+- "insert after three underscores"
+- Deleting between delimiters, such as the text in a link
+- how to navigate to and open files
+
+
 ATOM CUSTOM COMMANDS
 - Cut/Copy to bookmark
 Once that is working:
@@ -12,11 +19,6 @@ Command for easily moving recipe step text from Atom to Word
 
 Then: switch back to working on Sandwich reusable code
 
-
-VOCOLA VOICE COMMANDS
-- how to navigate to and open files
-- "insert after three underscores"
-- Deleting between delimiters, such as the text in a link
 
 
 

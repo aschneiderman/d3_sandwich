@@ -32,10 +32,10 @@
       <h2> Abstract State Map</h2><h2>Step #1: Store State Data in an Array </h2>
           <div class="home_row">
             <div class="home_column1">
+      <h3>	What Data Do We Need to Create the Map?</h3>
+      <p>You could create an abstract state map by manually writing code for every state rectangle and state label on the map. But there's a much easier way: create  a table that contains the data needed to create the map.</p>
 
-      <p>You could create an abstract state map by manually writing code for every state rectangle and state label on the map. But there's a much easier way: create the D3/JavaScript equivalent of a table that stores the data you need to create the map.</p>
-
-<p> What data do we need to have to create the map? Well, the abstract state map is essentially a grid:</p>
+<p> What data do we need to  create the map? Well, the abstract state map is essentially a grid:</p>
       <table id="strawberry">
       <tr><td>Row &nbsp;</td><td>&nbsp;0 &nbsp;</td><td>&nbsp;1 &nbsp;</td><td width="150" style="text-align: center"> &nbsp; 2 &nbsp; 3  &nbsp;  4  &nbsp; 5  &nbsp; 6 &nbsp; </td><td>&nbsp;7 &nbsp;</td><td>&nbsp;8 &nbsp;</td><td>&nbsp;9 &nbsp;</td><td> 10&nbsp;</td></tr>
       <tr><td>0</td><td> </td><td> </td><td style="text-align: center"> ...</td><td> </td><td> </td><td> </td><td>ME</td></tr>
@@ -51,16 +51,17 @@
     <br/>
 
     <p> So for each state, you need to know:</p>
-<ul><li> The state's name</li>
-<li> The state's row on the grid</li>
-<li> the state's column on the grid</li></ul>
+<ul><li> The state's <b>name</b> (e.g., "WA")</li>
+<li> The state's <b>row</b> on the grid (e.g., 2)</li>
+<li> the state's <b>column</b> on the grid (e.g., 0)</li></ul>
 
 
 <div class="recipe_row">
   <div class="recipe_text">
+<h3>Playing with the Code</h3>
+<p> Here's a chunk of the code that stores the info needed to create the state map (we only included 6 states to make it more manageable).</p>
 
-<p> Here's the code that stores the info needed to create the state map. Before we explain what each line does, let's spend a little time playing with it.</p>
-<p> Try changing a few states' rows and columns and see what happens to the abstract state map.</p>
+<p> Before we explain what each line does, let's spend a little time playing with it. Try changing a few states' rows and columns and see what happens to the map.</p>
 </div>
 <div class="recipe_code">
   <br/>    <!-- br is a temp fix; fix the css so it isn't needed -->
@@ -205,102 +206,88 @@ d3.select("#state_color").on("change",  function() {
 </div>
 </div>  <!-- recipe_row -->
 
+<h3>Understanding the Code</h3>
+    <p>To understand how the code works, you need to understand 3 concepts: </p>
 
 <div class="recipe_row">
   <div class="recipe_text">
-<p>The code above was just a sample that creates data for a few states.  This code creates the data for all
-  52 states.</p>
-  <p>
-    How does it work?
-  </p>
-  <p>To store the info about the map, we  need to store a couple of pieces of info about each state.</p>
-<p>    To do that, we create a <b>variable</b> called state_map:</p>
+    <h4>We Store the Map Data in a Variable: state_map</h4>
+    <p>In D3, to store data we create a <b> variable</b>. We called our variable state_map: </p>
 <ul><li><b>var</b> tells D3 to create a variable</li>
   <li> Why did we call it "state_map" instead of "state map"?  Because  a variable's name can't have a space in it</li>
 <li> How does JavaScript know when we're done defining the variable state_map? Because all the way at the end there's a semi-colon  -- it's like putting a period at the end of a sentence</li></ul>
+</div>
+<div class="recipe_code">
+  <br/>    <!-- br is a temp fix; fix the css so it isn't needed -->
+<pre>
+  <b>var  state_map =</b> [
+      { "state": "ME", "row": 0, "col": 10 },
+      { "state": "VT", "row": 1, "col": 9 },
+      { "state": "NH", "row": 1, "col": 10 },
+      { "state": "WA", "row": 2, "col": 0 },
+      { "state": "ID", "row": 2, "col": 1 },
+      { "state": "NY", "row": 2, "col": 8 }
+  ]<b>;</b>
+</pre>
+</div>
+</div>  <!-- recipe_row -->
 
-<p>  state_map is an <b>array</b> of <b>objects</b>.</p>
+<div class="recipe_row">
+  <div class="recipe_text">
+<h4>state_map Is an Array </h4>
 
   <p> An <b>array</b> is basically just a list – in this case a list of the states.
-<ul><li>    We tell D3/JavaScript we want to create an array by using brackets ( [] ). </li>
-  <li>Each item in the array is separated by a comma</li></ul>
+<ul><li>We tell D3 we want to create an array by using <b>brackets</b>:  []  </li>
+  <li>Each item in the array is separated by a <b>comma</b></li></ul>
+</div>
+<div class="recipe_code">
+  <br/>    <!-- br is a temp fix; fix the css so it isn't needed -->
+<pre>
+  var  state_map = [
+      <b>{ "state": "ME", "row": 0, "col": 10 },
+      { "state": "VT", "row": 1, "col": 9 },
+      { "state": "NH", "row": 1, "col": 10 },
+      { "state": "WA", "row": 2, "col": 0 },
+      { "state": "ID", "row": 2, "col": 1 },
+      { "state": "NY", "row": 2, "col": 8 }</b>
+  ];
+</pre>
+</div>
+</div>  <!-- recipe_row -->
+
+<div class="recipe_row">
+  <div class="recipe_text">
+    <h4>state_map Is an Array of Objects</h4>
 
 <p> Because we want to store several pieces of info for each state, each item in the array will
-  be an <b>object</b>. The curly brackets ( { ) tells D3/JavaScript we want to create objects.</p>
-<p>    Each object can store several pieces of info, called <b> attributes</b>.  So for example, the first object in state_map  has three attributes:</p>
-  <ul><li> state: "ME"</li>
-  <li> row: 0</li>
-  <li>col: 10</li></ul>
-  <p> If you look back at the grid at the top of the page, you'll see that this object captures all the info D3 needs to know about the state of Maine (ME).</p>
+  be an <b>object</b>.</p>
+  <ul>
+  <li>We tell D3 we want to create an object by using <b> curly brackets</b>: {}</li>
+  <li> Each piece of an object's info is called called an <b>attribute</b>. Our state objects have 3 attributes:</li>
+  <ul><li> state: WA</li>
+  <li> row: 2</li>
+  <li>col: 0</li></ul>
+  </ul>
+  <p> If you look back at the grid at the top of the page, you'll see that this object captures all the info D3 needs to know to put the state of Washington (WA) on the map. <p>
 
-<p>You might be wondering, does it matter what order the states' objects are in state_map?
-  Nope.  You could change around the order and the map would come out the same.  Why? Because when the abstract state map is created, it
-  places each state using the row and column  info that's in the object for that state, not the order the objects are in. </p>
     </div>
     <div class="recipe_code">
       <br/>    <!-- br is a temp fix; fix the css so it isn't needed -->
     <pre>
-  var  state_map = [
-  { "state": "ME", "row": 0, "col": 10 },
-  { "state": "WI", "row": 1, "col": 5 },
-  { "state": "VT", "row": 1, "col": 9 },
-  { "state": "NH", "row": 1, "col": 10 },
-  { "state": "WA", "row": 2, "col": 0 },
-  { "state": "ID", "row": 2, "col": 1 },
-  { "state": "MT", "row": 2, "col": 2 },
-  { "state": "ND", "row": 2, "col": 3 },
-  { "state": "MN", "row": 2, "col": 4 },
-  { "state": "IL", "row": 2, "col": 5 },
-  { "state": "MI", "row": 2, "col": 6 },
-  { "state": "NY", "row": 2, "col": 8 },
-  { "state": "MA", "row": 2, "col": 9 },
-  { "state": "OR", "row": 3, "col": 0 },
-  { "state": "NV", "row": 3, "col": 1 },
-  { "state": "WY", "row": 3, "col": 2 },
-  { "state": "SD", "row": 3, "col": 3 },
-  { "state": "IA", "row": 3, "col": 4 },
-  { "state": "IN", "row": 3, "col": 5 },
-  { "state": "OH", "row": 3, "col": 6 },
-  { "state": "PA", "row": 3, "col": 7 },
-  { "state": "NJ", "row": 3, "col": 8 },
-  { "state": "CT", "row": 3, "col": 9 },
-  { "state": "RI", "row": 3, "col": 10 },
-  { "state": "CA", "row": 4, "col": 0 },
-  { "state": "UT", "row": 4, "col": 1 },
-  { "state": "CO", "row": 4, "col": 2 },
-  { "state": "NE", "row": 4, "col": 3 },
-  { "state": "MO", "row": 4, "col": 4 },
-  { "state": "KY", "row": 4, "col": 5 },
-  { "state": "WV", "row": 4, "col": 6 },
-  { "state": "VA", "row": 4, "col": 7 },
-  { "state": "MD", "row": 4, "col": 8 },
-  { "state": "DE", "row": 4, "col": 9 },
-  { "state": "AZ", "row": 5, "col": 1 },
-  { "state": "NM", "row": 5, "col": 2 },
-  { "state": "KS", "row": 5, "col": 3 },
-  { "state": "AR", "row": 5, "col": 4 },
-  { "state": "TN", "row": 5, "col": 5 },
-  { "state": "NC", "row": 5, "col": 6 },
-  { "state": "SC", "row": 5, "col": 7 },
-  { "state": "OK", "row": 6, "col": 3 },
-  { "state": "LA", "row": 6, "col": 4 },
-  { "state": "MS", "row": 6, "col": 5 },
-  { "state": "AL", "row": 6, "col": 6 },
-  { "state": "GA", "row": 6, "col": 7 },
-  { "state": "HI", "row": 7, "col": 0 },
-  { "state": "AK", "row": 7, "col": 1 },
-  { "state": "TX", "row": 7, "col": 3 },
-  { "state": "FL", "row": 7, "col": 8 }
-];</pre>
+          <b>{ "state": "WA", "row": 2, "col": 0 }</b>,
+</pre>
     </div>
     </div>  <!-- recipe_row -->
 
+<br/>    <!-- br is a temp fix; fix the css so it isn't needed -->
 <h3>D3 Sandwich Motto: Don't Sweat It</h3>
 <p>If you feel like you understand how the code to create state_map works, that's great.</p>
 <p>If you're not entirely sure, that's ok:  <b>don't sweat it</b></p>
 <p>
-  It takes most folks a while to really get the code.  At this point, all you need is a very
-  rough idea of how it works.  Try playing with the states one more time, then check out the
+  It takes most folks a while to really understand D3 code.  At this point, all you need is a very
+  rough idea of how it works.  </p>
+
+  <p>Try playing with the states one more time, then go on to the
   next recipe step.
 </p>
 <h4> Up Next: <a href="abstract_state_rects.html">Recipe Step #2: Using the Array to Create the States on the Map</a></h4>

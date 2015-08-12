@@ -64,6 +64,7 @@ function get_states() {
 function make_map(map_name,state_map, selected_states, x_offset, y_offset)  {
 
   var width = 40, height = 40, cellsize = 39;
+  var text_x_offset = 10;
 
   svg_area = d3.select(map_name)
 
@@ -72,7 +73,7 @@ function make_map(map_name,state_map, selected_states, x_offset, y_offset)  {
       .data(state_map)
     .enter()
     .append("rect")
-      .attr("x", function(d,i)  { return d.col * width + 100 + x_offset;})
+      .attr("x", function(d,i)  { return d.col * width +  x_offset;})
       .attr("y", function(d,i) {return d.row * height + y_offset;})
       .attr("width", cellsize)
       .attr("height", cellsize)
@@ -84,7 +85,7 @@ function make_map(map_name,state_map, selected_states, x_offset, y_offset)  {
     .data(state_map)
     .enter()
     .append("text")
-      .attr("x", function(d,i)  { return d.col * width + 108 + x_offset;})
+      .attr("x", function(d,i)  { return d.col * width + text_x_offset + x_offset;})
       .attr("y", function(d,i) {return d.row * height +  26; + y_offset})
       .text(function (d) { return d.state; })
       .style("font",   "16px sans-serif")

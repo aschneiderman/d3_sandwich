@@ -19,43 +19,48 @@
     <div class="home_row">
       <div class="home_column1">
       <h2> Abstract State Map </h2>
-    <p>
-        This recipe is based on abstract maps by
+      <p>There are plenty of tools to create detailed state maps. But what if you want to create a more abstract map? Excel/Tableau can't do it, but D3 can.</p>
+      <p> Once you learn how to create an abstract state map, it's easy to create  other types of abstract maps – e.g., a map for a neighborhood  <a href="block_party_0_recipe.html">block party</a>.</p>
+      <p>NOTE: this recipe is based on abstract maps by
          <a href="http://bl.ocks.org/mbostock/29cc3cc4078091fd2115">Mike Bostock</a> and
-          <a href="http://bl.ocks.org/mimno/4a904031a566a361f2b1">David Mimno</a>.
-        </p>
+          <a href="http://bl.ocks.org/mimno/4a904031a566a361f2b1">David Mimno</a>. </p>
 
-        <p>
-            Difficulty: Beginner
-        </p>
-        <p>Prerequsites:  <a href="">Anatomy of a D3 Web Page</a></p>
+      <p> <b>Difficulty</b>: Beginner </p>
 
-      <p>
-        <a href="abstract_state.html">Try It Out!</a>
-      </p>
+      <p><b>Prerequsites</b>:  <a href="">Anatomy of a D3 Web Page</a></p>
+
+
     </div>
-    <div class="home_column2" class="homepage_picture"> <img align=left width=400 height=266
+    <div class="home_column2" class="homepage_picture"> <img  width=400 height=266
        src= "abstract_state_snapshot.jpg" />
+       <p style="text-align: center"> <a href="abstract_state.html">View the Map</a> </p>
     </div>
 
     <div class="recipe_summary_row">
       <div class="recipe_summary_text">
         <h3>The Recipe</h3>
-        <p>1)  <a href="abstract_state_array.html">Create the data</a> that describes the states and selected states </p>
-          <p>2) <a href="abstract_state_rects.html">Create a rectangle</a> to represent each state.</p>
-          <p>3) <a href="abstract_state_names.html">Create a label</a> for each state</p>
-          <p>4)  <a href= "abstract_state_selected.html">Change the color</a> of the selected states</p>
-          <p><b>Now It's Your Turn</b>:  <a href="#">download the code</a> and try changing the
-          selected states or the colors!</p>
-          <p>
-            <i>NOTE:  We'll also want to say something about
-            this code is structured so modifying  it to create a new state map
-            is easy to do  (maybe linking to a page on designing your code for reuse?)
-            </i>
-          </p>
+        <p><b>Prep</b>: if this is your first D3 recipe, before you get started please read <a href="">Anatomy of a D3 Web Page</a>.</p>
+        <p>1)  <a href="abstract_state_1_array.html">Create the data</a> that describes the states and selected states </p>
+          <p>2) <a href="abstract_state_2_rects.html">Create a rectangle</a> to represent each state.</p>
+          <p>3) <a href="abstract_state_3_names.html">Create a label</a> for each state</p>
+          <p>4)  <a href= "abstract_state_4_selected.html">Change the color</a> of the selected states</p>
+
+<br/>       <!-- br is a temp fix; fix the css so it isn't needed -->
+          <h3>Now It's Your Turn</h3>
+          <p> Now that you've learned how to create an abstract state map, it's time to make one! Since it's your first recipe, rather than making it from scratch, let's tweak an existing map.</p>
+
+          <p> Here's how to <a href="#">copy an existing map and make a small change</a>. Try changing the selected states or the state colors! </p>
+
+<br/>       <!-- br is a temp fix; fix the css so it isn't needed -->
+          <h3>Related Recipes</h3>
+          <p>This recipe hasn't just taught you how to create an abstract state map. It's also giving you the tools to easily create other types of abstract maps. Just change the data that describes the map and what data you'll highlight  and you've got a brand-new map.</p>
+          <p> What kind of abstract maps could you create? The only limit is your imagination.</p>
+          <p> To get your creative juices flowing, here's a recipe for another type of abstract map -- a neighborhood  <a href="block_party_0_recipe.html">block party</a>, plus 2 <a href="sandwiches/Abstract_Map/block_bringing_0_recipe.html">extra</a> abstract map  <a href="sandwiches/Abstract_Map/block_file_0_recipe.html">tricks</a>.</p>
+
       </div>
       <div class="recipe_summary_code">
         <br/>    <!-- br is a temp fix; fix the css so it isn't needed -->
+        <h3>Code Created by the Recipe</h3>
         <pre>
 &lt;!DOCTYPE html&gt;
 &lt;head&gt;
