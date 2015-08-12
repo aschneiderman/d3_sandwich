@@ -93,7 +93,7 @@
       { "state": "NY", "row": 2, "col": 8 },
   ];
 
-  var x_offset = 0, y_offset=0;
+  var x_offset = 0, y_offset=0, text_offset = 10;
   make_map('#selected_states', state_map, selected_states,x_offset, y_offset);
 
   var width = 40, height = 40, cellsize = 39;
@@ -108,7 +108,7 @@ function updateRow(state, input_text)  {
     .attr("y", function(d,i) {return row * height + y_offset;})
   selected = states.selectAll("text")
     .data( selected_state, function(d) { return d.state; });
-  selected.attr("y", function(d,i) {return row * height +  26 + y_offset;});
+  selected.attr("y", function(d,i) {return row * height + 26 + y_offset;});
 
   state_code = '#' + state + "_code";
   col = rr = d3.select('#ME_col')[0][0].value;
@@ -129,10 +129,10 @@ function updateCol(state, input_text)  {
   var states =  d3.select('#selected_states');
   states.selectAll("rect")
     .data( selected_state, function(d) { return d.state; })
-    .attr("x", function(d,i) {return col * width + 100 + x_offset;})
+    .attr("x", function(d,i) {return col * width  + x_offset;})
   states.selectAll("text")
     .data( selected_state, function(d) { return d.state; })
-      .attr("x", function(d,i)  { return col * width + 108 + x_offset;});
+      .attr("x", function(d,i)  { return col * width + text_offset  + x_offset;});
 };
 
 

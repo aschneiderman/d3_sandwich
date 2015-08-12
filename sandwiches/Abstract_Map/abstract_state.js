@@ -86,7 +86,7 @@ function make_map(map_name,state_map, selected_states, x_offset, y_offset)  {
     .enter()
     .append("text")
       .attr("x", function(d,i)  { return d.col * width + text_x_offset + x_offset;})
-      .attr("y", function(d,i) {return d.row * height +  26; + y_offset})
+      .attr("y", function(d,i) {return d.row * height +  26 + y_offset})
       .text(function (d) { return d.state; })
       .style("font",   "16px sans-serif")
       .style("fill", "White")
