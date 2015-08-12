@@ -1,5 +1,11 @@
 ﻿Battle Plan: Sandwich Task List
 
+FIXUP FOR BEN
+- Move stuff from the Abstract Maps page to the homepage, and save the info about how to start playing with it
+- Add the "knife skills" To the homepage
+- Abstract State Map: add a line about what the abstract state map is about  - There are lots of tools for creating detailed maps
+- Recipe step #1: Split up the Last step, which is a large block of text right now
+
 CODING
 - create functions to encapsulate the work I'll do frequently, such as highlighting sample code
 
