@@ -106,3 +106,8 @@ pre {
 #sandwich_footer {
     clear: left;
 }
+
+
+.SVG_playground {
+    border: 1px dotted Gray;  
+}

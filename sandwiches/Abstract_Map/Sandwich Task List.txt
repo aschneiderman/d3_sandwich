@@ -1,41 +1,22 @@
 ﻿Battle Plan: Sandwich Task List
 
-CODING
-- create functions to encapsulate the work I'll do frequently, such as highlighting sample code
-
-- creating a code writer .html, which I can use for
-creating input forms
-Creating  Input form based on selected array of objects
-Given an array of objects, create the pre stuff on the side, the input form, etc
-
-
-- Fixing the Form so I can have multiple forms and associated svg areas:
+Cleaning this up:
+<td ><input type="text" class="state_input" value="0"  onChange="updateRow('ME', this)"></td>
+And while I am doing that, fix the Form so I can have multiple forms and associated svg areas:
 Parent element, attar from it, to get svg for a form
 How to get this's parent, to get the id of it
 http://stackoverflow.com/questions/20641953/how-to-select-parent-element-of-current-element-in-d3-js
 http://stackoverflow.com/questions/992115/custom-attributes-yea-or-nay
 http://idratherbewriting.com/events-and-listeners-javascript/
-
-
-NOTE:
-when I get to the point where I am going to work with Ian on the next recipe,
-make sure that we end up using "map"
-
-
-
-FORMATTING
-- For each major semantic div, put a closing comment on the closing div
-
-Array:
-"a variable won’t cut it, so an array of objects"
-(Google JavaScript data types, and to get names right)
-
+- create functions to encapsulate the work I'll do frequently, such as highlighting sample code
 Rectangles: (I think)
 D3.select("div").style…  .Background color…    .on("click", function());
 e.g.: function () {console.log("you clicked a div")});
+- For each major semantic div, put a closing comment on the closing div
 
 
 
-
-UPCOMING "KNIFE SKILLS"
-- Banging out Sandwiches without Burning out
+- creating a code writer .html, which I can use for
+creating input forms
+Creating  Input form based on selected array of objects
+Given an array of objects, create the pre stuff on the side, the input form, etc

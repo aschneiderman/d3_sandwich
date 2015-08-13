@@ -1,0 +1,16 @@
+
+# NOTE: this is basically a notes dump for recipes/techniques in the upcoming MONTHs
+
+MONTH 2
+
+
+MONTH 3
+
+<li>Block Party Variation #1: <a href="sandwiches/Abstract_Map/block_bringing_0_recipe.html">What Are They Bringing?</a></li>
+(NOTE: when I get to the point where I am going to work with Ian on the next recipe, make sure that we end up using "map")
+
+<li> Variation #2: <a href="sandwiches/Abstract_Map/block_file_0_recipe.html">Sign up List As a Text File</a></li>
+
+Techniques:
+      <li> <a href="">Troubleshooting</a>: What to Do When Your Sandwich Isn't Working (Video)</li>
+- Banging out Sandwiches without Burning out
