@@ -1,5 +1,9 @@
 ﻿Battle Plan: Atom Task List
 
+
+-  Delete tag
+
+
 VOCOLA VOICE COMMANDS
 - Delete back 2 words
 - "insert after three underscores"

@@ -1,12 +1,36 @@
 ﻿Battle Plan: Sandwich Task List
 
-- creating a recipe maker tool.html, which I can use for
-creating input forms
-Creating  Input form based on selected array of objects
-Given an array of objects, create the pre stuff on the side, the input form, etc
+- Delete Tag: Will require a command -- Using Atom, do a replace with a regular expression catching the first tag
+- Remove Tags (from the front and back of the line): Using Atom, do a replace catching the first and last tag and replacing with the text between
 
 
-Cleaning this up:
+
+
+
+assess where I am with Recipe Step #2's first interactive toy:
+Marking the pre-code:
+- switch to using italics marker
+- Create command: easier to put in the ID tags around italics
+
+Adding the code for updating the color
+
+Use that code as a template to create the form maker for individual values
+- Create the textarea and the code to take an array and create the form & input fields
+- Create the code to take an array and create a shell for each corresponding function
+
+
+
+
+
+
+- File navigation by voice, using keyboard shortcuts:
+http://www.shortcutworld.com//en/linux/Atom-%28text-editor%29_1.0.html
+
+
+
+- Given an array of objects, create the pre stuff on the side, the input form, etc
+
+Cleanup Recipe Step #1:
 <td ><input type="text" class="state_input" value="0"  onChange="updateRow('ME', this)"></td>
 And while I am doing that, fix the Form so I can have multiple forms and associated svg areas:
 Parent element, attar from it, to get svg for a form
@@ -19,4 +43,3 @@ Rectangles: (I think)
 D3.select("div").style…  .Background color…    .on("click", function());
 e.g.: function () {console.log("you clicked a div")});
 - For each major semantic div, put a closing comment on the closing div
-
