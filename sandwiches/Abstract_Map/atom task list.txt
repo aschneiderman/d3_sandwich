@@ -5,7 +5,6 @@
 
 
 VOCOLA VOICE COMMANDS
-- Delete back 2 words
 - "insert after three underscores"
 - Deleting between delimiters, such as the text in a link
 - how to navigate to and open files
