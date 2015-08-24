@@ -1,7 +1,5 @@
 ﻿Battle Plan: Sandwich Task List
 
-
-
 assess where I am with Recipe Step #2's first interactive toy:
 Marking the pre-code:
 - switch to using italics marker
