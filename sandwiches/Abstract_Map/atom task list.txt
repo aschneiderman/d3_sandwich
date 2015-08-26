@@ -1,33 +1,27 @@
 ﻿Battle Plan: Atom Task List
 
-
--  Delete tag
-
-
 VOCOLA VOICE COMMANDS
-- "insert after three underscores"
-- Deleting between delimiters, such as the text in a link
 - how to navigate to and open files
+
+- Deleting between delimiters, such as the link text in a URL
 
 
 ATOM CUSTOM COMMANDS
+- Convert selection – or entire line? - From underscores to camel case
+
 - Cut/Copy to bookmark
 Once that is working:
 Command for easily moving recipe step text from Atom to Word
 (Precursor: add ending comments to each div tag, so I can search by them)
 
-- Grab everything inside quotes
-- Change  Delimeter one so that it includes the tags
+- Create a "command line"  (need to remember why I need this  :-)
 
-
-Then: switch back to working on Sandwich reusable code
-
+-  Re-factor delete-tags to create a function that lets me operate on the current line
+   by passing it an anonymous function
 
 
 
 
 ATOM PACKAGES
+-  A linter
 -beautify scripts?
-
-Eventually, switch to using the following for synchronizing atom across computers:
-https://github.com/Hackafe/atom-sync-settings
