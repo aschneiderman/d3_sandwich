@@ -34,3 +34,9 @@ Rectangles: (I think)
 D3.select("div").style…  .Background color…    .on("click", function());
 e.g.: function () {console.log("you clicked a div")});
 - For each major semantic div, put a closing comment on the closing div
+
+
+- Error messages are like crying infant babies with a new parent.
+At the beginning, you know it's really upset, you just don't have any idea why.
+Over time, as you get to know the baby better you figure out what its particular sounds mean.
+The same is true for deciphering error messages.
