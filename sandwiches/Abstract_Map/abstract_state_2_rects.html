@@ -20,21 +20,21 @@
       <h2> Abstract State Map</h2>
       <h2>   Step #2: Create a Rectangle for Each State </h2>
 
-<p> Usually when you are just starting to learn a programming language, they start off with something very simple – e.g., printing the words "hello world!" At step along your path to learning more as a beginner, they tried to set it up so you only have 1 or 2 concepts you need to wrap your header and at any one time.</p>
+<p> Usually when you are just starting to learn a programming language, they start off with something very simple – e.g., printing the words "hello world!" At each step, they tried to make sure you only have 1 or 2 concepts you need to wrap your head around.</p>
 
-<p> But with D3, to do something at all useful you need to tackle a bunch of concepts at the same time. So what we're going to do is start by giving you a chance to play with a few settings in the finished code, then step back and systematically unpack the concepts behind the card one by one.</p>
+<p> But with D3, to do something at all useful you need to tackle a bunch of concepts at the same time. So what we're going to do is start by giving you a chance to play with a few settings in the finished code, then step back and systematically unpack the concepts behind the code one by one.</p>
 
 <h3>Playing with the Code</h3>
 
 <div class="recipe_row">
 <div class="recipe_text">
-<p>Before we dive into the code, let's get a very rough feel for how it works.</p>
-<p> Play with the values and see what it does.</p>
+<p>Before we dive into the code for creating the rectangles, let's get a very rough feel for how it works.</p>
+<p>Play with the values and see what happens.</p>
 </div>
 <div class="recipe_code">
-  <pre>
-    var width = <i id="width">40</i>, height = 40, cellsize = 39;    </b>
-    <b id="svg">svg_area = d3.select("svg")</b>
+  <pre id="play_code_form">
+    var width = <i id="width">40</i>, height = <i id="height">40</i>, cellsize = <i id= "cellsize">39</i>;
+    svg_area = d3.select("svg")
 
     // Insert a rectangle for each state
     svg_area.selectAll("rect")
@@ -45,46 +45,66 @@
         .attr("y", function(d,i) {return d.row * height;})
         .attr("width", cellsize)
         .attr("height", cellsize)
-        <b id="fillLine">.style("fill", "<i id="fill">Sienna</i>");</b>
+        .style("fill", "<i id="fill">Sienna</i>");
   </pre>
 </div>
 </div>  <!-- end recipe_row -->
 
 <div class="recipe_row">
 <div class="recipe_text">
-  <svg width="500" height="160" id="play_code" class="SVG_playground"></svg>        <!-- SVG graphics will go here  -->
+  <svg width="520" height="400" id="play_code" class="SVG_playground"></svg>        <!-- SVG graphics will go here  -->
+  <script type="text/javascript">
+    svgName = '#play_code';
+    make_map(svgName, get_states(), [], 0, 0);
+  </script>
 </div>
 <div class="recipe_code">
   <form>
     <table class="input_table">
-      <tr><td>Width</td><td><input type="text" value="40"  onChange="changeRecipeWidth(this)"> </td></tr>
-<tr><td>Height</td><td>
-</td></tr>
-<tr><td>fill</td><td><input type="text" value="Sienna"  onChange="changeRecipeFill(this)">
-</td></tr>
-<tr><td>cellsize</td><td>
-</td></tr>
+      <tr><td>Width</td><td><input type="text" value="40"  onChange="changeValue('width', this)"> </td></tr>
+      <tr><td>Height</td><td><input type="text" value="40"  onChange="changeValue('height', this)"> </td></tr>
+      <tr><td>Cell Size</td><td><input type="text" value="39"  onChange="changeValue('cellsize', this)"> </td></tr>
+      <tr><td>Fill</td><td><input type="text" value="Sienna"  onChange="changeValue('fill', this)"> </td></tr>
     </table>
   </form>
 </div>
 </div>  <!-- end recipe_row -->
 <script type="text/javascript">
 
-
-
   // Captains log:
-  //  - Run the function to create the state map
-  //  - In every "change" function,  select all the rectangles and then change the parameter, using the input value
+  // Break the state map code up so that creating the text is done separately,
+  //  so I can just create the rectangles while still having the code to create the whole map
+  //
+  // Fix the code so changing the color works
+  //
+  // Rewrite changeValue so that you pass it an anonymous function that has the code you need to use
+
+  var state_rects =  d3.select(svgName)
+      .selectAll("rect");
+
+  var values = {width: 40, height: 40, cellsize: 39, fill: "Sienna"};
+  // Better yet, I could grab one rectangle and get these values from it, I think  :-)
 
   function updateCodeValue(formID, valueID, newValue) {
     // Updates the value of a line of code and highlights the line
-    actualValueID = '#' + formID + ' #' + valueID;
-    d3.select(actualValueID).text(newValue);
-    d3.select('#' + formID).style("background-color", '#FFFF66');
+    fullID = '#' + formID  + " #" + valueID;
+    console.log('fullID:' + fullID);
+    d3.select('#' + formID + ' #' + valueID)
+      .text(newValue)
+      .style("background-color", '#FFFF66');
   };
 
-  function changeRecipeWidth(input) {
-    updateCodeValue('width_height_cellsize', 'width', input.value);
+  function changeValue(attribute, input) {
+    updateCodeValue('play_code_form', attribute, input.value);
+    // state_rects.attr(attribute, input.value);
+    values[attribute] = input.value;
+    state_rects.attr(attribute, input.value)
+      .attr("x", function(d,i)  { return d.col * values['width'];})
+      .attr("y", function(d,i) {return d.row * values['height'];})
+      .attr("width", values['cellsize'])
+      .attr("height", values['cellsize'])
+      .style("fill",  values['fill']);
+      // .style("fill",  "Red");
   };
 
   function changeRecipeFill(input)  {
