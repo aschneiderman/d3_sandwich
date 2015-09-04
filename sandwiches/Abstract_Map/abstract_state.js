@@ -66,7 +66,7 @@ function make_map(map_name,state_map, selected_states, x_offset, y_offset)  {
   var width = 40, height = 40, cellsize = 39;
   var text_x_offset = 10;
 
-  svg_area = d3.select(map_name)
+  svg_area = d3.select(map_name);
 
   // Insert a rectangle for each state
   svg_area.selectAll("rect")
@@ -100,4 +100,26 @@ function make_map(map_name,state_map, selected_states, x_offset, y_offset)  {
 
   // Change the background color of each of those states to orange
    state_rects.style("fill", "orange");    // For every state that was joined, change the color to orange
+};
+
+
+// An ugly hack for now -- eventually need to split up make_map so I can either call rectanges or the whole deal
+
+function make_rectangles(map_name,state_map, selected_states, x_offset, y_offset)  {
+
+  var width = 40, height = 40, cellsize = 39;
+  var text_x_offset = 10;
+
+  svg_area = d3.select(map_name);
+
+  // Insert a rectangle for each state
+  svg_area.selectAll("rect")
+      .data(state_map)
+    .enter()
+    .append("rect")
+      .attr("x", function(d,i)  { return d.col * width +  x_offset;})
+      .attr("y", function(d,i) {return d.row * height + y_offset;})
+      .attr("width", cellsize)
+      .attr("height", cellsize)
+      .style("fill", "DarkRed");
 };

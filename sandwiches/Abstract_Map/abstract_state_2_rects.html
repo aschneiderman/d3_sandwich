@@ -32,7 +32,7 @@
 <p>Play with the values and see what happens.</p>
 </div>
 <div class="recipe_code">
-  <pre id="play_code_form">
+  <pre class="code_play">
     var width = <i id="width">40</i>, height = <i id="height">40</i>, cellsize = <i id= "cellsize">39</i>;
     svg_area = d3.select("svg")
 
@@ -45,26 +45,31 @@
         .attr("y", function(d,i) {return d.row * height;})
         .attr("width", cellsize)
         .attr("height", cellsize)
-        .style("fill", "<i id="fill">Sienna</i>");
+        .style("fill", "<i id="fill">DarkRed</i>");
   </pre>
 </div>
 </div>  <!-- end recipe_row -->
 
 <div class="recipe_row">
 <div class="recipe_text">
-  <svg width="520" height="400" id="play_code" class="SVG_playground"></svg>        <!-- SVG graphics will go here  -->
+  <svg width="520" height="400" class="code_play" class="code_play" class="SVG_playground"></svg>        <!-- SVG graphics will go here  -->
+
   <script type="text/javascript">
-    svgName = '#play_code';
-    make_map(svgName, get_states(), [], 0, 0);
+    svgName = 'svg.code_play';
+
+    console.log("SVG map we are going to use:" + svgName);
+    make_rectangles(svgName, get_states(), [], 0, 0);
   </script>
+
 </div>
 <div class="recipe_code">
-  <form>
+  <form class="code_play">
     <table class="input_table">
-      <tr><td>Width</td><td><input type="text" value="40"  onChange="changeValue('width', this)"> </td></tr>
-      <tr><td>Height</td><td><input type="text" value="40"  onChange="changeValue('height', this)"> </td></tr>
-      <tr><td>Cell Size</td><td><input type="text" value="39"  onChange="changeValue('cellsize', this)"> </td></tr>
-      <tr><td>Fill</td><td><input type="text" value="Sienna"  onChange="changeValue('fill', this)"> </td></tr>
+      <tr><td>Width</td><td><input name="width" type="text" value="40"> </td></tr>
+      <tr><td>Height</td><td><input name="height" type="text" value="40"> </td></tr>
+      <tr><td>Cell Size</td><td><input name="cellsize" type="text" value="39"> </td></tr>
+      <tr><td>Fill</td><td><input name="fill" type="text" value="DarkRed"> </td></tr>
+      <tr><td></td><td><input type="button" value="Update the Map"  onClick="updateValue('code_play', this)"> </td></tr>
     </table>
   </form>
 </div>
@@ -72,10 +77,16 @@
 <script type="text/javascript">
 
   // Captains log:
+  //  So what I've learned:
+  //    In Firefox, on Change works just fine for Step 1 and, on my local drive, for Step 2, but not on GitHub Step 2
+  //  It Internet Explorer, on change works just fine for Step 1 but not at all for Step 2
+  //
+  // So for step 2, I need to switch to using an update button
+  // I also need to document this _in the code_ as well as somewhere else, so I won't bang my head against this will again
+  //
+  //
   // Break the state map code up so that creating the text is done separately,
   //  so I can just create the rectangles while still having the code to create the whole map
-  //
-  // Fix the code so changing the color works
   //
   // Rewrite changeValue so that you pass it an anonymous function that has the code you need to use
 
@@ -87,18 +98,18 @@
 
   function updateCodeValue(formID, valueID, newValue) {
     // Updates the value of a line of code and highlights the line
-    fullID = '#' + formID  + " #" + valueID;
+    fullID = 'pre.' + formID  + " #" + valueID;
     console.log('fullID:' + fullID);
-    d3.select('#' + formID + ' #' + valueID)
+    d3.select(fullID)
       .text(newValue)
       .style("background-color", '#FFFF66');
   };
 
   function changeValue(attribute, input) {
-    updateCodeValue('play_code_form', attribute, input.value);
+    updateCodeValue('code_play_form', attribute, input.value);
     // state_rects.attr(attribute, input.value);
     values[attribute] = input.value;
-    state_rects.attr(attribute, input.value)
+    state_rects
       .attr("x", function(d,i)  { return d.col * values['width'];})
       .attr("y", function(d,i) {return d.row * values['height'];})
       .attr("width", values['cellsize'])
@@ -106,6 +117,39 @@
       .style("fill",  values['fill']);
       // .style("fill",  "Red");
   };
+
+  function updateValue(playName, input)  {
+
+      // Load the form values into the "values" object
+      var playForm = "form." + playName;
+      var values = {};
+      // var formValues =  d3.select(playForm)
+      //     .selectAll("input")[0]    //  comes back as an array within an array, so drop the outer array
+      //     .slice(0,-1);     // drop the button that's at the end of the form;  switch to using a filter?
+      // formValues.forEach(function(d, i) { console.log(d.name + " " + i); values[d.name] = d.value; });
+      // console.log("Color is: " + values.fill);
+      d3.select(playForm)
+          .selectAll("input")[0]    //  comes back as an array within an array, so drop the outer array
+          .slice(0,-1)     // drop the button that's at the end of the form;  switch to using a filter?
+          .forEach(function(d, i) {
+              values[d.name] = d.value;
+              updateCodeValue(playName, d.name, d.value);
+          });
+      console.log("fill is: " + values.fill);
+
+      state_rects
+        .attr("x", function(d,i)  { return d.col * values.width;})
+        .attr("y", function(d,i) {return d.row * values.height;})
+        .attr("width", values.cellsize)
+        .attr("height", values.cellsize)
+        .style("fill",  values.fill);
+        // .style("fill",  "Red");
+
+  };
+
+
+
+
 
   function changeRecipeFill(input)  {
     updateCodeValue('fillLine', 'fill', input.value);
