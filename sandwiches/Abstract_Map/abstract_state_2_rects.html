@@ -104,19 +104,19 @@
       .text(newValue)
       .style("background-color", '#FFFF66');
   };
-
-  function changeValue(attribute, input) {
-    updateCodeValue('code_play_form', attribute, input.value);
-    // state_rects.attr(attribute, input.value);
-    values[attribute] = input.value;
-    state_rects
-      .attr("x", function(d,i)  { return d.col * values['width'];})
-      .attr("y", function(d,i) {return d.row * values['height'];})
-      .attr("width", values['cellsize'])
-      .attr("height", values['cellsize'])
-      .style("fill",  values['fill']);
-      // .style("fill",  "Red");
-  };
+  //
+  // function changeValue(attribute, input) {
+  //   updateCodeValue('code_play_form', attribute, input.value);
+  //   // state_rects.attr(attribute, input.value);
+  //   values[attribute] = input.value;
+  //   state_rects
+  //     .attr("x", function(d,i)  { return d.col * values['width'];})
+  //     .attr("y", function(d,i) {return d.row * values['height'];})
+  //     .attr("width", values['cellsize'])
+  //     .attr("height", values['cellsize'])
+  //     .style("fill",  values['fill']);
+  //     // .style("fill",  "Red");
+  // };
 
   function updateValue(playName, input)  {
 
@@ -148,12 +148,12 @@
   };
 
 
-
-
-
-  function changeRecipeFill(input)  {
-    updateCodeValue('fillLine', 'fill', input.value);
-  };
+  //
+  //
+  //
+  // function changeRecipeFill(input)  {
+  //   updateCodeValue('fillLine', 'fill', input.value);
+  // };
 
 
 </script>
@@ -162,8 +162,72 @@
 
 <h3>Revenge of Your High School Math Teacher</h3>
 <p>
-  (what's a rectangle?)
+  (what's a rectangle and what does it have to do with high school math?)
 </p>
+
+
+
+
+
+<div class="recipe_row">
+<div class="recipe_text">
+  <svg width="500" height="160"  class="rectangle">
+  <rect x="50" y="20" width="40" height="40"
+   style="fill:DarkRed" />
+  </svg>        <!-- SVG graphics will go here  -->
+</div>
+<div class="recipe_code">
+  <form class="rectangle">
+    <table class="input_table">
+      <tr><td>X</td><td><input name="X" type="text" value="50"> </td></tr>
+      <tr><td>Y</td><td><input name="Y" type="text" value="20"> </td></tr>
+      <tr><td>Width</td><td><input name="width" type="text" value="40"> </td></tr>
+      <tr><td>Height</td><td><input name="height" type="text" value="40"> </td></tr>
+      <tr><td>Fill</td><td><input name="fill" type="text" value="DarkRed"> </td></tr>
+      <tr><td></td><td><input type="button" value="Update It!"  onClick="updateRectangle('rectangle', this)"> </td></tr>
+    </table>
+  </form>
+</div>
+</div>  <!-- end recipe_row -->
+
+
+
+  <script type="text/javascript">
+    svgName = 'svg.rectangle';
+    console.log("SVG map we are going to use:" + svgName);
+
+
+    var rectangle =  d3.select(svgName).select("rect");
+  </script>
+
+<script type="text/javascript">
+
+
+// Need to redo updateValue so it gets passed the anonymous function containing the update
+
+
+
+function updateRectangle(playName, input)  {
+    var playForm = "form." + playName;
+    var values = {};
+    d3.select(playForm)
+        .selectAll("input")[0]    //  comes back as an array within an array, so drop the outer array
+        .slice(0,-1)     // drop the button that's at the end of the form;  switch to using a filter?
+        .forEach(function(d, i) {
+            values[d.name] = d.value;
+        });
+    console.log("fill is: " + values.fill);
+
+    rectangle
+      .attr("x", values.X)
+      .attr("y", values.Y)
+      .attr("width", values.width)
+      .attr("height", values.height)
+      .style("fill",  values.fill);
+};
+</script>
+
+
 <p>
   (explain and demonstrate the "border" trick)
 </p>
