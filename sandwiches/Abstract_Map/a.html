@@ -1,0 +1,25 @@
+
+
+
+<pre>var
+
+  width = <i id="width">40</i>, height = <i id="height">40</i>, cellsize = <i id="cellsize">39</i>;
+
+svg_area = d3.select("svg")
+
+// Insert a rectangle for each state
+svg_area.selectAll("rect")
+    .data(state_map)
+  .enter()
+  .append("rect")
+    .attr("x", function(d,i)  { return d.col * width + 100;})
+    .attr("y", function(d,i) {return d.row * height;})
+    .attr("width", cellsize)
+    .attr("height", cellsize)
+    .style("fill", "<i id="fill">Sienna</i>");
+ </pre>
+
+
+null
+
+o,or,ro
