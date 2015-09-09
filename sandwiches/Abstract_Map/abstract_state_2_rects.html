@@ -22,7 +22,7 @@
 
 <p> Usually when you are just starting to learn a programming language, they start off with something very simple – e.g., printing the words "hello world!" At each step, they tried to make sure you only have 1 or 2 concepts you need to wrap your head around.</p>
 
-<p> But with D3, to do something at all useful you need to tackle a bunch of concepts at the same time. So what we're going to do is start by giving you a chance to play with a few settings in the finished code, then step back and systematically unpack the concepts behind the code one by one.</p>
+<p> But with D3, to do something at all useful you need to tackle a bunch of concepts at the same time. So what we're going to do is start by giving you a chance to play with a few settings in the finished code, then we'll break this Step into a couple of mini-steps and systematically unpack the concepts behind the code.</p>
 
 <h3>Playing with the Code</h3>
 
@@ -157,17 +157,121 @@
 
 
 </script>
+<p>FYI, if you play around with the height, width, and cellsize, you'll discover something interesting.
+We don't directly create the white border between the rectangles. If cellsize is 1 or more pixels smaller than height and width,
+that creates some whitespace between the rectangles that looks like a border.
+The larger the difference between height/width and cellsize, the bigger the border. If you haven't
+  played with it already, give it a try.</p>
+
+<hr/>
+<p> (NOTE: in the next draft, break the rest of this page into 3 mini-steps.
+  But don't do it until Ian and I have had a chance to take a look at it and make sure that's the most logical way to break it down)</p>
+
+
+<h3>Creating the Rectangles: Don't Sweat Each Line of Code, Focus on the Pattern</h3>
+
+<p>In Step 1, we created an <b>array</b> of <b>objects</b>, one per state, with the info the computer needs to put each state on the map: name, row, column.</p>
+
+<p>How do we tell the computer to use that info to create the rectangles?</p>
+
+<p>First we need to tell the computer <b>where</b> to put the rectangles. Here's how:</p>
+
+<div class="recipe_row">
+<div class="recipe_text">
+<p>svg tells the computer to create an area 960 pixels wide and 400 pixels tall where we will put the rectangles.</p>
+</div>
+<div class="recipe_code">
+  <pre>
+&ltsvg width="960" height="400"&gt&lt/svg&gt        &lt!-- SVG graphics will go here  --&gt
+  </pre>
+</div>
+</div>  <!-- end recipe_row -->
+
+<div class="recipe_row">
+<div class="recipe_text">
+<p>Next we tell the computer to create a variable called svgArea that points to the SVG area we just created.</p>
+</div>
+<div class="recipe_code">
+  <pre>
+    svg_area = d3.select("svg")
+  </pre>
+</div>
+</div>  <!-- end recipe_row -->
+
+
+<p>Okay, here's where things get weird.</p>
+
+<p>Here's the code that tells the computer to use the data in stateMap to create the rectangles.  In most tutorials, here's how they explain what this code is doing:</p>
+<div class="recipe_row">
+<div class="recipe_text">
+  <ul><li>Select every rectangle that's in the SVG area.</li>
+  <li>Bind the data in stateMap to those rectangles.</li>
+  <li>If there aren't enough rectangles for all the data,
+  create a new rectangle for the remaining data.</li></ul>
+</div>
+<div class="recipe_code">
+  <pre>
+    svg_area.selectAll("rect")
+        .data(state_map)
+      .enter()
+      .append("rect")
+  </pre>
+</div>
+</div>  <!-- end recipe_row -->
+
+<p>At which point your brain says: ????</p>
+
+<p>Select every rectangle that's in the SVG area? But we just created an empty SVG area, so we know there are no rectangles in it.</p>
+
+<p>An instructor might say, "Yes, there aren't any rectangles this time, but there could have been rectangles in it. And if there were, bla bla bla bla…</p>
+
+</p>This is the point at which a lot of people get off the D3 train.</p>
+
+<p>And if that didn't do it, the next conversation – what exactly do they mean when they say bind the data? – would probably do it.</p>
+
+<p>Here's a better explanation:<br/>
+Yeah, it's weird. But don't sweat it.</p>
+
+<p> After you've worked on a couple of D3 graphs, you won't see those individual lines – you'll see a pattern. Here's how you'll read the code:</p>
+<div class="recipe_row">
+<div class="recipe_text">
+  <p>If the code says <b>.enter and .append("rect")</b>:<br/>
+  Inside the SVG area, create a rectangle for every item in stateMap.</p>
+</div>
+<div class="recipe_code">
+  <pre>
+    svg_area.selectAll("rect")
+        .data(state_map)
+      .enter()
+      .append("rect")
+  </pre>
+</div>
+</div>  <!-- end recipe_row -->
+
+
+<p>You're going to use this pattern over and over and over – almost every D3 graph uses it. In fact, you'll see it again in Step 3.</p>
+
+<p>Eventually – a few months from now? a year from now? – those individual lines of code will make more sense. But for now, it's not worth worrying about.</p>
 
 
 
-<h3>Revenge of Your High School Math Teacher</h3>
-<p>
-  (what's a rectangle and what does it have to do with high school math?)
-</p>
 
 
 
+<h3>The Revenge of Your High School Math Teacher</h3>
+<p>We're in the homestretch now!  We've told the computer to create one rectangle per item in stateMap. Now all we need to do is give it a few more details about those rectangles.</p>
 
+<p> But to do it, we need to remember something you were taught a long time ago. Call it the revenge of your high school math teacher.</p>
+
+<p> Back in high school math, you probably wondered, where am I ever going to use any of this? Now you know: you need it to create cool data visualizations.</p>
+
+<p> We don't want the computer to create any old rectangle. So what info does it need to know to create the specific rectangle we want?</p>
+<ul><li> The rectangle's height</li>
+<li> The rectangle's width</li>
+<li> The rectangle's color – otherwise it'll be invisible</li>
+<li> The X and Y coordinates where it should start drawing the rectangle</li></ul>
+
+</p> None of this coming back to you? Or are you in high school and it hasn't been covered yet? The simplest way to get it: play with this interactive toy.
 
 <div class="recipe_row">
 <div class="recipe_text">
@@ -227,20 +331,186 @@ function updateRectangle(playName, input)  {
 };
 </script>
 
+<p>Try changing the rectangle's height, width, X, Y, and fill/color and see what happens.</p>
 
+
+<h3>Revenge of Your High School Math Teacher, Part 2</h3>
+
+<p> Now we know how to tell the computer exactly how we want it to create the rectangle. But how do we how to do this for a bunch of rectangles, each of which has slightly different instructions?</p>
+
+<div class="recipe_row">
+<div class="recipe_text">
+<p>  Here's the code that does it.</p>
+</div>
+<div class="recipe_code">
+  <pre>
+.attr("x", function(d,i)  { return d.col * width + 100;})
+.attr("y", function(d,i) {return d.row * height;})
+.attr("width", cellsize)
+.attr("height", cellsize)
+.style("fill", "<i id="fill">Sienna</i>");
+  </pre>
+</div>
+</div>  <!-- end recipe_row -->
+
+<p> Each rectangle is going to have the same width, height, and fill/color, so we can just tell the computer the value to use.</p>
+
+<p> ( A side note: You might have noticed that for width and height we use "attr", which is short for attribute, but for fill/color, we use "style."  Why aren't they all "attr"? There is a geeky answer, but you really need to know right now? No, you don't. All you need to know: sometimes you use "attr," sometimes you use "style", just copy which ever one is used in the example or documentation you are reading and will be fine.) </p>
+
+<p> But what about X and Y? X and Y tell the computer where to start creating the rectangle, so if every rectangle had the same X and Y, they would be stacked on top of each other. So how do you tell the computer the X and Y for each rectangle?</p>
+
+<p> This is where the idea of the grid we talked about in Step 1 comes in. We've got 3 pieces of data about each state:</p>
+<ul><li> The state's <b>name</b> (e.g., "WA")</li>
+<li> The state's <b>row</b> on the grid (e.g., 2)</li>
+<li> the state's <b>column</b> on the grid (e.g., 0)</li></ul>
+<p> So what we need to tell the computer is how to translate row and column into X and Y.</p>
+
+<p> Time for another interactive toy! Since we are using math that you probably don't remember, instead of playing with the states, we'll work with 6 rectangles and we'll put them at the start of the map </p>
+
+<p> <b>Before you start playing with the rectangles </b>, take a look at X and Y. Notice how each X and Y is 40 more than the last one? That's because each rectangle's height and width is 40.
 <p>
-  (explain and demonstrate the "border" trick)
-</p>
+<div class="recipe_row">
+<div class="recipe_text">
+  <svg width="500" height="160" id="" class="SVG_playground"></svg>        <!-- SVG graphics will go here  -->
+</div>
+<div class="recipe_code">
+  <form>
+    <table class="input_table">
+      <tr><td>
+        State
+      </td><td>
+        X
+      </td><td>
+        Y
+      </td>
+      </tr>
+      <tr>
+        <td>ME</td>
+        <td ><input type="text" class="state_input" value="0"  onChange="updateRow('ME', this)"></td>
+        <td><input type="text" class="state_input" id='ME_col' value="10" onChange="updateCol('ME', this)"></td>
+      </tr>
+      <tr>
+        <td>VT</td>
+        <td><input type="text" class="state_input" value="1"  onChange="updateRow('VT', this)"></td>
+        <td><input type="text" class="state_input" value="9"  onChange="updateCol('VT', this)"></td>
+      </tr>
+      <tr>
+        <td>NH</td>
+        <td><input type="text" class="state_input" value="1"  onChange="updateRow('NH', this)"></td>
+        <td><input type="text" class="state_input" value="10" onChange="updateCol('NH', this)"></td>
+      </tr>
+      <tr>
+        <td>WA</td>
+        <td><input type="text" class="state_input" value="2"  onChange="updateRow('WA', this)"></td>
+        <td><input type="text" class="state_input" value="0" onChange="updateCol('WA', this)"></td>
+      </tr>
+      <tr>
+        <td>ID</td>
+        <td><input type="text" class="state_input" value="2"  onChange="updateRow('ID', this)"></td>
+        <td><input type="text" class="state_input" value="1" onChange="updateCol('ID', this)"></td>
+      </tr>
+      <tr>
+        <td>NY</td>
+        <td><input type="text" class="state_input" value="2"  onChange="updateRow('NY', this)"></td>
+        <td><input type="text" class="state_input" value="8" onChange="updateCol('NY', this)"></td>
+      </tr>
+    </table>
+  </form>
+</div>
+</div>
+</div>  <!-- end recipe_row -->
+<script type="text/javascript">
+
+</script>
+<p> Try playing around with the X and Y for each state.</p>
+
+<p> (Not sure if this is the right data visualization. Before I mess with it anymore, get Ian's thoughts)</p>
+
+<p> Now that we know that to translate a state's row into X, we want to multiply the row by 40 and we want to do the same math for Y, how do we tell the computer? In math class, they use what they call a formula:</p>
+
+<ul><li> X = X * width</li>
+<li>Y = Y * height</li></ul>
+
+<p> How do we do this in D3?
+<div class="recipe_row">
+<div class="recipe_text">
+<p>  Here's the code that does it.</p>
+</div>
+<div class="recipe_code">
+  <pre>
+.attr("x", function(d,i)  { return d.col * width;})
+.attr("y", function(d,i) {return d.row * height;})
+  </pre>
+</div>
+</div>  <!-- end recipe_row -->
+
+<p> What's this weird "function(d,i)" business?  As D3 loops through each of the items in stateMap, it creates two variables to help you:
+<ul><li>d:  the item you are on – e.g., WA</li>
+<li>i: the number of the item you're on -- 0, 1, 2, 3 (computers like to start counting from 0)</li></ul>
+<p> In this case we only care about d, the item.  We can use d to get to the info we have about each state: "d.col" is the state's column.</p>
+<p> The bad news: this looks weird. The good news: you are going to see this pattern over and over and over in every D3 visualization you write. So instead of worrying about the individual details right now, here's how to read the code:
+<div class="recipe_row">
+<div class="recipe_text">
+<p> For each rectangle: </p>
+<ul><li>Set X to the state's col * width</li>
+<li>Set Y to the state's row * height</li></ul>
+</div>
+<div class="recipe_code">
+  <pre>
+.attr("x", function(d,i)  { return d.col * width;})
+.attr("y", function(d,i) {return d.row * height;})
+  </pre>
+</div>
+</div>  <!-- end recipe_row -->
+<p> (A side note: in case you're wondering "what's that business about function" or if you have done some programming before and you're wondering what is a function doing inside a line of code, it's called an anonymous function – we'll explain more in the coming months, but for now don't worry about it).</p>
 
 
-<h3> Select, data, enter weirdness</h3>
-
-
-<h3>Revenge, Part 2: why that calculation for height?</h3>
 
 
 
-<h3>anonymous function weirdness</h3>
+<p> (give them some reassurance about how it'll take a little time to get used to using this math, but most of the time the math is pretty simple. The main thing you need to do is that if you feel at all confused about the math that you see in a D3 visualization, make a copy of the code and do what we've been doing here: play with the numbers to get a feel for how it works.)</p>
+
+<h3>Recap: D3's "Saute until the Onions Start to Brown </h3>
+<p> Ouch! That was way too many things to have to learn when you're just getting started. We're sorry about that. Like we said at the beginning of this Step, it's what makes the first few baby steps of D3 so rocky.</p>
+
+<p> The good news is, at this point you don't need to completely understand the details.</p>
+
+<p> The most important thing you need to know: you're going to see these patterns over and over and over. So if at the beginning you're not entirely comfortable with each individual line, don't sweat it.  When you see a chunk of code that looks like this, here's how you read it:</p>
+
+<div class="recipe_row">
+<div class="recipe_text">
+<p> For each item in stateMap, create a rectangle:</p>
+<ul><li> x = the state's column * width</li>
+<li> y = the state's row * height</li>
+<li> width = cellsize</li>
+<li> height = cellsize</li>
+<li>fill, aka color = DarkRed</li></ul>
+</div>
+<div class="recipe_code">
+  <pre>
+    var width = <i id="width">40</i>, height = <i id="height">40</i>, cellsize = <i id= "cellsize">39</i>;
+    svg_area = d3.select("svg")
+
+    // Insert a rectangle for each state
+    svg_area.selectAll("rect")
+        .data(state_map)
+      .enter()
+      .append("rect")
+        .attr("x", function(d,i)  { return d.col * width;})
+        .attr("y", function(d,i) {return d.row * height;})
+        .attr("width", cellsize)
+        .attr("height", cellsize)
+        .style("fill", "<i id="fill">DarkRed</i>");
+  </pre>
+</div>
+</div>  <!-- end recipe_row -->
+
+<p> So yeah, initially it looks pretty weird. But if you know how to read the pattern, you've got an amazing amount done in just a few lines of code. </p>
+
+<p>And after you've done a couple D3 visualizations, it'll become as natural  you as the instructions "sauté the onions until they start to brown" are to an experienced cook.</p>
+
+
+
 
 
 

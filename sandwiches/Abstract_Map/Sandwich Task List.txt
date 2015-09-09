@@ -1,5 +1,11 @@
 ﻿Battle Plan: Sandwich Task List
 
+<p> (NOTE: need to figure out where in Step 2 I explain what method chaining is and why you use it)
+
+
+On the bootstrap CSS list, Ask about how to deal with using paragraph tags inside the code text area
+so the explanation of the code doesn't get bumped down a line. Or ask Tom's folks
+
 assess where I am with Recipe Step #2's first interactive toy:
 Marking the pre-code:
 - switch to using italics marker
