@@ -1,0 +1,39 @@
+I need to SLOW DOWN
+and create the tools I need
+to take care of my hands
+(PS: it'll also make creating new recipes easier)
+
+- schedule Monday, September 21 and Tuesday, September 22 mornings to write a draft of Steps 3 and 4
+
+NOTE: I need to PRIORITIZE these additions,
+I need to GO SLOW – I will not get it all done by the time Ian is back
+what is most important for my being happy and feeling good is to go slow and take care of my hands
+- for the steps to create Step 3 and 4, right down my ideal workflow and imagine: what's easy to do, what's hard to do?
+
+High Priority Taking Care Of My Hands
+Grabbing the right lines of code
+- solution: learn how to do Mark
+- create a "select to Mark" and "copy to Mark" commands
+
+Copping another example of code that I'm going to use
+- solution: find the division tag, mark it, find the end division tag, and select to Mark
+
+Instead of being afraid of change, right the Python tool/library to make the change easier – and uses opportunity to learn how to write tests
+Cleanup/reformat process: if you're going to have to do it anyways, why not
+- Do the one-off's on Python
+- in D3 Sandwich:  /admin: administrative tools,  /recipe-authors: for making creating recipes easier
+
+One-off changes in Python:
+- swap classes, using a high-level domain description: e.g., reorder ([recipe-text, recipe-code], [recipe-code, recipe-text])
+- precursor: first check that code is properly tagged with divisions in the right order
+- write documentation as I go, OR before I write the code (documentation as spec)
+
+
+Either in Atom or Python:
+Take a form and extract the data
+- either singular data or multiple (e.g., row and column)
+- extract the IDs and default values
+
+Then, given a template in the clipboard and the selected data,
+produce the new input form
+- more generally, a "mailmerge" pattern – with test cases and examples
