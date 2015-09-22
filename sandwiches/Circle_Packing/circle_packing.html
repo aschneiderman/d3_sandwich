@@ -1,0 +1,92 @@
+<DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Circle Packing</title>
+  <script src="http://d3js.org/d3.v3.min.js"></script>        <!-- d3 library -->
+	<style>
+  body {
+	  font-family: sans-serif;
+  }
+	circle {
+	  fill: Purple;
+	  fill-opacity: .5;
+	  stroke: Gray;
+	  stroke-width: 1px;
+	}
+
+	.leaf circle {
+	  fill: AntiqueWhite;
+	  fill-opacity: 1;
+	}
+
+	text {
+		text-anchor: middle;
+	}
+
+	</style>
+</head>
+<body>
+	<h3>Produce Popularity</h3>
+<script>
+
+var produce = {
+	"name": "flare",
+	"children": [
+		{ "name": "Fruit",
+			"children": [
+				{"name": "Apple", "size": 300},
+				{"name": "Banana", "size": 200},
+				{ "name": "Berries",
+					"children": [
+						{"name": "Raspberries", "size": 100},
+						{"name": "Strawberries", "size": 200},
+						{"name": "Blueberries", "size": 80}
+					] }
+			] },
+		{ "name": "Veggies",
+			"children":  [
+				{"name": "Zucchini", "size": 52},
+				{"name": "Peas", "size": 50},
+				{"name": "Carrots", "size": 60}
+			] }
+	] };
+
+
+var diameter = 860;
+
+// Create a packed layout function and use it to do the calculations to turn produce into a packed layout
+var pack = d3.layout.pack()
+    .size([diameter - 4, diameter - 4])
+    .value(function(d) { return d.size; });   	 //  .value  = the size of the node -- E.g., 4 carats it's 60
+var packedNodes = pack.nodes(produce);
+
+// Create the SVG area and add one group for each point of data that has children
+var svg = d3.select("body").append("svg")
+    .attr("width", diameter)
+    .attr("height", diameter);
+var nodes = svg.selectAll(".node")
+    .data(packedNodes)
+  	.enter()
+    .append("g")
+    	.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+    	.attr("class", function(d) { return d.children ? "node" : "leaf node"; });
+
+// Add the circles
+nodes.append("circle")
+    .attr("r", function(d) { return d.r; });
+
+// Add the text
+var leaves = nodes.filter(function(d) { return !d.children; });
+leaves.append("text")
+    .text(function(d) { return d.name; })
+		.style("font-size", "20px");
+</script>
+
+
+
+
+
+<!-- Based on mbostock’s block #4063530 November 13, 2012  -->
