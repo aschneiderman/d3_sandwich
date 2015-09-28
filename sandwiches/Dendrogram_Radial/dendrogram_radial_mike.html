@@ -29,9 +29,7 @@
 </style>
 </head>
 <body>
-<h3>Produce</h3>
-<p> NOTE: for this diagram to be effective, we need a lot more data,
-  which means either switching to JSON or using the Excel trick.</p>
+<h3>Our version of the code, using the flare.JSON file from Mike Bostock</h3>
 <script>
 
 var produce = {
@@ -70,6 +68,8 @@ var svg = d3.select("body").append("svg")
   .append("g")
     .attr("transform", "translate(" + radius + "," + radius + ")");
 
+    d3.json("flare.json", function(error, produce) {
+      if (error) throw error;
 
   var nodes = cluster.nodes(produce);
 
@@ -94,7 +94,7 @@ var svg = d3.select("body").append("svg")
       .attr("transform", function(d) { return d.x < 180 ? "translate(8)" : "rotate(180)translate(-8)"; })
       .text(function(d) { return d.name; });
 
-
+});
 </script>
 
 

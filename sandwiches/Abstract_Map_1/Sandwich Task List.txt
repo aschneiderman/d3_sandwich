@@ -1,5 +1,26 @@
 ﻿Battle Plan: Sandwich Task List
 
+
+Recipes:
+- Radial Dendrogram: add comments
+
+- Zoomable Circle Packing: figure out, add comments
+
+Abstract Map 2:
+- Reading CSV file
+- Adding a Legend
+
+
+
+Harder:
+July:
+- kept turning a tab delimited text file into JSON
+
+
+
+---------------------------------------------------------------------------------------
+
+
 <p> (NOTE: need to figure out where in Step 2 I explain what method chaining is and why you use it)
 
 
