@@ -1,5 +1,7 @@
 ﻿Battle Plan: Atom Task List
 
+* * NOTE: for lots of goodies on / snippets of Atom code, see my Coding folder in Outlook * *
+
 VOCOLA VOICE COMMANDS
 - how to navigate to and open files
 
@@ -25,3 +27,29 @@ Command for easily moving recipe step text from Atom to Word
 ATOM PACKAGES
 -  A linter
 -beautify scripts?
+
+
+---------------------------------------------------------------------------------------
+
+
+LEARNING FROM CODE
+- Bookmarks:
+https://atom.io/packages/bookmarks
+
+Other options:
+Looks pretty manageable:  
+https://github.com/atom/bracket-matcher
+https://github.com/atom/go-to-line
+
+
+https://github.com/atom/sort-lines
+
+Shows all the UI elements you can use in Atom
+https://github.com/atom/styleguide
+
+https://github.com/atom/command-palette
+https://github.com/atom/snippets
+https://github.com/atom/find-and-replace
+
+
+
