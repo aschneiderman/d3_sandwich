@@ -1,0 +1,178 @@
+<DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Circle Packing</title>
+  <script src="http://d3js.org/d3.v3.min.js"></script>        <!-- d3 library -->
+	<style>
+  body {
+	  font-family: sans-serif;
+  }
+	circle {
+	  fill: Purple;
+	  fill-opacity: .5;
+	  stroke: Gray;
+	  stroke-width: 1px;
+	}
+
+	.leaf circle {
+	  fill: AntiqueWhite;
+	  fill-opacity: 1;
+	}
+
+	text {
+		text-anchor: middle;
+	}
+
+	</style>
+</head>
+<body>
+	<h3>Produce Popularity</h3>
+  <div class="graphic">
+  </div>
+  <form id="formInput">
+    <input type="button" value="Update It!"  onClick="updateIt()">
+  </form>
+
+
+<script>
+
+// Create the data
+var produce = {
+	name: "produce",
+	children: [
+		{ name: "Fruit",
+			children: [
+				{name: "Apple", quantity: 300},
+				{name: "Banana", quantity: 200},
+				{ name: "Berries",
+					children: [
+						{name: "Raspberries", quantity: 100},
+						{name: "Strawberries", quantity: 200},
+						{name: "Blueberries", quantity: 80}
+					] }
+			] },
+		{ name: "Veggies",
+			children:  [
+				{name: "Zucchini", quantity: 52},
+				{name: "Peas", quantity: 30},
+				{name: "Carrots", quantity: 60},
+        {name: "Onions", quantity: 70}
+			] }
+] };
+
+
+var diameter = 500;
+
+// Create a packed layout function and use it to do the calculations to turn produce into a packed layout
+var packedLayout = d3.layout.pack()
+    .size([diameter, diameter])
+    .value(function(d) { return d.quantity; });
+var packedNodes = packedLayout.nodes(produce);
+
+// Create the SVG area
+var svg = d3.select(".graphic").append("svg")
+    .attr("width", diameter)
+    .attr("height", diameter);
+
+// For each item, add a group to hold the circle and the text
+var nodes = svg.selectAll("g")
+    .data(packedNodes)
+    .enter().append("g")
+    	.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+    	.attr("class", function(d) { return d.children ? "node" : "leaf node"; });
+
+// For each group, add a circle
+nodes.append("circle")
+    .attr("r", function(d) { return d.r; });
+
+//For each group,add a text label
+var leaves = nodes.filter(function(d) { return !d.children; });
+leaves.append("text")
+    .text(function(d) { return d.name; })
+		.style("font-size", "12px");
+
+
+var  start = d3.select("#formInput");
+
+// <input type="text" class="state_input" value="0"  onChange="updateRow('ME', this)"></td>
+// <td><input type="text" class="state_input" id='ME_col' value="10" onChange="updateCol('ME', this)"></td
+
+
+setID = function (nodes)  {
+  nodes.id = nodes.name;
+  if (nodes.children)  {
+    nodes.children.forEach(setID)
+  };
+};
+
+setID(produce);
+
+
+createInputFields = function (nodes)  {
+  quantity = nodes.quantity ? nodes.quantity : 0;
+  var div = start.append("div")
+      .style("margin-left", nodes.depth * 20);
+  div.append("input")
+      .attr("value", nodes.name)
+      .attr("name", nodes.name);
+  if (quantity) {
+    div.append("input")
+      .attr("value", quantity)
+      .attr("name", nodes.name + "-quantity");
+  };
+  if (nodes.children)  {
+    nodes.children.forEach(createInputFields)
+  };
+};
+
+createInputFields(produce);
+
+// var inputs = start.selectAll("input").each( function () {
+//   console.log(this);
+//   start.append("p").text(this.name);
+// })
+
+test = start.select("input[name='Peas-quantity']")[0][0];
+console.log(test.value)
+
+updateNodes = function (nodes)  {
+  console.log("here we go with the update...");
+  var nodeInput = start.select('input[name="' + nodes.id + '"]')[0][0];
+  nodes.name = nodeInput.value;
+  console.log(nodes.name + ": " + nodes.quantity);
+  if (nodes.children)  {
+    nodes.children.forEach(updateNodes)
+  } else{
+  var nodeInputQuantity = start.select('input[name="' + nodes.id + '-quantity"]')[0][0];
+  nodes.quantity = nodeInputQuantity.value;
+  };
+};
+
+
+updateIt = function () {
+  updateNodes(produce);
+
+  // var leaves = nodes.filter(function(d) { return !d.children; });
+  // leaves.append("text")
+  //     .text(function(d) { return d.name; })
+  // 		.style("font-size", "12px");
+
+};
+// updateNodes(produce);
+
+// start.selectAll("div")
+//   .data(packedNodes)
+//   .enter().append("div")
+//     .text(function(d) { return d.depth + ": " + d.name + ": " + d. quantity +
+//       " (x: " + Math.round(d.x) + ", y:" + Math.round(d.y) + ", r:"  + Math.round(d.r) + ")" ; })
+
+
+</script>
+
+</body>
+</html>
+
+<!-- Based on mbostock’s block #4063530 November 13, 2012  -->
