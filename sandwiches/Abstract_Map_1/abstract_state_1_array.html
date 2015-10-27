@@ -33,7 +33,8 @@
           <div class="home_row">
             <div class="home_column1">
       <h3>	What Data Do We Need to Create the Map?</h3>
-      <p> The abstract state map looks like it's one object: a map of the United States. In fact, it's a bunch of rectangles, one per state.</p>
+      <p> The abstract state map looks like it's just one item, but it's actually a collection of rectangles,
+         one per state.</p>
 
 <p>How do we tell the computer where to put each state's rectangle? By thinking of the state map as a grid:</p>
       <table id="strawberry">
@@ -54,7 +55,7 @@
 <ul><li> The state's <b>name</b> (e.g., "WA")</li>
 <li> The state's <b>row</b> on the grid (e.g., 2)</li>
 <li> the state's <b>column</b> on the grid (e.g., 0)</li></ul>
-<p> Given a state's name, row, and column, the computer knows exactly where
+<p> Given this info, the computer knows exactly where
   to put the state on the map and how to label it.</p>
 
 
@@ -183,16 +184,13 @@ function updateCol(state, input_text)  {
 <h3>Variables, Arrays, and Objects: <br/>
 The Measuring Cups and Sauté Pans of Cooking with Code</h3>
 
-<p>If you're learning cooking, at some point you may learn a whole new vocabulary: tablespoons, different types of pans, etc.  At the beginning, you may not know the exact names of these tools. In fact, if someone from your family or a relative is teaching you, you may not even realize that you are using, say, a medium-size sauté pan. You just know to use that particular pan to grill a grilled cheese sandwich just for you and maybe a larger pan if you're cooking a bunch of grilled cheese sandwiches.</p>
+<p> When you learn to cook, you pick up a whole new vocabulary: tablespoons vs cups, different types of pans, etc. </p>
+
+<p>But when you're first getting started, you may not know the exact names of these tools. In fact, if someone from your family or a relative is teaching you, you may not even realize that you are using, say, a small sauté pan. You just know to use that particular pan to grill a grilled cheese sandwich just for you and maybe a larger pan if you're cooking a bunch of grilled cheese sandwiches.</p>
 
 <p> In short, when you're first learning to cook, knowing the exact names is less important than picking up on the patterns behind using them – e.g., if you try to shove too many ingredients into a pan that can't fit them, either it'll turn into a mess or you'll undercook some of the food.</p>
 
-<p>The same is true when you first start learning to code. The most important 2 things you can do at this point:</p>
-<ul><li> Don't Sweat It!  You don't have to understand everything all at once. You just need to get a rough enough sense you can start to play around and learn what does &amp; doesn't work.</li>
-<li> Instead of trying to memorize or perfectly understand everything that's new, just try to keep an eye out for patterns.</li></ul>
-
-<p> Below you're going to learn about some tools of the trade for coding D3: variables, arrays, and objects. You don't need to understand exactly what they are right now, you just have to have a very rough sense. As you use them over and over throughout this and other recipes, you'll gradually get more comfortable with them.</p>
-
+<p> Below you're going to learn about some of D3's tools of the trade: <b>variables</b>, <b>arrays</b>, and <b>objects</b>. You don't need to understand exactly what they are right now, you just have to have a very rough sense. As you use them over &amp; over throughout this and other recipes, you'll gradually get more comfortable with them.</p>
 
 <div class="recipe_row">
   <div class="recipe_text">
@@ -222,7 +220,7 @@ The Measuring Cups and Sauté Pans of Cooking with Code</h3>
 <h4>stateMap Is an Array </h4>
 
   <p> An <b>array</b> is basically just a list – in this case a list of the states.
-<ul><li>We tell D3 we want to create an array by using <b>brackets</b>:  []  </li>
+<ul><li>We tell D3 we want to create stateMap as an array by using <b>brackets</b>:  []  </li>
   <li>Each item in the array is separated by a <b>comma</b> ( ; )</li></ul>
 </div>
 <div class="recipe_code">
@@ -268,7 +266,7 @@ The Measuring Cups and Sauté Pans of Cooking with Code</h3>
 <h3>A Reminder: Don't Sweat It!</h3>
 <p>If you feel like you understand how the code to create stateMap works, that's great.</p>
 <p>If you're not entirely sure, that's ok.  It takes most folks a while to really understand D3 code.  At this point, all you need is a very
-  rough idea of how it works. Try playing around with the states' rows and columns one more time, then go on to the
+  rough idea of how it works. Go back to the top of the page and play around with the states' rows and columns one more time. Then go on to the
   next recipe step.
 </p>
 <h4> Up Next: <a href="abstract_state_2_rects.html">Recipe Step #2: Using the Array to Create the States on the Map</a></h4>

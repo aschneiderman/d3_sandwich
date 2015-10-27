@@ -20,16 +20,18 @@
       <h2> Abstract State Map</h2>
       <h2>   Step #2: Create a Rectangle for Each State </h2>
 
-<p> Usually when you are just starting to learn a programming language, they start off with something very simple – e.g., printing the words "hello world!" At each step, they tried to make sure you only have 1 or 2 concepts you need to wrap your head around.</p>
+<h3>The "Sauté until Browned" of D3</h3>
+      <p>In Step 1, we created an <b>array</b> of <b>objects</b>, one per state, with the info needed to put each state on the map. How do we use that info to create each state's rectangle? By using the code below. This code is the "sauté until browned" of D3: you're going to use this pattern over and over in your D3 recipes.</p>
 
-<p> But with D3, to do something at all useful you need to tackle a bunch of concepts at the same time. So what we're going to do is start by giving you a chance to play with a few settings in the finished code, then we'll break this Step into a couple of mini-steps and systematically unpack the concepts behind the code.</p>
 
-<h3>Playing with the Code</h3>
 
 <div class="recipe_row">
 <div class="recipe_text">
-<p>Before we dive into the code for creating the rectangles, let's get a very rough feel for how it works.</p>
-<p>Play with the values and see what happens.</p>
+
+<p> Yeah, this code looks weird the first time you see it. But don't sweat it: after you've used in a bunch of times, it'll seem second nature. For now, all you need is a rough idea how it works.</p>
+
+<p> So before we dive in, let's play a little with the code. Try making changes and see how it affects the map.</p>
+
 </div>
 <div class="recipe_code">
   <pre class="code_play">
@@ -158,14 +160,11 @@
 
 </script>
 <p>FYI, if you play around with the height, width, and cellsize, you'll discover something interesting.
-We don't directly create the white border between the rectangles. If cellsize is 1 or more pixels smaller than height and width,
+  The map looks like we draw white borders between the state rectangles, but it turns out we don't.
+ If cellsize is smaller than height and width,
 that creates some whitespace between the rectangles that looks like a border.
-The larger the difference between height/width and cellsize, the bigger the border. If you haven't
-  played with it already, give it a try.</p>
+ If you haven't played with it already, give it a try.</p>
 
-<hr/>
-<p> (NOTE: in the next draft, break the rest of this page into 3 mini-steps.
-  But don't do it until Ian and I have had a chance to take a look at it and make sure that's the most logical way to break it down)</p>
 
 
 <h3>Creating the Rectangles: Don't Sweat Each Line of Code, Focus on the Pattern</h3>
