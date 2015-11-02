@@ -28,7 +28,6 @@
       <h1> <img src="../../sandwich_icon.jpeg"  height="50" width="50">  d3 sandwich </h1>
       <div id="sandwich-border"></div>
     </div>
-
       <h2> Abstract State Map</h2><h2>Step #1: Store State Data in an Array </h2>
           <div class="home_row">
             <div class="home_column1">
@@ -43,7 +42,6 @@
       <tr><td>1</td><td> </td><td> </td><td style="text-align: center"> ...</td><td> </td><td> </td><td> VT</td><td>NH</td></tr>
       <tr><td>2</td><td> WA</td><td> ID</td><td style="text-align: center"> ...</td><td> </td><td> NY</td><td> MA</td><td></td></tr>
       </table>
-
       </div>
       <div class="home_column2" class="homepage_picture"> <img align=left width=400 height=266
        src= "abstract_state_snapshot.jpg" />
@@ -51,16 +49,14 @@
     </div>
     <br/>
 
-    <p>For each state, the computer needs to know:</p>
+<p>For each state, the computer needs to know:</p>
 <ul><li> The state's <b>name</b> (e.g., "WA")</li>
 <li> The state's <b>row</b> on the grid (e.g., 2)</li>
 <li> the state's <b>column</b> on the grid (e.g., 0)</li></ul>
-<p> Given this info, the computer knows exactly where
-  to put the state on the map and how to label it.</p>
-
+<p> Given this info, the computer knows exactly where to put the state on the map and how to label it.</p>
 
 <div class="recipe_row">
-  <div class="recipe_text">
+<div class="recipe_text">
 <h3>Playing with the Code</h3>
 <p> This code stores the info needed to create the state map;<br/>
 to make the code manageable, we are only including 6 states.</p>
@@ -81,13 +77,14 @@ to make the code manageable, we are only including 6 states.</p>
 </div>
 </div>  <!-- end recipe_row -->
 
-
 <div class="recipe_row">
   <div class="recipe_text">
+  <svg width="500" height="160" id="selected_states" class="SVG_playground"></svg>
 
-    <svg width="500" height="160" id="selected_states" class="SVG_playground"></svg>        <!-- SVG graphics will go here  -->
   <script type="text/javascript">
-  var selected_states = [];
+  var x_offset = 0, y_offset=0, text_offset = 10;
+  var width = 40, height = 40, cellsize = 39;
+
   var  stateMap = [
       { state: "ME", row: 0, col: 10 },
       { state: "VT", row: 1, col: 9 },
@@ -96,14 +93,13 @@ to make the code manageable, we are only including 6 states.</p>
       { state: "ID", row: 2, col: 1 },
       { state: "NY", row: 2, col: 8 },
   ];
-
-  var x_offset = 0, y_offset=0, text_offset = 10;
+  var selected_states = [];
   make_map('#selected_states', stateMap, selected_states,x_offset, y_offset);
 
-  var width = 40, height = 40, cellsize = 39;
-
+// Start Fixing Here //
 
 function updateRow(state, input_text)  {
+  // updateRow: update the map and the code for a row item
   var row = input_text.value;
   var selected_state = [{'state': state}];
   var states =  d3.select('#selected_states');
@@ -138,14 +134,7 @@ function updateCol(state, input_text)  {
 <div class="recipe_code">
   <form>
     <table class="input_table">
-      <tr><td>
-        State
-      </td><td>
-        Row
-      </td><td>
-        Column
-      </td>
-      </tr>
+      <tr><td> State </td><td> Row </td><td> Column </td> </tr>
       <tr>
         <td>ME</td>
         <td ><input type="text" class="state_input" value="0"  onChange="updateRow('ME', this)"></td>
@@ -181,15 +170,11 @@ function updateCol(state, input_text)  {
 </div>
 </div>  <!-- end recipe_row -->
 
-<h3>Variables, Arrays, and Objects: <br/>
-The Measuring Cups and Sauté Pans of Cooking with Code</h3>
 
+<h3>Variables, Arrays, and Objects: <br/> The Measuring Cups and Sauté Pans of Cooking with Code</h3>
 <p> When you learn to cook, you pick up a whole new vocabulary: tablespoons vs cups, different types of pans, etc. </p>
-
 <p>But when you're first getting started, you may not know the exact names of these tools. In fact, if someone from your family or a relative is teaching you, you may not even realize that you are using, say, a small sauté pan. You just know to use that particular pan to grill a grilled cheese sandwich just for you and maybe a larger pan if you're cooking a bunch of grilled cheese sandwiches.</p>
-
 <p> In short, when you're first learning to cook, knowing the exact names is less important than picking up on the patterns behind using them – e.g., if you try to shove too many ingredients into a pan that can't fit them, either it'll turn into a mess or you'll undercook some of the food.</p>
-
 <p> Below you're going to learn about some of D3's tools of the trade: <b>variables</b>, <b>arrays</b>, and <b>objects</b>. You don't need to understand exactly what they are right now, you just have to have a very rough sense. As you use them over &amp; over throughout this and other recipes, you'll gradually get more comfortable with them.</p>
 
 <div class="recipe_row">
@@ -271,8 +256,9 @@ The Measuring Cups and Sauté Pans of Cooking with Code</h3>
 </p>
 <h4> Up Next: <a href="abstract_state_2_rects.html">Recipe Step #2: Using the Array to Create the States on the Map</a></h4>
 
-        <div id= "sandwich_footer">
-        </div>
+      <div id= "sandwich_footer">
       </div>
-    </body>
-    </html>
+    </div>
+
+</body>
+</html>
