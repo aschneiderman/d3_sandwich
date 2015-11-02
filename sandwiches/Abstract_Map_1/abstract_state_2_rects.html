@@ -324,42 +324,89 @@ function updateRectangle(playName, input)  {
 </i>
 <hr/>
 
-<h3>The Select-Enter-Append Pattern</h3>
+<h3>Putting It All Together</h3>
 
+<p>Now that we know the formulas we need, how do we put it all together? How do we use the data we have in stateMap to create each state's rectangle?</p>
 
-<p> How do we do this in D3?</p>
-
-<p> This is where the idea of the grid we talked about in Step 1 comes in. We've got 3 pieces of data about each state:</p>
-<ul><li> The state's <b>name</b> (e.g., "WA")</li>
-<li> The state's <b>row</b> on the grid (e.g., 2)</li>
-<li> the state's <b>column</b> on the grid (e.g., 0)</li></ul>
-<p> So what we need to tell the computer is how to translate row and column into X and Y.</p>
+<p>Let's go back to the code that makes it happen. We'll explain the details in a minute. Here's how you read it:</p>
 
 <div class="recipe_row">
 <div class="recipe_text">
-<p>svg tells the computer to create an area 960 pixels wide and 400 pixels tall where we will put the rectangles.</p>
+  <p> Create a 960 x 400 pixels SVG area where we can put our rectangles,<br/>
+and create a variable called svgArea that selects/points to  it.</p>
+<br/>
+<p> For each item in stateMap, <br/>
+  add ("append") a rectangle with the following values:</p>
+<ul><li> x = the state's column * width</li>
+<li> y = the state's row * height</li>
+<li> width = cellsize</li>
+<li> height = cellsize</li>
+<li>fill, aka color = DarkRed</li></ul>
 </div>
 <div class="recipe_code">
   <pre>
-&ltsvg width="960" height="400"&gt&lt/svg&gt        &lt!-- SVG graphics will go here  --&gt
-  </pre>
-</div>
-</div>  <!-- end recipe_row -->
+    &ltsvg width="960" height="400"&gt&lt/svg&gt        &lt!-- SVG graphics will go here  --&gt
+    ...
 
-<div class="recipe_row">
-<div class="recipe_text">
-<p>Next we tell the computer to create a variable called svgArea that points to the SVG area we just created.</p>
-</div>
-<div class="recipe_code">
-  <pre>
     svg_area = d3.select("svg")
+
+    // Insert a rectangle for each state
+    svg_area.selectAll("rect")
+        .data(state_map)
+      .enter()
+      .append("rect")
+        .attr("x", function(d,i)  { return d.col * width;})
+        .attr("y", function(d,i) {return d.row * height;})
+        .attr("width", cellsize)
+        .attr("height", cellsize)
+        .style("fill", "<i id="fill">DarkRed</i>");
   </pre>
 </div>
 </div>  <!-- end recipe_row -->
 
+<p> The lines creating and selecting the SVG area are pretty straightforward. But there are a lot of concepts in the rest of the code even though it's only a few lines long, so let's break it into two parts.</p>
 
+<h4>The Second Half: The Code to Describe the Rectangles</h4>
+<p>The second half of the code, which describes how the rectangles should be created, is easier to wrap your head around than the first half. So let's start there:</p>
 
-<p>Here's the code that tells the computer to use the data in stateMap to create the rectangles.  In most tutorials, here's how they explain what this code is doing:</p>
+<div class="recipe_row">
+<div class="recipe_text">
+    <p>Because each rectangle has the same width, height, and fill/color, setting them is pretty straightforward.</p>
+</div>
+<div class="recipe_code">
+  <pre>
+        .attr("width", cellsize)
+        .attr("height", cellsize)
+        .style("fill", "<i id="fill">DarkRed</i>");
+  </pre>
+</div>
+</div>  <!-- end recipe_row -->
+
+<div class="recipe_row">
+<div class="recipe_text">
+  <p> But each rectangle needs to have a different X and Y. How do we tell D3 the formulas we want to use? By using the weird looking "function(d,i)". </p>
+
+  <p> "function(d,i)" is shorthand.  It tells D3, as you loop  through each of the items in stateMap, give me two variables:</p>
+  <ul><li>d:  the item you are on – e.g., WA</li>
+  <li>i: the number of the item you're on -- 0, 1, 2, 3 (computers like to start counting from 0)</li></ul>
+  <p> In this case we only care about d, the item.  We can use d to get to the info we have about each state: "d.col" is the state's column.</p>
+</div>
+<div class="recipe_code">
+  <pre>
+        .attr("x", function(d,i)  { return d.col * width;})
+        .attr("y", function(d,i) {return d.row * height;})
+  </pre>
+</div>
+</div>  <!-- end recipe_row -->
+
+<p> Is It weird looking the first time you see it? Yes. But don't sweat it: after the fifth or sixth time you seen it, it'll seem second nature.</p>
+
+<h4>The Select-Enter-Append Pattern</h4>
+<p> Now let's explore the first half of the code.</p>
+
+<P> I found this pattern – the "select-bind-enter-append" pattern – the hardest thing to wrap my head around when learning D3. The bad news: you have to learn it at the beginning, because it's used absolutely everywhere. The good news: at the beginning, you don't need to understand the details, just what the pattern is telling you.</p>
+
+<p> Here's literally what the code says:
 <div class="recipe_row">
 <div class="recipe_text">
   <ul><li>Select every rectangle that's in the SVG area.</li>
@@ -377,7 +424,9 @@ function updateRectangle(playName, input)  {
 </div>
 </div>  <!-- end recipe_row -->
 
-<p>If you're feeling confused, that's because you're paying attention.</p>
+<p> You're probably thinking, why do I start by selecting all the rectangles in the SVG area when I know there's nothing there?</p>
+
+
 
 <p> There are some key key technical reasons why the man who created D3 decided to do it this way. Bottom line: you could care less. All you need to know is:
 <ul><li> Yeah, it's weird</li>
@@ -388,102 +437,20 @@ function updateRectangle(playName, input)  {
 
 
 
-<p> Each rectangle is going to have the same width, height, and fill/color, so we can just tell the computer the value to use.</p>
-
-<p> ( A side note: You might have noticed that for width and height we use "attr", which is short for attribute, but for fill/color, we use "style."  Why aren't they all "attr"? There is a geeky answer, but you really need to know right now? No, you don't. All you need to know: sometimes you use "attr," sometimes you use "style", just copy which ever one is used in the example or documentation you are reading and will be fine.) </p>
-
-
-<p> What's this weird "function(d,i)" business?  As D3 loops through each of the items in stateMap, it creates two variables to help you:
-<ul><li>d:  the item you are on – e.g., WA</li>
-<li>i: the number of the item you're on -- 0, 1, 2, 3 (computers like to start counting from 0)</li></ul>
-<p> In this case we only care about d, the item.  We can use d to get to the info we have about each state: "d.col" is the state's column.</p>
-<p> The bad news: this looks weird. The good news: you are going to see this pattern over and over and over in every D3 visualization you write. So instead of worrying about the individual details right now, here's how to read the code:
-<div class="recipe_row">
-<div class="recipe_text">
-<p> For each rectangle: </p>
-<ul><li>Set X to the state's col * width</li>
-<li>Set Y to the state's row * height</li></ul>
-</div>
-<div class="recipe_code">
-  <pre>
-.attr("x", function(d,i)  { return d.col * width;})
-.attr("y", function(d,i) {return d.row * height;})
-  </pre>
-</div>
-</div>  <!-- end recipe_row -->
-<p> (A side note: in case you're wondering "what's that business about function" or if you have done some programming before and you're wondering what is a function doing inside a line of code, it's called an anonymous function – we'll explain more in the coming months, but for now don't worry about it).</p>
-
-
-
-
-<p> After you've worked on a couple of D3 graphs, you won't see those individual lines – you'll see a pattern. Here's how you'll read the code:</p>
-<div class="recipe_row">
-<div class="recipe_text">
-  <p>If the code says <b>.enter and .append("rect")</b>:<br/>
-  Inside the SVG area, create a rectangle for every item in stateMap.</p>
-</div>
-<div class="recipe_code">
-  <pre>
-    svg_area.selectAll("rect")
-        .data(state_map)
-      .enter()
-      .append("rect")
-  </pre>
-</div>
-</div>  <!-- end recipe_row -->
-
-
-<p>You're going to use this pattern over and over and over – almost every D3 graph uses it. In fact, you'll see it again in Step 3.</p>
-
-<p>Eventually – a few months from now? a year from now? – those individual lines of code will make more sense. But for now, it's not worth worrying about.</p>
-
 
 
 
 <h3>Recap: D3's "Saute until the Onions Start to Brown </h3>
-<p> Ouch! That was way too many things to have to learn when you're just getting started. We're sorry about that. Like we said at the beginning of this Step, it's what makes the first few baby steps of D3 so rocky.</p>
+<p> Ouch! That was way too many things to have to learn when you're just getting started. We're sorry about that. Like we said at the beginning of this step, it's what makes the first few baby steps of D3 so rocky.</p>
 
-<p> The good news is, at this point you don't need to completely understand the details.</p>
-
-<p> The most important thing you need to know: you're going to see these patterns over and over and over. So if at the beginning you're not entirely comfortable with each individual line, don't sweat it.  When you see a chunk of code that looks like this, here's how you read it:</p>
-
-<div class="recipe_row">
-<div class="recipe_text">
-<p> For each item in stateMap, create a rectangle:</p>
-<ul><li> x = the state's column * width</li>
-<li> y = the state's row * height</li>
-<li> width = cellsize</li>
-<li> height = cellsize</li>
-<li>fill, aka color = DarkRed</li></ul>
-</div>
-<div class="recipe_code">
-  <pre>
-    var width = <i id="width">40</i>, height = <i id="height">40</i>, cellsize = <i id= "cellsize">39</i>;
-    svg_area = d3.select("svg")
-
-    // Insert a rectangle for each state
-    svg_area.selectAll("rect")
-        .data(state_map)
-      .enter()
-      .append("rect")
-        .attr("x", function(d,i)  { return d.col * width;})
-        .attr("y", function(d,i) {return d.row * height;})
-        .attr("width", cellsize)
-        .attr("height", cellsize)
-        .style("fill", "<i id="fill">DarkRed</i>");
-  </pre>
-</div>
-</div>  <!-- end recipe_row -->
-
-<p> So yeah, initially it looks pretty weird. But if you know how to read the pattern, you've got an amazing amount done in just a few lines of code. </p>
+<p>But even though the code looks a little weird, you did an amazing amount in just a few lines of code. In the long run, that's part of the payoff -- and that's why you're going to see this pattern over and over as you make D3 recipes.</p>
 
 <p>And after you've done a couple D3 visualizations, it'll become as natural  to you as the instructions "sauté the onions until they start to brown" are to an experienced cook.</p>
 
+<p> Speaking of which, in the next step, you'll get to use this pattern one more time.<p>
 
 
-
-
-
+<h4> Up Next: <a href="abstract_state_3_names.html">Recipe Step #3: Using stateMap to create the names on the Map</a></h4>
 
         <div id= "sandwich_footer">
         </div>
