@@ -1,11 +1,58 @@
-// Functions for creating the abstract state map,
+// abstract_state.js: globals and functions for creating the abstract state map,
 // so we don't have to repeat the code & clutter up each recipe step
 
-function get_selected_states() {
+// Globals
+var Width = 40, Height = 40, CellSize = 39;
+
+
+function makeMap(svgID, mapItems, selectedItems, xOffset, yOffset)  {
+  // makeMap: create a map
+  var textXOffset = 10;
+  makeRectangles(svgID,mapItems, selectedItems, xOffset, yOffset);
+  makeText(svgID,mapItems, selectedItems, xOffset, yOffset, textXOffset);
+
+  // Change the background color of each of those states to orange
+  d3.select(svgID).selectAll("rect")
+      .data( selectedItems, function(d) { return d.state; })
+      .style("fill", "orange");
+};
+
+
+function makeRectangles(svgID,mapItems, selectedItems, xOffset, yOffset)  {
+    // Insert a rectangle for each state
+    d3.select(svgID).selectAll("rect")
+      .data(mapItems)
+      .enter()
+      .append("rect")
+        .attr("x", function(d,i)  { return d.col * Width +  xOffset;})
+        .attr("y", function(d,i) {return d.row * Height + yOffset;})
+        .attr("width", CellSize)
+        .attr("height", CellSize)
+        .style("fill", "DarkRed");
+};
+
+
+function makeText(svgID,mapItems, selectedItems, xOffset, yOffset, textXOffset)  {
+  // Put the name of each state on its rectangle
+  d3.select(svgID).selectAll("text")
+    .data(mapItems)
+    .enter()
+    .append("text")
+      .attr("x", function(d,i)  { return d.col * Width + textXOffset + xOffset;})
+      .attr("y", function(d,i) {return d.row * height +  26 + yOffset})
+      .text(function (d) { return d.state; })
+      .style("font",   "16px sans-serif")
+      .style("fill", "White")
+      .style("pointer-events", "none");    // If you put the mouse over one of the states, this prevents it from treating it like text (reword)
+};
+
+
+
+function getSelectedStates() {
   return  [ {"state": "OR"},  {"state": "MA"} ];
 };
 
-function get_states() {
+function getStates() {
   return [
     { "state": "ME", "row": 0, "col": 10 },
     { "state": "WI", "row": 1, "col": 5 },
@@ -58,68 +105,4 @@ function get_states() {
     { "state": "TX", "row": 7, "col": 3 },
     { "state": "FL", "row": 7, "col": 8 }
   ];
-};
-
-
-function make_map(map_name,state_map, selected_states, x_offset, y_offset)  {
-
-  var width = 40, height = 40, cellsize = 39;
-  var text_x_offset = 10;
-
-  svg_area = d3.select(map_name);
-
-  // Insert a rectangle for each state
-  svg_area.selectAll("rect")
-      .data(state_map)
-    .enter()
-    .append("rect")
-      .attr("x", function(d,i)  { return d.col * width +  x_offset;})
-      .attr("y", function(d,i) {return d.row * height + y_offset;})
-      .attr("width", cellsize)
-      .attr("height", cellsize)
-      .style("fill", "DarkRed");
-
-
-  // Put the name of each state on its rectangle
-  svg_area.selectAll("text")
-    .data(state_map)
-    .enter()
-    .append("text")
-      .attr("x", function(d,i)  { return d.col * width + text_x_offset + x_offset;})
-      .attr("y", function(d,i) {return d.row * height +  26 + y_offset})
-      .text(function (d) { return d.state; })
-      .style("font",   "16px sans-serif")
-      .style("fill", "White")
-      .style("pointer-events", "none");    // If you put the mouse over one of the states, this prevents it from treating it like text (reword)
-
-
-  // Return a list of the rectangles for each selected state
-  var state_rects =  svg_area
-      .selectAll("rect")
-      .data( selected_states, function(d) { return d.state; });
-
-  // Change the background color of each of those states to orange
-   state_rects.style("fill", "orange");    // For every state that was joined, change the color to orange
-};
-
-
-// An ugly hack for now -- eventually need to split up make_map so I can either call rectanges or the whole deal
-
-function make_rectangles(map_name,state_map, selected_states, x_offset, y_offset)  {
-
-  var width = 40, height = 40, cellsize = 39;
-  var text_x_offset = 10;
-
-  svg_area = d3.select(map_name);
-
-  // Insert a rectangle for each state
-  svg_area.selectAll("rect")
-      .data(state_map)
-    .enter()
-    .append("rect")
-      .attr("x", function(d,i)  { return d.col * width +  x_offset;})
-      .attr("y", function(d,i) {return d.row * height + y_offset;})
-      .attr("width", cellsize)
-      .attr("height", cellsize)
-      .style("fill", "DarkRed");
 };
