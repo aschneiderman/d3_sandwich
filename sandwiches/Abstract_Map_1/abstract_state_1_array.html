@@ -83,7 +83,6 @@ to make the code manageable, we are only including 6 states.</p>
 
   <script type="text/javascript">
   var x_offset = 0, y_offset=0, text_offset = 10;
-  var width = 40, height = 40, cellsize = 39;
 
   var  stateMap = [
       { state: "ME", row: 0, col: 10 },
@@ -98,73 +97,54 @@ to make the code manageable, we are only including 6 states.</p>
 
 // Start Fixing Here //
 
-function updateRow(state, input_text)  {
-  // updateRow: update the map and the code for a row item
-  var row = input_text.value;
+function updateValue(state, rowOrColumn, inputField)  {
+// updateValue: Update the map and the code for a row/column item
+  var stateRow = d3.select('tr#' + state);
+  var row = stateRow.select('.row')[0][0].value;
+  var column = stateRow.select('.column')[0][0].value;
+
+  // Find the state rectangle and update it with the new x  and y
   var selected_state = [{'state': state}];
   var states =  d3.select('#selected_states');
   states.selectAll("rect")
-    .data( selected_state, function(d) { return d.state; })
-    .attr("y", function(d,i) {return row * height + y_offset;})
-  selected = states.selectAll("text")
-    .data( selected_state, function(d) { return d.state; });
-  selected.attr("y", function(d,i) {return row * height + 26 + y_offset;});
+    .data(selected_state, function(d) { return d.state; })
+    .attr("y", function(d,i) {return row * Height + y_offset;})
+    .attr("x", function(d,i) {return column * Width  + x_offset;});
 
-  state_code = '#' + state + "_code";
-  col = rr = d3.select('#ME_col')[0][0].value;
-  new_code = '    { state: "' + state + '", row: ' + row + ', col:'+ col + ' }';
-  d3.select(state_code).text(new_code ).style("background-color", '#FFFF66');
-  // d3.select(state_code).text("row is now:  " + value ).style("background-color", '#FFFF66');
-};
-
-function updateCol(state, input_text)  {
-  var col = input_text.value;
-  var selected_state = [{'state': state}];
-  var states =  d3.select('#selected_states');
-  states.selectAll("rect")
-    .data( selected_state, function(d) { return d.state; })
-    .attr("x", function(d,i) {return col * width  + x_offset;})
+  // Find the state text and update it with the new x  and y
   states.selectAll("text")
-    .data( selected_state, function(d) { return d.state; })
-      .attr("x", function(d,i)  { return col * width + text_offset  + x_offset;});
+    .data(selected_state, function(d) { return d.state; })
+    .attr("y", function(d,i) {return row * Height + 26 + y_offset;})
+    .attr("x", function(d,i)  { return column * Width + text_offset  + x_offset;});
+
+    updateCode('#' + state + "_code",
+      '    { state: "' + state + '", row: ' + row + ', col:'+ column + ' }');
 };
 </script>
 
 </div>
 <div class="recipe_code">
   <form>
-    <table class="input_table">
+    <table class="input_table" class="state_input">
       <tr><td> State </td><td> Row </td><td> Column </td> </tr>
-      <tr>
-        <td>ME</td>
-        <td ><input type="text" class="state_input" value="0"  onChange="updateRow('ME', this)"></td>
-        <td><input type="text" class="state_input" id='ME_col' value="10" onChange="updateCol('ME', this)"></td>
-      </tr>
-      <tr>
-        <td>VT</td>
-        <td><input type="text" class="state_input" value="1"  onChange="updateRow('VT', this)"></td>
-        <td><input type="text" class="state_input" value="9"  onChange="updateCol('VT', this)"></td>
-      </tr>
-      <tr>
-        <td>NH</td>
-        <td><input type="text" class="state_input" value="1"  onChange="updateRow('NH', this)"></td>
-        <td><input type="text" class="state_input" value="10" onChange="updateCol('NH', this)"></td>
-      </tr>
-      <tr>
-        <td>WA</td>
-        <td><input type="text" class="state_input" value="2"  onChange="updateRow('WA', this)"></td>
-        <td><input type="text" class="state_input" value="0" onChange="updateCol('WA', this)"></td>
-      </tr>
-      <tr>
-        <td>ID</td>
-        <td><input type="text" class="state_input" value="2"  onChange="updateRow('ID', this)"></td>
-        <td><input type="text" class="state_input" value="1" onChange="updateCol('ID', this)"></td>
-      </tr>
-      <tr>
-        <td>NY</td>
-        <td><input type="text" class="state_input" value="2"  onChange="updateRow('NY', this)"></td>
-        <td><input type="text" class="state_input" value="8" onChange="updateCol('NY', this)"></td>
-      </tr>
+      <tr id="ME"><td>ME</td>
+        <td><input type="text" class="row"    value="0"  onChange="updateValue('ME', this)"></td>
+        <td><input type="text" class="column" value="10" onChange="updateValue('ME', this)"></td> </tr>
+      <tr id="VT"> <td>VT</td>
+        <td><input type="text" class="row"    value="1"  onChange="updateValue('VT', this)"></td>
+        <td><input type="text" class="column" value="9"  onChange="updateValue('VT', this)"></td> </tr>
+      <tr id="NH"> <td>NH</td>
+        <td><input type="text" class="row"    value="1"  onChange="updateValue('NH', this)"></td>
+        <td><input type="text" class="column" value="10" onChange="updateValue('NH', this)"></td> </tr>
+      <tr id="WA"> <td>WA</td>
+        <td><input type="text" class="row"    value="2"  onChange="updateValue('WA', this)"></td>
+        <td><input type="text" class="column" value="0" onChange="updateValue('WA', this)"></td> </tr>
+      <tr id="ID"> <td>ID</td>
+        <td><input type="text" class="row"    value="2"  onChange="updateValue('ID', this)"></td>
+        <td><input type="text" class="column" value="1" onChange="updateValue('ID', this)"></td> </tr>
+      <tr id="NY"> <td>NY</td>
+        <td><input type="text" class="row"    value="2"  onChange="updateValue('NY', this)"></td>
+        <td><input type="text" class="column" value="8" onChange="updateValue('NY', this)"></td> </tr>
     </table>
   </form>
 </div>
