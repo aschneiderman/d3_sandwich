@@ -9,16 +9,14 @@
   <link href="../../sandwich.css" rel="stylesheet" media="screen">      <!-- sandwich's CSS -->
   <script src="abstract_state.js"></script>
   <style media="screen">
-  table#strawberry, table#strawberry, td {
-    border: 1px solid  #98bf21;
-    border-collapse: collapse;
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  }
-
-  table.input_table, th.input_table, table.input_table td {
-    border-style: none;
-  }
-
+    table#strawberry, table#strawberry, td {
+      border: 1px solid  #98bf21;
+      border-collapse: collapse;
+      font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    }
+    table.input_table, th.input_table, table.input_table td {
+      border-style: none;
+    }
   </style>
 </head>
 <body>
@@ -55,6 +53,7 @@
 <li> the state's <b>column</b> on the grid (e.g., 0)</li></ul>
 <p> Given this info, the computer knows exactly where to put the state on the map and how to label it.</p>
 
+<div class="toy" id="state_array">
 <div class="recipe_row">
 <div class="recipe_text">
 <h3>Playing with the Code</h3>
@@ -67,21 +66,21 @@ to make the code manageable, we are only including 6 states.</p>
   <br/>    <!-- br is a temp fix; fix the css so it isn't needed -->
 <pre>
 <b>var  stateMap = [</b>
-  <b id="ME_code">{ state: "ME", row: 0, col: 10 }</b>,
-  <b id="VT_code">{ state: "VT", row: 1, col: 9 }</b>,
-  <b id="NH_code">{ state: "NH", row: 1, col: 10 }</b>,
-  <b id="WA_code">{ state: "WA", row: 2, col: 0 }</b>,
-  <b id="ID_code">{ state: "ID", row: 2, col: 1 }</b>,
-  <b id="NY_code">{ state: "NY", row: 2, col: 8 }</b>,
+  <b class="ME">{ state: "ME", row: 0, col: 10 }</b>,
+  <b class="VT">{ state: "VT", row: 1, col: 9 }</b>,
+  <b class="NH">{ state: "NH", row: 1, col: 10 }</b>,
+  <b class="WA">{ state: "WA", row: 2, col: 0 }</b>,
+  <b class="ID">{ state: "ID", row: 2, col: 1 }</b>,
+  <b class="NY">{ state: "NY", row: 2, col: 8 }</b>,
 <b>];</b></pre>
 </div>
 </div>  <!-- end recipe_row -->
 
 <div class="recipe_row">
   <div class="recipe_text">
-  <svg width="500" height="160" id="selected_states" class="SVG_playground"></svg>
+  <svg width="500" height="160"></svg>
 
-  <script type="text/javascript">
+<script type="text/javascript">
   var x_offset = 0, y_offset=0, text_offset = 10;
 
   var  stateMap = [
@@ -93,9 +92,7 @@ to make the code manageable, we are only including 6 states.</p>
       { state: "NY", row: 2, col: 8 },
   ];
   var selected_states = [];
-  makeMap('#selected_states', stateMap, selected_states,x_offset, y_offset);
-
-// Start Fixing Here //
+  makeMap('state_array', stateMap, selected_states,x_offset, y_offset);
 
 function updateValue(state, rowOrColumn, inputField)  {
 // updateValue: Update the map and the code for a row/column item
@@ -105,7 +102,7 @@ function updateValue(state, rowOrColumn, inputField)  {
 
   // Find the state rectangle and update it with the new x  and y
   var selected_state = [{'state': state}];
-  var states =  d3.select('#selected_states');
+  var states = getSVG('state_array');
   states.selectAll("rect")
     .data(selected_state, function(d) { return d.state; })
     .attr("y", function(d,i) {return row * Height + y_offset;})
@@ -117,7 +114,7 @@ function updateValue(state, rowOrColumn, inputField)  {
     .attr("y", function(d,i) {return row * Height + 26 + y_offset;})
     .attr("x", function(d,i)  { return column * Width + text_offset  + x_offset;});
 
-    updateCode('#' + state + "_code",
+    updateCode('state_array', state,
       '    { state: "' + state + '", row: ' + row + ', col:'+ column + ' }');
 };
 </script>
@@ -148,7 +145,8 @@ function updateValue(state, rowOrColumn, inputField)  {
     </table>
   </form>
 </div>
-</div>  <!-- end recipe_row -->
+</div>    <!-- end recipe_row -->
+</div>  <!-- end toy -->
 
 
 <h3>Variables, Arrays, and Objects: <br/> The Measuring Cups and Sauté Pans of Cooking with Code</h3>

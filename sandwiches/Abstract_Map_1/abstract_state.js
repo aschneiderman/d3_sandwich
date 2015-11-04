@@ -4,28 +4,36 @@
 // Globals
 var Width = 40, Height = 40, CellSize = 39;
 
-function updateCode(id, newCode)  {
+function getSVG(toyID)  {
+  return d3.select('#' + toyID + ' svg');
+}
+
+function getPreItem(toyID, itemID)  {
+  return d3.select('#' + toyID + ' pre .' + itemID);
+}
+
+function updateCode(toyID, codeItem, newCode)  {
   // updateCode: Change the text of the code and change the background color to highlight it
-  d3.select(id).text(newCode).style("background-color", '#FFFF66');
+  getPreItem(toyID, codeItem).text(newCode).style("background-color", '#FFFF66');
 };
 
 
-function makeMap(svgID, mapItems, selectedItems, xOffset, yOffset)  {
+function makeMap(toyID, mapItems, selectedItems, xOffset, yOffset)  {
   // makeMap: create a map
   var textXOffset = 10;
-  makeRectangles(svgID, mapItems, selectedItems, xOffset, yOffset);
-  makeText(svgID,  mapItems, selectedItems, xOffset, yOffset, textXOffset);
+  makeRectangles(toyID, mapItems, xOffset, yOffset);
+  makeText(toyID,  mapItems, xOffset, yOffset, textXOffset);
 
   // Change the background color of each of those states to orange
-  d3.select(svgID).selectAll("rect")
+  getSVG(toyID).selectAll("rect")
       .data( selectedItems, function(d) { return d.state; })
       .style("fill", "orange");
 };
 
 
-function makeRectangles(svgID,mapItems, selectedItems, xOffset, yOffset)  {
+function makeRectangles(toyID, mapItems, xOffset, yOffset)  {
     // Insert a rectangle for each state
-    d3.select(svgID).selectAll("rect")
+    getSVG(toyID).selectAll("rect")
       .data(mapItems)
       .enter()
       .append("rect")
@@ -37,9 +45,9 @@ function makeRectangles(svgID,mapItems, selectedItems, xOffset, yOffset)  {
 };
 
 
-function makeText(svgID,mapItems, selectedItems, xOffset, yOffset, textXOffset)  {
+function makeText(toyID, mapItems, xOffset, yOffset, textXOffset)  {
   // Put the name of each state on its rectangle
-  d3.select(svgID).selectAll("text")
+  getSVG(toyID).selectAll("text")
     .data(mapItems)
     .enter()
     .append("text")
