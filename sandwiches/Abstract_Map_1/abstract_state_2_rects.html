@@ -22,7 +22,7 @@
 
       <p>In Step 1, we created an <b>array</b> of <b>objects</b>, one per state, containing the info needed to put each state on the map. In Step 2, the code below uses that info to create each state's rectangle.</p>
 
-<div class="toy" id="state_array">
+<div class="toy" id="rectangles_overview">
 <div class="recipe_row">
 <div class="recipe_text">
   <p> Does the code to create the rectangles look weird? Yes, it does.</p>
@@ -48,26 +48,18 @@
   </pre>
 </div>
 </div>  <!-- end recipe_row -->
-
 <div class="recipe_row">
 <div class="recipe_text">
   <svg width="520" height="400"></svg>        <!-- SVG graphics will go here  -->
-
-  <script type="text/javascript">
-    svgName = 'svg.code_play';
-    var toyID = 'overview';
-    makeRectangles(toyID, getStates(), 0, 0);
-  </script>
-
 </div>
 <div class="recipe_code">
-  <form class="code_play">
+  <form>
     <table class="input_table">
       <tr><td>Width</td><td><input name="width" type="text" value="40"> </td></tr>
       <tr><td>Height</td><td><input name="height" type="text" value="40"> </td></tr>
       <tr><td>Cell Size</td><td><input name="cellsize" type="text" value="39"> </td></tr>
       <tr><td>Fill</td><td><input name="fill" type="text" value="DarkRed"> </td></tr>
-      <tr><td></td><td><input type="button" value="Update the Map"  onClick="updateValue('code_play', this)"> </td></tr>
+      <tr><td></td><td><input type="button" value="Update the Map"  onClick="updateValues('rectangles_overview')"> </td></tr>
     </table>
   </form>
 </div>
@@ -75,48 +67,18 @@
 </div>  <!-- end toy -->
 
 <script type="text/javascript">
-  var state_rects =  getSVG(toyID)
-      .selectAll("rect");
+// Draw the rectangles for each state
+makeRectangles('rectangles_overview', getStates(), 0, 0);
 
-  var values = {width: 40, height: 40, cellsize: 39, fill: "Sienna"};
-  // Better yet, I could grab one rectangle and get these values from it, I think  :-)
-
-// CAPTAINS LOG:
-//
-// Convert this code over To a more abstract approach
-// that can be used by any toy that updates everything at once
-//
-
-  function updateCodeValue(formID, valueID, newValue) {
-    // Updates the value of a line of code and highlights the line
-    fullID = 'pre.' + formID  + " #" + valueID;
-    console.log('fullID:' + fullID);
-    d3.select(fullID)
-      .text(newValue)
-      .style("background-color", '#FFFF66');
-  };
-
-  function updateValue(playName, input)  {
-
-      // Load the form values into the "values" object
-      var playForm = "form." + playName;
-      var values = {};
-      d3.select(playForm)
-          .selectAll("input")[0]    //  comes back as an array within an array, so drop the outer array
-          .slice(0,-1)     // drop the button that's at the end of the form;  switch to using a filter?
-          .forEach(function(d, i) {
-              values[d.name] = d.value;
-              updateCodeValue(playName, d.name, d.value);
-          });
-      console.log("fill is: " + values.fill);
-
-      state_rects
-        .attr("x", function(d,i)  { return d.col * values.width;})
-        .attr("y", function(d,i) {return d.row * values.height;})
-        .attr("width", values.cellsize)
-        .attr("height", values.cellsize)
-        .style("fill",  values.fill);
-  };
+// Define the function for updating the rectangles using the values the user entered in the form
+UpdateFunction['rectangles_overview'] = function(values) {
+  getSVG('rectangles_overview').selectAll("rect")
+    .attr("x", function(d,i)  { return d.col * values.width;})
+    .attr("y", function(d,i) {return d.row * values.height;})
+    .attr("width", values.cellsize)
+    .attr("height", values.cellsize)
+    .style("fill",  values.fill);
+};
 </script>
 
 <p>FYI, if you play around with the height, width, and cellsize, you'll discover something interesting.
@@ -124,9 +86,6 @@
  If cellsize is smaller than height and width,
 that creates some whitespace between the rectangles that looks like a border.
  If you haven't played with it already, give it a try.</p>
-
-
-
 
 
 <h3>The Revenge of Your High School Math Teacher, Part 1</h3>
@@ -140,14 +99,15 @@ that creates some whitespace between the rectangles that looks like a border.
 <li> Color, which in D3 is called "Fill" </li>
 <li> X and Y coordinates where the rectangle should start</li></ul>
 To get a feel for it, let's play:
-<div class="recipe_row">
-<div class="recipe_text">
-  <svg width="500" height="160"  class="rectangle">
-  <rect x="50" y="20" width="40" height="40"
-   style="fill:DarkRed" />
-  </svg>        <!-- SVG graphics will go here  -->
-</div>
-<div class="recipe_code">
+
+<div class="toy" id="one_rectangle">
+  <div class="recipe_row">
+    <div class="recipe_text">
+      <svg width="500" height="160"  class="rectangle">
+      <rect x="50" y="20" width="40" height="40" style="fill:DarkRed" />
+      </svg>
+    </div>
+  <div class="recipe_code">
   <form class="rectangle">
     <table class="input_table">
       <tr><td>Width</td><td><input name="width" type="text" value="40"> </td></tr>
@@ -155,46 +115,23 @@ To get a feel for it, let's play:
       <tr><td>Fill</td><td><input name="fill" type="text" value="DarkRed"> </td></tr>
       <tr><td>X</td><td><input name="X" type="text" value="50"> </td></tr>
       <tr><td>Y</td><td><input name="Y" type="text" value="20"> </td></tr>
-      <tr><td></td><td><input type="button" value="Update It!"  onClick="updateRectangle('rectangle', this)"> </td></tr>
+      <tr><td></td><td><input type="button" value="Update It!"  onClick="updateValues('one_rectangle')"> </td></tr>
     </table>
   </form>
 </div>
 </div>  <!-- end recipe_row -->
+</div>  <!-- end toy -->
 
-
-
-  <script type="text/javascript">
-    svgName = 'svg.rectangle';
-    console.log("SVG map we are going to use:" + svgName);
-
-
-    var rectangle =  d3.select(svgName).select("rect");
-  </script>
 
 <script type="text/javascript">
-
-
-// Need to redo updateValue so it gets passed the anonymous function containing the update
-
-
-
-function updateRectangle(playName, input)  {
-    var playForm = "form." + playName;
-    var values = {};
-    d3.select(playForm)
-        .selectAll("input")[0]    //  comes back as an array within an array, so drop the outer array
-        .slice(0,-1)     // drop the button that's at the end of the form;  switch to using a filter?
-        .forEach(function(d, i) {
-            values[d.name] = d.value;
-        });
-    console.log("fill is: " + values.fill);
-
-    rectangle
-      .attr("x", values.X)
-      .attr("y", values.Y)
-      .attr("width", values.width)
-      .attr("height", values.height)
-      .style("fill",  values.fill);
+// Define the function for updating the rectangle using the values the user entered in the form
+UpdateFunction['one_rectangle'] = function(values) {
+  getSVG('one_rectangle').select("rect")
+  .attr("x", values.X)
+  .attr("y", values.Y)
+  .attr("width", values.width)
+  .attr("height", values.height)
+  .style("fill",  values.fill);
 };
 </script>
 
