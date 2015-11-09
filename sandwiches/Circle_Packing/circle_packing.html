@@ -2,8 +2,6 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Circle Packing</title>
   <script src="http://d3js.org/d3.v3.min.js"></script>        <!-- d3 library -->
 	<style>
@@ -16,22 +14,22 @@
 	  stroke: Gray;
 	  stroke-width: 1px;
 	}
+	text {
+		text-anchor: middle;
+	}
 
 	.leaf circle {
 	  fill: AntiqueWhite;
 	  fill-opacity: 1;
 	}
-
-	text {
-		text-anchor: middle;
-	}
-
+  .leaf text {
+    font-size: 20px;
+  }
 	</style>
 </head>
 <body>
 	<h3>Produce Popularity</h3>
-<script>
-
+  <script type="text/javascript">
 // Create the data
 var produce = {
 	name: "produce",
@@ -56,7 +54,6 @@ var produce = {
 			] }
 ] };
 
-
 var diameter = 860;
 
 // Create a packed layout function and use it to do the calculations to turn produce into a packed layout
@@ -75,17 +72,16 @@ var nodes = svg.selectAll("g")
     .data(packedNodes)
     .enter().append("g")
     	.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-    	.attr("class", function(d) { return d.children ? "node" : "leaf node"; });
+    	.attr("class", function(d) { return d.children ? "node" : "leaf"; });
 
 // For each group, add a circle
 nodes.append("circle")
     .attr("r", function(d) { return d.r; });
 
 //For each group,add a text label
-var leaves = nodes.filter(function(d) { return !d.children; });
-leaves.append("text")
-    .text(function(d) { return d.name; })
-		.style("font-size", "20px");
+nodes.filter(function(d) { return !d.children; })
+  .append("text")
+    .text(function(d) { return d.name; });
 </script>
 
 </body>
