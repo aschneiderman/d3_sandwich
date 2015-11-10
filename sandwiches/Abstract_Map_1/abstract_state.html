@@ -95,14 +95,10 @@ svg_area.selectAll("text")
     .style("pointer-events", "none");    // If you put the mouse over one of the states, this prevents it from treating it like text (reword)
 
 
-// Return a list of the rectangles for each selected state
-var state_rects =  svg_area
-    .selectAll("rect")
-    .data( selected_states, function(d) { return d.state; });
-
 // Change the background color of each of those states to orange
- state_rects.style("fill", "orange");    // For every state that was joined, change the color to orange
-
+svg_area.selectAll("rect")
+  .data( selected_states, function(d) { return d.state; });
+  .style("fill", "orange");
 </script>
 
 </body>

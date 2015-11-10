@@ -1,11 +1,23 @@
 ﻿Battle Plan: Atom Task List
 
-* * NOTE: for lots of goodies on / snippets of Atom code, see my Coding folder in Outlook * *
 
 VOCOLA VOICE COMMANDS
+- some way to insert after HTML parameter -- e.g., given this line:
+<div class="toy" id="rectangles_overview">
+  be able to pick the second parameter-- e.g., replace parameter 2
+  The real question:
+    What command names?  Distinguishing between HTML, JavaScript, and Python without having to say a lot each time
+
+- a command for saying var   -- may be a template?
+
+
 - how to navigate to and open files
 
 - Deleting between delimiters, such as the link text in a URL
+
+- Capitalizing the word
+
+- Deleting a word when you are in the middle of it (maybe with select word, delete word?)
 
 
 ATOM CUSTOM COMMANDS
@@ -22,6 +34,7 @@ Command for easily moving recipe step text from Atom to Word
    by passing it an anonymous function
 
 
+* * NOTE: for lots of goodies on / snippets of Atom code, see my Coding folder in Outlook * *
 
 
 ATOM PACKAGES
@@ -37,7 +50,7 @@ LEARNING FROM CODE
 https://atom.io/packages/bookmarks
 
 Other options:
-Looks pretty manageable:  
+Looks pretty manageable:
 https://github.com/atom/bracket-matcher
 https://github.com/atom/go-to-line
 
@@ -50,6 +63,3 @@ https://github.com/atom/styleguide
 https://github.com/atom/command-palette
 https://github.com/atom/snippets
 https://github.com/atom/find-and-replace
-
-
-

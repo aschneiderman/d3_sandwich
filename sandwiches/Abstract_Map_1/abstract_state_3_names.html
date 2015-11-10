@@ -21,6 +21,7 @@
       <h3>Step #3: Add the State Names to the Map</h3>
 <p> All that hard work you put in on Step 2? It's about to start paying dividends. Because Step 3 is just a variation on the pattern you just learned -- only instead of creating rectangles, we are going to create text to put the state names on the map. </p>
 
+<div class="toy" id="text_overview">
 <div class="recipe_row">
 <div class="recipe_text">
 <p> Let's start by playing with the code.</p>
@@ -41,47 +42,50 @@ var  state_map = [
       .data(state_map)
       .enter()
       .append("text")
-        .attr("x", function(d,i)  { return d.col * width + 108;})
-        .attr("y", function(d,i) {return d.row * height +  26;})
+        .attr("x", function(d,i)  { return d.col * width + <i class="x">108</i>;})
+        .attr("y", function(d,i) {return d.row * height +  <i class="y">26</i>;})
         .text(function (d) { return d.state; })
-        .style("font",   "16px sans-serif")
-        .style("fill", "White")
-        .style("pointer-events", "none");
+        .style("font",   "<i class="font">16px sans-serif</i>")
+        .style("fill", "<i class="fill">White</i>")
+        .style("pointer-events", "<i class="pointer-events">none</i>");
 </pre>
 </div>
 </div>  <!-- recipe_row -->
-
-
 <div class="recipe_row">
 <div class="recipe_text">
-  <svg width="520" height="400" class="code_play" class="code_play" class="SVG_playground"></svg>        <!-- SVG graphics will go here  -->
-
-  <script type="text/javascript">
-    svgName = 'svg.code_play';
-
-    console.log("SVG map we are going to use:" + svgName);
-    make_rectangles(svgName, get_states(), [], 0, 0);
-  </script>
-
+  <svg width="520" height="400"></svg>        <!-- SVG graphics will go here  -->
 </div>
 <div class="recipe_code">
   <form class="code_play">
     <table class="input_table">
-      <tr><td>Width</td><td><input name="width" type="text" value="40"> </td></tr>
-      <tr><td>Height</td><td><input name="height" type="text" value="40"> </td></tr>
-      <tr><td>Cell Size</td><td><input name="cellsize" type="text" value="39"> </td></tr>
-      <tr><td>Fill</td><td><input name="fill" type="text" value="DarkRed"> </td></tr>
-      <tr><td></td><td><input type="button" value="Update the Map"  onClick="updateValue('code_play', this)"> </td></tr>
+      <tr><td>Font</td><td><input name="font" type="text" value="16px sans-serif"> </td></tr>
+      <tr><td>X Offset</td><td><input name="x" type="text" value="0"> </td></tr>
+      <tr><td>Y Offset</td><td><input name="y" type="text" value="26"> </td></tr>
+      <tr><td>Fill</td><td><input name="fill" type="text" value="White"> </td></tr>
+      <tr><td></td><td><input type="button" value="Update the Map"  onClick="updateValues('text_overview')"> </td></tr>
     </table>
   </form>
 </div>
 </div>  <!-- end recipe_row -->
+</div>  <!-- end toy -->
+
+<script type="text/javascript">
+makeMap('text_overview', getStates(), [], 0, 0);
+
+// Define the function for updating the rectangles using the values the user entered in the form
+UpdateFunction['text_overview'] = function(values) {
+  getSVG('text_overview').selectAll("text")
+    .attr("x", function(d,i)  { return d.col * Width + parseInt(values.x);})
+    .attr("y", function(d,i) {return d.row * Height + parseInt(values.y);})
+    .style("fill",  values.fill)
+    .style("font",   values.font)
+};
+</script>
+
 
 
 
 <h4>Select-Data-Enter-Append</h4>
-
-
 <div class="recipe_row">
 <div class="recipe_text">
   <p> For the first part of the code, we use the same pattern that we used with rectangles:
@@ -137,11 +141,14 @@ and we think you've already had plenty of weird stuff to deal with.</p>
 <p> We'll teach the grouping technique in a coming recipe. For now, we will use a quick and dirty trick:</p>
 
 
-
+<div class="toy" id="text_offset">
 <div class="recipe_row">
 <div class="recipe_text">
 <p> For now, we will use a quick and dirty trick: if you add __ pixels to the text's
   height and width, it'll be close enough to being centered to be fine for now.</p>
+
+  <p> That's not completely intuitive. So let's play a little to get a better feel for how it works.</p>
+
 </div>
 <div class="recipe_code">
   <br/>    <!-- br is a temp fix; fix the css so it isn't needed -->
@@ -151,53 +158,34 @@ and we think you've already had plenty of weird stuff to deal with.</p>
 </pre>
 </div>
 </div>  <!-- recipe_row -->
+<div class="recipe_row">
+<div class="recipe_text">
+  <svg width="520" height="400"></svg>        <!-- SVG graphics will go here  -->
+</div>
+<div class="recipe_code">
+  <form class="code_play">
+    <table class="input_table">
+      <tr><td>X Offset</td><td><input name="x" type="text" value="0"> </td></tr>
+      <tr><td>Y Offset</td><td><input name="y" type="text" value="26"> </td></tr>
+      <tr><td></td><td><input type="button" value="Update the Map"  onClick="updateValues('text_offset')"> </td></tr>
+    </table>
+  </form>
+</div>
+</div>  <!-- end recipe_row -->
+</div>  <!-- end toy -->
 
+<script type="text/javascript">
+makeMap('text_offset', getStates(), [], 0, 0);
 
+UpdateFunction['text_offset'] = function(values) {
+  getSVG('text_offset').selectAll("text")
+    .attr("x", function(d,i)  { return d.col * Width + parseInt(values.x);})
+    .attr("y", function(d,i) {return d.row * Height + parseInt(values.y);})
+};
+</script>
 
-
-
-
-
-  <div class="recipe_row">
-  <div class="recipe_text">
-    <p> That's not completely intuitive. So let's play a little to get a better feel for how it works.</p>
-  </div>
-  <div class="recipe_code">
-    <br/>    <!-- br is a temp fix; fix the css so it isn't needed -->
-    <pre>
-          .attr("x", function(d,i)  { return d.col * width + 108;})
-          .attr("y", function(d,i) {return d.row * height +  26;})
-  </pre>
-  </div>
-  </div>  <!-- recipe_row -->
-
-  <div class="recipe_row">
-  <div class="recipe_text">
-    <svg width="520" height="400" class="code_play" class="code_play" class="SVG_playground"></svg>        <!-- SVG graphics will go here  -->
-
-    <script type="text/javascript">
-      svgName = 'svg.code_play';
-
-      console.log("SVG map we are going to use:" + svgName);
-      make_rectangles(svgName, get_states(), [], 0, 0);
-    </script>
-
-  </div>
-  <div class="recipe_code">
-    <form class="code_play">
-      <table class="input_table">
-        <tr><td>Width</td><td><input name="width" type="text" value="40"> </td></tr>
-        <tr><td>Height</td><td><input name="height" type="text" value="40"> </td></tr>
-        <tr><td>Cell Size</td><td><input name="cellsize" type="text" value="39"> </td></tr>
-        <tr><td>Fill</td><td><input name="fill" type="text" value="DarkRed"> </td></tr>
-        <tr><td></td><td><input type="button" value="Update the Map"  onClick="updateValue('code_play', this)"> </td></tr>
-      </table>
-    </form>
-  </div>
-  </div>  <!-- end recipe_row -->
-
-
- <p>As you can see, Step 3 was a lot easier then Step 2. All you needed to do was take the code pattern we saw in Step 2 and tweak
+<h4>Recap</h4>
+ <p>As you can see, Step 3 was a <b>lot</b> easier then Step 2. All you needed to do was take the code pattern we saw in Step 2 and tweak
  it to account for the difference between a rectangle and a text label.</p>
 
 <h4> Up Next: <a href="abstract_state_4_selected.html">Recipe Step #4: Changing the color of selected states</a></h4>

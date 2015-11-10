@@ -1,5 +1,9 @@
 ﻿Battle Plan: Sandwich Task List
 
+- Debugging:
+do a video I break a couple of things and show the errors
+example: if a value is undefined
+if the value doesn't exist (e.g., Height instead of height)
 
 Recipes:
 - Radial Dendrogram: add comments

@@ -2,7 +2,7 @@
 // so we don't have to repeat the code & clutter up each recipe step
 
 // Globals
-var Width = 40, Height = 40, CellSize = 39;
+var Width = 40, Height = 40, CellSize = 39, SelectedColor = 'DarkRed';
 var UpdateFunction = {};
 
 function getSVG(toyID)  {
@@ -59,11 +59,11 @@ function makeRectangles(toyID, mapItems, xOffset, yOffset)  {
       .data(mapItems)
       .enter()
       .append("rect")
-        .attr("x", function(d,i)  { return d.col * Width +  xOffset;})
-        .attr("y", function(d,i) {return d.row * Height + yOffset;})
+        .attr("x", function(d,i) { return d.col * Width +  xOffset;})
+        .attr("y", function(d,i) { return d.row * Height + yOffset;})
         .attr("width", CellSize)
         .attr("height", CellSize)
-        .style("fill", "DarkRed");
+        .style("fill", SelectedColor);
 };
 
 
