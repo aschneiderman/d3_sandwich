@@ -1,4 +1,11 @@
-## Workflow for One Control per Unique Variable (e.g., Height)
+## Workflow for One Toy per Unique Variable (e.g., Height)
+
+NOTE: Atom isn't reading snippets that are in the recipe-tools package.
+Then again, the commands that should be in the package aren't showing up under Packages
+on my desktop at work. So maybe that's the issue? See if that's a problem at home as well.
+
+
+
 
 ### Get the Code Set up In Pre-Formatted Form
 1) Copy the D3 code you want to make interactive.
