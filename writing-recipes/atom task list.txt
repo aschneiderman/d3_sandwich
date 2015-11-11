@@ -10,15 +10,13 @@ VOCOLA VOICE COMMANDS
 
 - a command for saying var   -- may be a template?
 
-
-- how to navigate to and open files
-
 - Deleting between delimiters, such as the link text in a URL
 
-- Capitalizing the word
+- Capitalizing a word
 
 - Deleting a word when you are in the middle of it (maybe with select word, delete word?)
 
+- how to navigate to and open files
 
 ATOM CUSTOM COMMANDS
 - Convert selection – or entire line? - From underscores to camel case
