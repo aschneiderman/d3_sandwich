@@ -22,16 +22,39 @@
       </p>
 
 CAPTAINS log:
-- Move the pre-formatting command to the recipe tool package, and connect it up to work
+- Create the command for putting italics and the class around a selected value
+- Run and if necessary tweak the function for turning the properly tagged variables into a form
 - create my first recipe toy for Circle packing, for showing off the style stuff
 
-<div class="toy" id="circle-style">
+<div class="toy" id="pack-circle-style">
   <div class="recipe_row">
     <div class="recipe_text">
       <p> Let's start by playing with the code.</p>
     </div> <!-- end recipe_text -->
     <div class="recipe_code">
       <pre>
+	&ltstyle&gt
+  body {
+	  font-family: sans-serif;
+  }
+	circle {
+	  fill: Bold;
+	  fill-opacity: .5;
+	  stroke: Gray;
+	  stroke-width: 1px;
+	}
+	text {
+		text-anchor: middle;
+	}
+
+	.leaf circle {
+	  fill: AntiqueWhite;
+	  fill-opacity: 1;
+	}
+  .leaf text {
+    font-size: 20px;
+  }
+	&lt/style&gt
       </pre>
     </div>   <!-- end recipe_code -->
   </div>  <!-- end recipe_row -->
@@ -49,8 +72,8 @@ CAPTAINS log:
 <script type="text/javascript">
 
 // Define the function for updating the data viz using the values the user entered in the form
-UpdateFunction['circle-style'] = function(values) {
-  getSVG('circle-style').
+UpdateFunction['pack-circle-style'] = function(values) {
+  getSVG('pack-circle-style').
 };
 </script>
 
