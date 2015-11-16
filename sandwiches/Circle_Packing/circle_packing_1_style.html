@@ -17,19 +17,21 @@
 <h2>Circle Packing</h2><h2>Step #1: Create the Circle and Text CSS Styles </h2>
   <div class="home_row">
     <div class="home_column1">
-      <p> In the <a href="../Abstract_Map_1/abstract_state_0_recipe.html">Abstract State Map</a>, all of the styling of the information on the screen was done through D3. However, we can also just use CSS to do it.
-        ...
-      </p>
+            <p> In the <a href="../Abstract_Map_1/abstract_state_0_recipe.html">Abstract State Map</a>, all of the styling of the information on the screen was done through D3. In this step, we will learn another way to do it: using Cascading Style Sheets (CSS).</p>
 
+
+<!--
 CAPTAINS log:
 - Create the command for putting italics and the class around a selected value
 - Run and if necessary tweak the function for turning the properly tagged variables into a form
-- create my first recipe toy for Circle packing, for showing off the style stuff
+- create my first recipe toy for Circle packing, for showing off the style stuff -->
+
+
 
 <div class="toy" id="pack-circle-style">
   <div class="recipe_row">
     <div class="recipe_text">
-      <p> Let's start by playing with the code.</p>
+      <p> Let's start by playing with the code.  Try tweaking the Cascading Style Sheet (CSS) values and see how it changes the Circle Packing graphic.</p>
     </div> <!-- end recipe_text -->
     <div class="recipe_code">
       <pre>
@@ -38,7 +40,7 @@ CAPTAINS log:
 	  font-family: sans-serif;
   }
 	circle {
-	  fill: Bold;
+	  fill: Purple;
 	  fill-opacity: .5;
 	  stroke: Gray;
 	  stroke-width: 1px;
@@ -76,6 +78,26 @@ UpdateFunction['pack-circle-style'] = function(values) {
   getSVG('pack-circle-style').
 };
 </script>
+
+<h3>What Is a Cascading Style Sheet (CSS) and Why Would You Want One?</h3>
+<p> With the Abstract Map, if we wanted to change a rectangle's style – e.g., mark a selected state with a different color – we used code like this to do it. If you're only setting one style, such as "fill", that approach works well.</p>
+<p> But what if you're changing a whole bunch of styles? At that point, it might be easier to take the style changes outside of your code using Cascading Style Sheets (CSS). That way, you can easily tweak the look and feel without having to go into the code. This is particularly useful if you are working with a graphics designer.</p>
+<p> There 2 ways you can use CSS:</p>
+<ul><li> Create a separate file, give it a name that ends with ".css", and then call it from your HTML page</li>
+<li> Create an "in-line" stylesheet, where you put the CSS inside your HTML page.</li></ul>
+<p> For this recipe, we used an in-line stylesheet. All we had to do was use the code to the right.</p>
+
+<h3>How to Read CSS</h3>
+<p>There is a lot you can learn about using CSS -- just Google "CSS tutorial" and you'll find thousands of articles about it. Luckily, to use it with D3 you don't need to know much. So, here's the minimum you need to know.</p>
+<p>Every chunk of CSS starts with what's called a "selector", which tells the browser to add the styles to.  It's just like using d3.selectAll("rect"), just skip the d3.select.</p>
+<p>For example, here we tell the browser that we want to make 4 style changes to each circle:</p>
+<ul><li> <b> fill </b>: Color each circle purple</li>
+<li><b>fill-opacity</b>: Set each circle's opacity/transparency to 0.5 (0 = invisible, 1 = no transparency)</li>
+<li><b> stroke</b>: Make each circle's border to gray</li>
+<li><b>stroke-width</b>: Make each circle's border 1 pixel wide</li></ul>
+
+
+
 
 
 <h4> Up Next: <a href="circle_packing_2_json.html">Recipe Step #2: Create the JSON To Store the Data Visualization's Info </a></h4>
