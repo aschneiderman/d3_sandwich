@@ -15,18 +15,18 @@
 </div>
 
 <h2>Circle Packing</h2><h2>Step #1: Create the Circle and Text CSS Styles </h2>
-  <div class="home_row">
-    <div class="home_column1">
             <p> In the <a href="../Abstract_Map_1/abstract_state_0_recipe.html">Abstract State Map</a>, all of the styling of the information on the screen was done through D3. In this step, we will learn another way to do it: using Cascading Style Sheets (CSS).</p>
 
 
 <!--
 CAPTAINS log:
-- Create the command for putting italics and the class around a selected value
-- Run and if necessary tweak the function for turning the properly tagged variables into a form
-- create my first recipe toy for Circle packing, for showing off the style stuff -->
 
+- Start building the functions I need in circle_packing.JS
 
+- learn how to do searching in coffeescript, so I can get the cursor to exactly where I want
+in this case, where we are going to put the ID
+(although in theory I could go look for it above and then deposited below)
+ -->
 
 <div class="toy" id="pack-circle-style">
   <div class="recipe_row">
@@ -40,21 +40,21 @@ CAPTAINS log:
 	  font-family: sans-serif;
   }
 	circle {
-	  fill: Purple;
-	  fill-opacity: .5;
-	  stroke: Gray;
-	  stroke-width: 1px;
+	  fill: <i class="fill">Purple</i>;
+	  fill-opacity: <i class="fill-opacity">.5</i>;
+	  stroke: <i class="stroke">Gray</i>;
+	  stroke-width: <i class="stroke-width">1px</i>;
 	}
 	text {
 		text-anchor: middle;
 	}
 
 	.leaf circle {
-	  fill: AntiqueWhite;
-	  fill-opacity: 1;
+	  fill: <i class="leaf-fill">AntiqueWhite</i>;
+	  fill-opacity: <i class="leaf-opacity">1</i>;
 	}
   .leaf text {
-    font-size: 20px;
+    font-size: <i class="font-size">20px</i>;
   }
 	&lt/style&gt
       </pre>
@@ -65,11 +65,23 @@ CAPTAINS log:
       <svg width="520" height="400"></svg>        <!-- SVG graphics will go here  -->
     </div>
       <div class="recipe_code">
-        <form>
-        </form>
+<form>
+    <table class="input_table">
+      <tr><td>Fill</td><td><input name="fill" type="text" value="Purple"> </td></tr>
+      <tr><td>Fill-opacity</td><td><input name="fill-opacity" type="text" value=".5"> </td></tr>
+      <tr><td>Stroke</td><td><input name="stroke" type="text" value="Gray"> </td></tr>
+      <tr><td>Stroke-width</td><td><input name="stroke-width" type="text" value="1px"> </td></tr>
+      <tr><td>Leaf-fill</td><td><input name="leaf-fill" type="text" value="AntiqueWhite"> </td></tr>
+      <tr><td>Leaf-opacity</td><td><input name="leaf-opacity" type="text" value="1"> </td></tr>
+      <tr><td>Font-size</td><td><input name="font-size" type="text" value="20px"> </td></tr>
+      <tr><td></td><td><input type="button" value="Update It"  onClick="updateValues('pack-circle-style)"> </td></tr>
+    </table>
+  </form>
       </div>  <!-- end recipe_code -->
   </div>     <!-- end recipe_row -->
 </div>  <!-- end toy -->
+
+
 
 <script type="text/javascript">
 
@@ -79,22 +91,126 @@ UpdateFunction['pack-circle-style'] = function(values) {
 };
 </script>
 
+
+
+<!-- // Draw the rectangles for each state
+makeRectangles('rectangles_overview', getStates(), 0, 0);
+
+// Define the function for updating the rectangles using the values the user entered in the form
+UpdateFunction['rectangles_overview'] = function(values) {
+  getSVG('rectangles_overview').selectAll("rect")
+    .attr("x", function(d,i)  { return d.col * values.width;})
+    .attr("y", function(d,i) {return d.row * values.height;})
+    .attr("width", values.cellsize)
+    .attr("height", values.cellsize)
+    .style("fill",  values.fill);
+}; -->
+
+
+
+
+
+
 <h3>What Is a Cascading Style Sheet (CSS) and Why Would You Want One?</h3>
+<div class="recipe_row">
+<div class="recipe_text">
 <p> With the Abstract Map, if we wanted to change a rectangle's style – e.g., mark a selected state with a different color – we used code like this to do it. If you're only setting one style, such as "fill", that approach works well.</p>
+</div>
+<div class="recipe_code">
+  <pre>
+    .style("fill", "<i id="fill">DarkRed</i>");
+  </pre>
+</div>
+</div>  <!-- end recipe_row -->
+
 <p> But what if you're changing a whole bunch of styles? At that point, it might be easier to take the style changes outside of your code using Cascading Style Sheets (CSS). That way, you can easily tweak the look and feel without having to go into the code. This is particularly useful if you are working with a graphics designer.</p>
 <p> There 2 ways you can use CSS:</p>
 <ul><li> Create a separate file, give it a name that ends with ".css", and then call it from your HTML page</li>
 <li> Create an "in-line" stylesheet, where you put the CSS inside your HTML page.</li></ul>
+<div class="recipe_row">
+<div class="recipe_text">
 <p> For this recipe, we used an in-line stylesheet. All we had to do was use the code to the right.</p>
+</div>
+<div class="recipe_code">
+  <pre>
+	&ltstyle&gt
+  ...
+  &lt/style&gt
+  </pre>
+</div>
+</div>  <!-- end recipe_row -->
 
 <h3>How to Read CSS</h3>
 <p>There is a lot you can learn about using CSS -- just Google "CSS tutorial" and you'll find thousands of articles about it. Luckily, to use it with D3 you don't need to know much. So, here's the minimum you need to know.</p>
 <p>Every chunk of CSS starts with what's called a "selector", which tells the browser to add the styles to.  It's just like using d3.selectAll("rect"), just skip the d3.select.</p>
+
+<div class="recipe_row">
+<div class="recipe_text">
 <p>For example, here we tell the browser that we want to make 4 style changes to each circle:</p>
 <ul><li> <b> fill </b>: Color each circle purple</li>
 <li><b>fill-opacity</b>: Set each circle's opacity/transparency to 0.5 (0 = invisible, 1 = no transparency)</li>
 <li><b> stroke</b>: Make each circle's border to gray</li>
 <li><b>stroke-width</b>: Make each circle's border 1 pixel wide</li></ul>
+</div>
+<div class="recipe_code">
+  <pre>
+    circle {
+  	  fill: <i class="fill">Purple</i>;
+  	  fill-opacity: <i class="fill-opacity">.5</i>;
+  	  stroke: <i class="stroke">Gray</i>;
+  	  stroke-width: <i class="stroke-width">1px</i>;
+  	}
+    </pre>
+  </div>
+</div>   <!-- end recipe_code -->
+
+<div class="recipe_row">
+<div class="recipe_text">
+  Similarly, here we tell the browser we want all text to be centered.
+</div>
+<div class="recipe_code">
+  <pre>
+  	text {
+  		text-anchor: middle;
+  	}
+  </pre>
+</div>
+</div>  <!-- end recipe_row -->
+
+<h3>CSS Classes</h3>
+  <p>That'll work great if we want all of the circles to be styled the same way. But in this case, we want the circles that contain info about specific produce -- e.g., that 300 apples were purchased -- to be a different color and not to be transparent. How do we do that? By using classes or IDs.</p>
+<p> With both SVG and HTML, you can tag an item as belonging either to a particular class or ID. If you want to tag just one item, use ID; if you are taking more than one item, use class. In our case we want to tag a bunch of circles, so we will use a class called "leaf"; in Step 4, we'll show you how we add that class to the right circles.</p>
+
+<div class="recipe_row">
+<div class="recipe_text">
+  <p>This code tells the browser how to style circles that belong to the "leaf" class: </p>
+  <p><b>.leaf</b> tells the browser to select the "leaf" class. In CSS, we use "." to refer to class and "#" to refer to ID</p>
+  <p>By putting <b> circle</b> right after ".leaf", we're telling the browser to only select circles that belong to the "leaf" class.</p>
+</div>
+<div class="recipe_code">
+  <pre>
+  	.leaf circle {
+  	  fill: <i class="leaf-fill">AntiqueWhite</i>;
+  	  fill-opacity: <i class="leaf-opacity">1</i>;
+  	}
+  </pre>
+</div>
+</div>  <!-- end recipe_row -->
+
+<div class="recipe_row">
+<div class="recipe_text">
+  <p> We use the same approach to select all text that belongs to the "leaf" class.</p>
+<p><b> font-size</b>: the text size of the font</p>
+</div>
+<div class="recipe_code">
+  <pre>
+    .leaf text {
+      font-size: <i class="font-size">20px</i>;
+    }
+  </pre>
+</div>
+</div>  <!-- end recipe_row -->
+
 
 
 
