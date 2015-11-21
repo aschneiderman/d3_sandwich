@@ -3,14 +3,17 @@
 <html>
 <head>
   <title>Circle Packing</title>
-  <script src="../../d3.v3.min.js"></script>        <!-- d3 library -->
+  <script src="../../libraries/d3.v3.min.js"></script>        <!-- d3 library -->
+  <script src="../../libraries/sandwich.js"></script>        <!-- core d3 sandwich library -->
+  <script src="circle_packing.js"></script>
   <link href="../../sandwich.css" rel="stylesheet" media="screen">      <!-- sandwich's CSS -->
+  <link href="circle_packing.css" rel="stylesheet">
 </head>
 <body>
 <div id="container">
 
 <div id="sandwich-heading">
-  <h1> <img src="../../sandwich_icon.jpeg"  height="50" width="50">  d3 sandwich </h1>
+  <h1> <img src="../../images/sandwich_icon.jpeg"  height="50" width="50">  d3 sandwich </h1>
   <div id="sandwich-border"></div>
 </div>
 
@@ -62,7 +65,7 @@ in this case, where we are going to put the ID
   </div>  <!-- end recipe_row -->
   <div class="recipe_row">
     <div class="recipe_text">
-      <svg width="520" height="400"></svg>        <!-- SVG graphics will go here  -->
+      <div id="svg_location"> </div>        <!-- SVG graphics will be inserted here  -->
     </div>
       <div class="recipe_code">
 <form>
@@ -85,28 +88,29 @@ in this case, where we are going to put the ID
 
 <script type="text/javascript">
 
+makePackCircle('pack-circle-style', getCircleItems());
+
 // Define the function for updating the data viz using the values the user entered in the form
 UpdateFunction['pack-circle-style'] = function(values) {
-  getSVG('pack-circle-style').
+  // getSVG('pack-circle-style').
+  return "here is some stuff that is a placeholder";
 };
-</script>
 
 
 
 <!-- // Draw the rectangles for each state
-makeRectangles('rectangles_overview', getStates(), 0, 0);
-
 // Define the function for updating the rectangles using the values the user entered in the form
-UpdateFunction['rectangles_overview'] = function(values) {
-  getSVG('rectangles_overview').selectAll("rect")
-    .attr("x", function(d,i)  { return d.col * values.width;})
-    .attr("y", function(d,i) {return d.row * values.height;})
-    .attr("width", values.cellsize)
-    .attr("height", values.cellsize)
-    .style("fill",  values.fill);
-}; -->
+// UpdateFunction['rectangles_overview'] = function(values) {
+//   getSVG('rectangles_overview').selectAll("rect")
+//     .attr("x", function(d,i)  { return d.col * values.width;})
+//     .attr("y", function(d,i) {return d.row * values.height;})
+//     .attr("width", values.cellsize)
+//     .attr("height", values.cellsize)
+//     .style("fill",  values.fill);
+// }; -->
 
 
+</script>
 
 
 
