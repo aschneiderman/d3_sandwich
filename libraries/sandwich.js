@@ -21,25 +21,36 @@ function updateCode(toyID, codeItem, newCode)  {
   getPreItem(toyID, codeItem).text(newCode).style("background-color", '#FFFF66');
 };
 
+
+function getFormInputValues(toyID)  {
+  // getInputValues: read and all of the input values other than the button that's at the end of the form
+    return getForm(toyID)
+      .selectAll("input")[0]    //  comes back as an array within an array, so drop the outer array
+      .slice(0,-1)     // drop the button that's at the end of the form;  switch to using a filter?
+};
+
+function updateStyles(toyID)  {
+  // updateStyles: read the values the user put in the toy's form
+  //  and then use them to update the toy's styles and the toy's pre code
+    var toySVG = getSVG(toyID);
+    getFormInputValues(toyID)
+      .forEach(function(d, i) {                     // Loop through each input field
+          updateCode(toyID, d.name, d.value);       // Update the pre code
+          styleSelector  = StyleInfo[d.name][0];    // Read from the StyleInfo object
+          styleProperty = StyleInfo[d.name][1];         //    the style's sector and its property
+          toySVG.selectAll(styleSelector)
+            .style(styleProperty, d.value);         // Update the style of every element with that selector
+      });
+};
+
 function updateValues(toyID)  {
   // updateValues: read the values the user put in the toy's form
   //  and then use them to update the toy and the toy's pre code
     var values = {};
-    getForm(toyID)
-      .selectAll("input")[0]    //  comes back as an array within an array, so drop the outer array
-      .slice(0,-1)     // drop the button that's at the end of the form;  switch to using a filter?
+    getFormInputValues(toyID)
       .forEach(function(d, i) {
           values[d.name] = d.value;
           updateCode(toyID, d.name, d.value);
       });
-      UpdateFunction[toyID](values);
+    UpdateFunction[toyID](values);
 };
-
-
-// Up next:
-// create a function: updateStyles
-// What the function does is roll through each non-button value in the input form
-// and then does a selectAll using the input form Element and converts them:
-//
-// get SVG.selectAll (element)
-//   .style("name", "value")

@@ -43,21 +43,21 @@ in this case, where we are going to put the ID
 	  font-family: sans-serif;
   }
 	circle {
-	  fill: <i class="fill">Purple</i>;
-	  fill-opacity: <i class="fill-opacity">.5</i>;
-	  stroke: <i class="stroke">Gray</i>;
-	  stroke-width: <i class="stroke-width">1px</i>;
+	  fill: <i class="circle-fill">Purple</i>;
+	  fill-opacity: <i class="circle-fill-opacity">.5</i>;
+	  stroke: <i class="circle-stroke">Gray</i>;
+	  stroke-width: <i class="circle-stroke-width">1px</i>;
 	}
 	text {
 		text-anchor: middle;
 	}
 
 	.leaf circle {
-	  fill: <i class="leaf-fill">AntiqueWhite</i>;
-	  fill-opacity: <i class="leaf-opacity">1</i>;
+	  fill: <i class="leaf-circle-fill">AntiqueWhite</i>;
+	  fill-opacity: <i class="leaf-circle-fill-opacity">1</i>;
 	}
   .leaf text {
-    font-size: <i class="font-size">20px</i>;
+    font-size: <i class="leaf-text-font-size">20px</i>;
   }
 	&lt/style&gt
       </pre>
@@ -70,14 +70,14 @@ in this case, where we are going to put the ID
       <div class="recipe_code">
 <form>
     <table class="input_table">
-      <tr><td>Fill</td><td><input name="fill" type="text" value="Purple"> </td></tr>
-      <tr><td>Fill-opacity</td><td><input name="fill-opacity" type="text" value=".5"> </td></tr>
-      <tr><td>Stroke</td><td><input name="stroke" type="text" value="Gray"> </td></tr>
-      <tr><td>Stroke-width</td><td><input name="stroke-width" type="text" value="1px"> </td></tr>
-      <tr><td>Leaf-fill</td><td><input name="leaf-fill" type="text" value="AntiqueWhite"> </td></tr>
-      <tr><td>Leaf-opacity</td><td><input name="leaf-opacity" type="text" value="1"> </td></tr>
-      <tr><td>Font-size</td><td><input name="font-size" type="text" value="20px"> </td></tr>
-      <tr><td></td><td><input type="button" value="Update It"  onClick="updateValues('pack-circle-style)"> </td></tr>
+      <tr><td>Fill</td><td><input         name="circle-fill" type="text" value="Purple"> </td></tr>
+      <tr><td>Fill-opacity</td><td><input name="circle-fill-opacity" type="text" value=".5"> </td></tr>
+      <tr><td>Stroke</td><td><input       name="circle-stroke" type="text" value="Gray"> </td></tr>
+      <tr><td>Stroke-width</td><td><input name="circle-stroke-width" type="text" value="1px"> </td></tr>
+      <tr><td>Leaf-fill</td><td><input    name="leaf-circle-fill" type="text" value="AntiqueWhite"> </td></tr>
+      <tr><td>Leaf-opacity</td><td><input name="leaf-circle-fill-opacity" type="text" value="1"> </td></tr>
+      <tr><td>Font-size</td><td><input    name="leaf-text-font-size" type="text" value="20px"> </td></tr>
+      <tr><td></td><td><input type="button" value="Update It"  onClick="updateStyles('pack-circle-style')"> </td></tr>
     </table>
   </form>
       </div>  <!-- end recipe_code -->
@@ -87,29 +87,11 @@ in this case, where we are going to put the ID
 
 
 <script type="text/javascript">
+var StyleInfo = {'circle-fill': ['circle', 'fill'] ,  'circle-fill-opacity': ['circle', 'fill-opacity'],  'circle-stroke': ['circle', 'stroke'],  'circle-stroke-width': ['circle', 'stroke-width'],
+                'leaf-circle-fill': ['.leaf circle', 'fill'],  'leaf-circle-fill-opacity': ['.leaf circle', 'fill-opacity'],
+                'leaf-text-font-size': ['.leaf text', 'font-size']};    // The selector for each input field class, so it knows which style to modify
 
 makePackCircle('pack-circle-style', getCircleItems());
-
-// Define the function for updating the data viz using the values the user entered in the form
-UpdateFunction['pack-circle-style'] = function(values) {
-  // getSVG('pack-circle-style').
-  return "here is some stuff that is a placeholder";
-};
-
-
-
-<!-- // Draw the rectangles for each state
-// Define the function for updating the rectangles using the values the user entered in the form
-// UpdateFunction['rectangles_overview'] = function(values) {
-//   getSVG('rectangles_overview').selectAll("rect")
-//     .attr("x", function(d,i)  { return d.col * values.width;})
-//     .attr("y", function(d,i) {return d.row * values.height;})
-//     .attr("width", values.cellsize)
-//     .attr("height", values.cellsize)
-//     .style("fill",  values.fill);
-// }; -->
-
-
 </script>
 
 

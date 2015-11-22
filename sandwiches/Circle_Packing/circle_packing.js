@@ -7,14 +7,11 @@ var Diameter = 500, TextSize = "12";
 function makePackCircle(toyID, circleItems)  {
 // makePackCircle: create a packed circle
 
-  console.log(circleItems);
   // Create a packed layout function and use it to do the calculations to turn produce into a packed layout
   var packedLayout = d3.layout.pack()
       .size([Diameter, Diameter])
       .value(function(d) { return d.quantity; });
   var packedNodes = packedLayout.nodes(circleItems);
-
-  console.log(packedNodes);
 
   // Create the SVG area
   var svg = d3.select("#" + toyID + " #svg_location").append("svg")
