@@ -3,20 +3,105 @@
 <html>
 <head>
   <title>Circle Packing</title>
-  <script src="../../d3.v3.min.js"></script>        <!-- d3 library -->
+  <script src="../../libraries/d3.v3.min.js"></script>        <!-- d3 library -->
+  <script src="../../libraries/sandwich.js"></script>        <!-- core d3 sandwich library -->
+  <script src="circle_packing.js"></script>
   <link href="../../sandwich.css" rel="stylesheet" media="screen">      <!-- sandwich's CSS -->
+  <link href="circle_packing.css" rel="stylesheet">
 </head>
 <body>
 <div id="container">
 
 <div id="sandwich-heading">
-  <h1> <img src="../../sandwich_icon.jpeg"  height="50" width="50">  d3 sandwich </h1>
+  <h1> <img src="../../images/sandwich_icon.jpeg"  height="50" width="50">  d3 sandwich </h1>
   <div id="sandwich-border"></div>
 </div>
 
 <h2>Circle Packing</h2>
 <h2>Step #2: Create the JSON to Store the Data </h2>
 
+<div class="toy" id="create_JSON">
+  <div class="recipe_row">
+    <div class="recipe_text">
+      {Here is where the text will go to explain what we are doing}
+    </div> <!-- end recipe_text -->
+    <div class="recipe_code">
+      <pre>
+var produce = {
+	name: "produce",
+	children: [
+		{ name: "Fruit",
+			children: [
+				{name: "Apple", quantity: 300},
+				{name: "Banana", quantity: 200},
+				{ name: "Berries",
+					children: [
+						{name: "Raspberries", quantity: 100},
+						{name: "Strawberries", quantity: 200},
+						{name: "Blueberries", quantity: 80}
+					] }
+			] },
+		{ name: "Veggies",
+			children:  [
+				{name: "Zucchini", quantity: 52},
+				{name: "Peas", quantity: 30},
+				{name: "Carrots", quantity: 60},
+        {name: "Onions", quantity: 70}
+			] }
+] };
+      </pre>
+    </div>   <!-- end recipe_code -->
+  </div>  <!-- end recipe_row -->
+  <div class="recipe_row">
+    <div class="recipe_text">
+      <svg width="520" height="400"></svg>        <!-- SVG graphics will go here  -->
+    </div>
+      <div class="recipe_code">
+        <form>
+        </form>
+      </div>  <!-- end recipe_code -->
+  </div>     <!-- end recipe_row -->
+</div>  <!-- end toy -->
+
+<script type="text/javascript">
+var ToyID = 'create_JSON';
+
+createInputFields = function (nodes)  {
+  quantity = nodes.quantity ? nodes.quantity : 0;
+  console.log(nodes, nodes.depth);
+  var div = getForm(ToyID).append("div")
+      .style("margin-left", nodes.depth * 20);
+  div.append("input")
+      .attr("value", nodes.name)
+      .attr("name", nodes.name);
+  if (quantity) {
+    div.append("input")
+      .attr("value", quantity)
+      .attr("name", nodes.name + "-quantity");
+  };
+  if (nodes.children)  {
+    nodes.children.forEach(createInputFields)
+  };
+};
+
+// CAPTAINS log:
+// - Can't figure out why depth is coming back as undefined.
+//  Need to look at the toy example to see why it works and what the difference is
+createInputFields(CircleItems);
+
+
+
+
+
+
+
+
+// Define the function for updating the data viz using the values the user entered in the form
+// UpdateFunction['create_JSON'] = function(values) {
+//   getSVG('create_JSON').
+// };
+
+</script>
 
 
 <h4> Up Next: <a href="circle_packing_3_pack.html">Recipe Step #3: Generate the Data about Where to Put the Circles   </a></h4>

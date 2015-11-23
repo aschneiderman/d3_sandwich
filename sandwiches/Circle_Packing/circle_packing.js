@@ -4,14 +4,37 @@
 // Globals
 var Diameter = 500, TextSize = "12";
 
-function makePackCircle(toyID, circleItems)  {
+function makePackCircle(toyID)  {
 // makePackCircle: create a packed circle
+
+  var produce = {
+  	name: "produce",
+  	children: [
+  		{ name: "Fruit",
+  			children: [
+  				{name: "Apple", quantity: 300},
+  				{name: "Banana", quantity: 200},
+  				{ name: "Berries",
+  					children: [
+  						{name: "Raspberries", quantity: 100},
+  						{name: "Strawberries", quantity: 200},
+  						{name: "Blueberries", quantity: 80}
+  					] }
+  			] },
+  		{ name: "Veggies",
+  			children:  [
+  				{name: "Zucchini", quantity: 52},
+  				{name: "Peas", quantity: 30},
+  				{name: "Carrots", quantity: 60},
+          {name: "Onions", quantity: 70}
+  			] }
+  ] };
 
   // Create a packed layout function and use it to do the calculations to turn produce into a packed layout
   var packedLayout = d3.layout.pack()
       .size([Diameter, Diameter])
       .value(function(d) { return d.quantity; });
-  var packedNodes = packedLayout.nodes(circleItems);
+  var packedNodes = packedLayout.nodes(produce );
 
   // Create the SVG area
   var svg = d3.select("#" + toyID + " #svg_location").append("svg")
@@ -38,28 +61,25 @@ function makePackCircle(toyID, circleItems)  {
 
 
 
-function getCircleItems()  {
-// Create the data
-  return {
-    name: "produce",
-    children: [
-      { name: "Fruit",
-        children: [
-          {name: "Apple", quantity: 300},
-          {name: "Banana", quantity: 200},
-          { name: "Berries",
-            children: [
-              {name: "Raspberries", quantity: 100},
-              {name: "Strawberries", quantity: 200},
-              {name: "Blueberries", quantity: 80}
-            ] }
-        ] },
-      { name: "Veggies",
-        children:  [
-          {name: "Zucchini", quantity: 52},
-          {name: "Peas", quantity: 30},
-          {name: "Carrots", quantity: 60},
-          {name: "Onions", quantity: 70}
-        ] }
-  ] };
-};
+var CircleItems = {
+	name: "produce",
+	children: [
+		{ name: "Fruit",
+			children: [
+				{name: "Apple", quantity: 300},
+				{name: "Banana", quantity: 200},
+				{ name: "Berries",
+					children: [
+						{name: "Raspberries", quantity: 100},
+						{name: "Strawberries", quantity: 200},
+						{name: "Blueberries", quantity: 80}
+					] }
+			] },
+		{ name: "Veggies",
+			children:  [
+				{name: "Zucchini", quantity: 52},
+				{name: "Peas", quantity: 30},
+				{name: "Carrots", quantity: 60},
+        {name: "Onions", quantity: 70}
+			] }
+    ] };

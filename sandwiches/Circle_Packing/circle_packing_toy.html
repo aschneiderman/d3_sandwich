@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Circle Packing</title>
   <script src="http://d3js.org/d3.v3.min.js"></script>        <!-- d3 library -->
+  <script src="circle_packing.js"></script>
 	<style>
   body {
 	  font-family: sans-serif;
@@ -94,7 +95,6 @@ leaves.append("text")
     .text(function(d) { return d.name; })
 		.style("font-size", "12px");
 
-
 var  start = d3.select("#formInput");
 
 // <input type="text" class="state_input" value="0"  onChange="updateRow('ME', this)"></td>
@@ -108,11 +108,12 @@ setID = function (nodes)  {
   };
 };
 
-setID(produce);
+// setID(produce);
 
 
 createInputFields = function (nodes)  {
   quantity = nodes.quantity ? nodes.quantity : 0;
+  // console.log(nodes, nodes.depth);
   var div = start.append("div")
       .style("margin-left", nodes.depth * 20);
   div.append("input")
@@ -127,6 +128,11 @@ createInputFields = function (nodes)  {
     nodes.children.forEach(createInputFields)
   };
 };
+
+
+console.log("produce:", produce.depth);
+console.log(CircleItems);
+console.log('items in depth', CircleItems.depth);
 
 createInputFields(produce);
 
