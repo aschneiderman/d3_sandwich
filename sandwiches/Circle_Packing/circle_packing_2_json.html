@@ -54,7 +54,7 @@ var produce = {
   </div>  <!-- end recipe_row -->
   <div class="recipe_row">
     <div class="recipe_text">
-      <svg width="520" height="400"></svg>        <!-- SVG graphics will go here  -->
+        <div id="svg_location"> </div>        <!-- SVG graphics will be inserted here  -->
     </div>
       <div class="recipe_code">
         <form>
@@ -66,29 +66,27 @@ var produce = {
 <script type="text/javascript">
 var ToyID = 'create_JSON';
 
-createInputFields = function (nodes)  {
-  quantity = nodes.quantity ? nodes.quantity : 0;
-  console.log(nodes, nodes.depth);
-  var div = getForm(ToyID).append("div")
-      .style("margin-left", nodes.depth * 20);
-  div.append("input")
-      .attr("value", nodes.name)
-      .attr("name", nodes.name);
-  if (quantity) {
-    div.append("input")
-      .attr("value", quantity)
-      .attr("name", nodes.name + "-quantity");
-  };
-  if (nodes.children)  {
-    nodes.children.forEach(createInputFields)
-  };
+makePackCircle('create_JSON', getCircleItems());
+
+createJSONInputFields(ToyID, getCircleItems(), 'updateCirclePacking');
+
+function createJSONFromInputFields(toyID)  {
+  getForm(toyID).selectAll("input[type=text]")[0].forEach( function (d) {
+    console.log(d, d.name, ':', d.value, ':', d['class']);})
+
+    // maybe switch to trying to use the div's?
+
+    
 };
 
-// CAPTAINS log:
-// - Can't figure out why depth is coming back as undefined.
-//  Need to look at the toy example to see why it works and what the difference is
-createInputFields(CircleItems);
+updateCirclePacking = function(toyID)  {
+  getSVG(toyID).selectAll('*').remove();
+  createJSONFromInputFields(toyID);
 
+  // Now all we need to do is:
+  // - turn the JSON input fields back into JSON
+  // - call makePackCirclewith that JSON
+};
 
 
 

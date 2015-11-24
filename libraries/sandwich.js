@@ -54,3 +54,38 @@ function updateValues(toyID)  {
       });
     UpdateFunction[toyID](values);
 };
+
+
+
+var makeJSONInputFields = function (toyID, nodes, depth)  {
+  // console.log(nodes.name, depth * 30);
+  quantity = nodes.quantity ? nodes.quantity : 0;
+  var div = getForm(toyID).append("div")
+      .style("margin-left", depth * 25);
+  div.append("input")
+      .attr("value", nodes.name)
+      .attr("type", "text")
+      .attr("name", nodes.name)
+      .attr("class", depth);        // Use class to store the node depth, so we can rebuild the hierarchy when we do the update
+  if (quantity) {
+    div.append("input")
+      .attr("value", quantity)
+      .attr("type", "text")
+      .attr("name", nodes.name + "-quantity");
+  };
+  if (nodes.children)  {
+    nodes.children.forEach( function(child) {
+      makeJSONInputFields(toyID, child, depth + 1)
+    } );
+  };
+};
+
+function createJSONInputFields(toyID, nodes, updateFunctionName)  {
+  // createJSONInputFields: uses makeJSONInputFields to create input fields
+  //  for modifying JSON, then adds an update button
+  makeJSONInputFields(toyID, nodes, 1);
+  getForm(toyID).append("input")
+    .attr("type", "button")
+    .attr("value", "Update It")
+    .attr("onClick", updateFunctionName + "('" + toyID + "')"  );
+};
