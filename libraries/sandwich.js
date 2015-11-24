@@ -61,12 +61,13 @@ var makeJSONInputFields = function (toyID, nodes, depth)  {
   // console.log(nodes.name, depth * 30);
   quantity = nodes.quantity ? nodes.quantity : 0;
   var div = getForm(toyID).append("div")
-      .style("margin-left", depth * 25);
+    .attr("class", depth)        // Use class to store the node depth, so we can rebuild the hierarchy when we do the update
+    .style("margin-left", depth * 25);
   div.append("input")
-      .attr("value", nodes.name)
-      .attr("type", "text")
-      .attr("name", nodes.name)
-      .attr("class", depth);        // Use class to store the node depth, so we can rebuild the hierarchy when we do the update
+    .attr("class", depth)        // Use class to store the node depth, so we can rebuild the hierarchy when we do the update
+    .attr("value", nodes.name)
+    .attr("type", "text")
+    .attr("name", nodes.name);
   if (quantity) {
     div.append("input")
       .attr("value", quantity)

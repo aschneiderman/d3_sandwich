@@ -71,12 +71,24 @@ makePackCircle('create_JSON', getCircleItems());
 createJSONInputFields(ToyID, getCircleItems(), 'updateCirclePacking');
 
 function createJSONFromInputFields(toyID)  {
-  getForm(toyID).selectAll("input[type=text]")[0].forEach( function (d) {
-    console.log(d, d.name, ':', d.value, ':', d['class']);})
+  getForm(toyID).selectAll("input").each( function(d) {
+    console.log(this.name);
+    console.log(d3.select(this).attr("class")  );
 
-    // maybe switch to trying to use the div's?
+// NOTE: do I want to try to solve this problem by storing the variable name in the div
+// and then use a select by name or class of each of the input fields?
+// That certainly would make more sense than operating at the level of the input fields and
+//     creating a name for one of the fields that is combining the name and "quantity"
 
-    
+    // http://stackoverflow.com/questions/20569670/d3-selector-for-immediate-children
+
+//   NOTE:  d3.select(this) creates a 1-element selection containing the current
+// node. This allows you to use D3's operators to modify the element, or
+// do whatever else, rather than using the raw W3C DOM API.  -- Mike B
+
+
+    }
+  );
 };
 
 updateCirclePacking = function(toyID)  {
