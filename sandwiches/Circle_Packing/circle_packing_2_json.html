@@ -64,36 +64,93 @@ var produce = {
 </div>  <!-- end toy -->
 
 <script type="text/javascript">
+
+// var makeJSONInputFields = function (toyID, nodes, depth)  {
+//   // console.log(nodes.name, depth * 30);
+//   var div = getForm(toyID).append("div")
+//     .style("margin-left", depth * 25)
+//     .attr("class", nodes.children ? "parent" : "child");
+//   div.append("input").attr("type", "text")
+//     .attr("name", nodes.name)
+//     .attr("value", nodes.name)
+//     .attr("class", "input_name");
+//   if (nodes.children) {
+//     nodes.children.forEach( function(child) {
+//       makeJSONInputFields(toyID, child, depth + 1)
+//     } );
+//   } else {
+//     div.append("input").attr("type", "text")
+//       .attr("name", nodes.name + "-quantity")
+//       .attr("value", nodes.quantity)
+//       .attr("class", "input_value");
+//   };
+// };
+//
+// function createJSONInputFields(toyID, nodes, updateFunctionName)  {
+//   // createJSONInputFields: uses makeJSONInputFields to create input fields
+//   //  for modifying JSON, then adds an update button
+//   makeJSONInputFields(toyID, nodes, 1);
+//   getForm(toyID).append("input")
+//     .attr("type", "button")
+//     .attr("value", "Update It")
+//     .attr("onClick", updateFunctionName + "('" + toyID + "')"  );
+// };
+
+
+
+
+
+
+
+
+
+
 var ToyID = 'create_JSON';
 
-makePackCircle('create_JSON', getCircleItems());
+oldJSON =  getCircleItems()
+
+makePackCircle('create_JSON', oldJSON);
 
 createJSONInputFields(ToyID, getCircleItems(), 'updateCirclePacking');
 
-function createJSONFromInputFields(toyID)  {
-  getForm(toyID).selectAll("input").each( function(d) {
-    console.log(this.name);
-    console.log(d3.select(this).attr("class")  );
 
-// NOTE: do I want to try to solve this problem by storing the variable name in the div
-// and then use a select by name or class of each of the input fields?
-// That certainly would make more sense than operating at the level of the input fields and
-//     creating a name for one of the fields that is combining the name and "quantity"
 
-    // http://stackoverflow.com/questions/20569670/d3-selector-for-immediate-children
+
+
+//   toyForm = .selectAll("input").each( function(d) {
+//     // console.log(this.name);
+//     // console.log(d3.select(this).attr("class")  );
+
+function getDataFromInputFields(myForm)  {
+  console.log(myForm, myForm.selectAll("form > div")[0]);
+  myForm.selectAll("form > div")[0]
+  .forEach(function(d, i) {
+    console.log(d, d.id);
+  });
+};
+
+
+
+
+function createJSONFromInputFields(toyID, oldJSON)  {
+  var toyForm = getForm(toyID);
+  var NewJSON = oldJSON;
+  return getDataFromInputFields(toyForm);  //, oldJSON, NewJSON)
+};
+
+
+
+
 
 //   NOTE:  d3.select(this) creates a 1-element selection containing the current
 // node. This allows you to use D3's operators to modify the element, or
 // do whatever else, rather than using the raw W3C DOM API.  -- Mike B
 
 
-    }
-  );
-};
 
 updateCirclePacking = function(toyID)  {
-  getSVG(toyID).selectAll('*').remove();
-  createJSONFromInputFields(toyID);
+  getSVG(toyID).selectAll('*').remove();      // Delete the old data viz
+  updatedJSON = createJSONFromInputFields(toyID, oldJSON);
 
   // Now all we need to do is:
   // - turn the JSON input fields back into JSON

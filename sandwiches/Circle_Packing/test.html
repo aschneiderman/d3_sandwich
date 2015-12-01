@@ -1,0 +1,68 @@
+<DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="http://d3js.org/d3.v3.min.js"></script>        <!-- d3 library -->
+</head>
+<body>
+<h2>Fiddle with the JSON!</h2>
+<form>
+</form>
+<script type="text/javascript">
+var produce = {
+	name: "produce",
+	children: [
+		{ name: "Fruit",
+			children: [
+				{name: "Apple", quantity: 300},
+				{name: "Banana", quantity: 200},
+				{ name: "Berries",
+					children: [
+						{name: "Raspberries", quantity: 100},
+						{name: "Strawberries", quantity: 200},
+						{name: "Blueberries", quantity: 80}
+					] }
+			] },
+		{ name: "Veggies",
+			children:  [
+				{name: "Zucchini", quantity: 52},
+				{name: "Peas", quantity: 30},
+				{name: "Carrots", quantity: 60},
+        {name: "Onions", quantity: 70}
+			] }
+] };
+
+
+var makeJSONInputFields = function (myDiv, nodes)  {
+  newDiv = myDiv.append("div");
+  newDiv
+    .style("margin-left", 25)
+    .attr("id", nodes.name);
+  newDiv.append("input").attr("type", "text")
+    .attr("name", nodes.name)
+    .attr("value", nodes.name)
+    .attr("class", "input_name");
+  if (nodes.children) {
+    nodes.children.forEach( function(child) {
+      makeJSONInputFields(newDiv, child)
+    } );
+  } else {
+    newDiv.append("input").attr("type", "text")
+      .attr("name", nodes.name + "-quantity")
+      .attr("value", nodes.quantity)
+      .attr("class", "input_value");
+  };
+};
+
+function createJSONInputFields(nodes)  {
+  var myForm = d3.select("form");
+  makeJSONInputFields(myForm, nodes);
+  myForm.append("input").attr("type", "button")
+    .attr("value", "Update It");
+};
+
+createJSONInputFields(produce);
+
+
+</script>
+</body></html>

@@ -55,38 +55,67 @@ function updateValues(toyID)  {
     UpdateFunction[toyID](values);
 };
 
+// var makeJSONInputFields = function (toyID, nodes, depth)  {
+//   // console.log(nodes.name, depth * 30);
+//   quantity = nodes.quantity ? nodes.quantity : 0;
+//   var div = getForm(toyID).append("div")
+//     .attr("class", depth)        // Use class to store the node depth, so we can rebuild the hierarchy when we do the update
+//     .style("margin-left", depth * 25);
+//   div.append("input")
+//     .attr("class", depth)        // Use class to store the node depth, so we can rebuild the hierarchy when we do the update
+//     .attr("value", nodes.name)
+//     .attr("type", "text")
+//     .attr("name", nodes.name);
+//   if (quantity) {
+//     div.append("input")
+//       .attr("value", quantity)
+//       .attr("type", "text")
+//       .attr("name", nodes.name + "-quantity");
+//   };
+//   if (nodes.children)  {
+//     nodes.children.forEach( function(child) {
+//       makeJSONInputFields(toyID, child, depth + 1)
+//     } );
+//   };
+// };
 
 
-var makeJSONInputFields = function (toyID, nodes, depth)  {
+
+var makeJSONInputFields = function (myDiv, nodes, depth)  {
   // console.log(nodes.name, depth * 30);
-  quantity = nodes.quantity ? nodes.quantity : 0;
-  var div = getForm(toyID).append("div")
-    .attr("class", depth)        // Use class to store the node depth, so we can rebuild the hierarchy when we do the update
-    .style("margin-left", depth * 25);
-  div.append("input")
-    .attr("class", depth)        // Use class to store the node depth, so we can rebuild the hierarchy when we do the update
-    .attr("value", nodes.name)
-    .attr("type", "text")
-    .attr("name", nodes.name);
-  if (quantity) {
-    div.append("input")
-      .attr("value", quantity)
-      .attr("type", "text")
-      .attr("name", nodes.name + "-quantity");
+  id = depth;
+
+  if (depth>2) {
+    return 1;
   };
-  if (nodes.children)  {
+  newDiv = myDiv.append("div");
+  newDiv
+    .style("margin-left", 25)
+    .attr("id", nodes.name);
+  newDiv.append("input").attr("type", "text")
+    .attr("name", nodes.name)
+    .attr("value", nodes.name)
+    .attr("class", "input_name");
+  if (nodes.children) {
     nodes.children.forEach( function(child) {
-      makeJSONInputFields(toyID, child, depth + 1)
+      newDiv.append("b")
+        .attr("id", child.name);
+      makeJSONInputFields(newDiv, child, depth + 1)
     } );
+  } else {
+    newDiv.append("input").attr("type", "text")
+      .attr("name", nodes.name + "-quantity")
+      .attr("value", nodes.quantity)
+      .attr("class", "input_value");
   };
 };
 
 function createJSONInputFields(toyID, nodes, updateFunctionName)  {
   // createJSONInputFields: uses makeJSONInputFields to create input fields
   //  for modifying JSON, then adds an update button
-  makeJSONInputFields(toyID, nodes, 1);
-  getForm(toyID).append("input")
-    .attr("type", "button")
+  var myForm = getForm(toyID);
+  makeJSONInputFields(myForm, nodes, 1);
+  myForm.append("input").attr("type", "button")
     .attr("value", "Update It")
     .attr("onClick", updateFunctionName + "('" + toyID + "')"  );
 };
