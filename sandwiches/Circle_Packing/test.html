@@ -8,6 +8,7 @@
 <h2>Fiddle with the JSON!</h2>
 <form>
 </form>
+<hr id='test'>
 <script type="text/javascript">
 var produce = {
 	name: "produce",
@@ -54,15 +55,96 @@ var makeJSONInputFields = function (myDiv, nodes)  {
   };
 };
 
+// function createJSONInputFields(nodes)  {
+//   var myForm = d3.select("form");
+//   makeJSONInputFields(myForm, nodes);
+//   myForm.append("input").attr("type", "button")
+//     .attr("value", "Update It");
+// };
+
+
 function createJSONInputFields(nodes)  {
-  var myForm = d3.select("form");
-  makeJSONInputFields(myForm, nodes);
-  myForm.append("input").attr("type", "button")
-    .attr("value", "Update It");
+
+  // Flatten the data into an array, so I know each node's parent, child, etc.
+  var tree = d3.layout.tree().size([960, 2000]);    // NOTE: height and width here is arbitrary since I am not creating an SVG graphic
+  var nodes = tree.nodes(nodes);
+
+  // Now create the div's for each node
+  var myForm = d3.select("form"); // NOTE: need to fix this to use the toy get form function
+  var inputs = myForm.selectAll("div")
+        .data(nodes)
+        .enter().append("div")
+          .style("margin-left", function(d,i) { return d.depth * 25})
+          .attr("id", function(d,i) { return d.name})
+          .append("input").attr("type", "text")
+            .attr("name", function(d,i) { return d.name})
+            .attr("value", function(d,i) { return d.name})
+            .attr("node_parent", function(d,i) { return d.parent ? d.parent.name : "" ; })
+            // .attr("value", function(d,i) { return d.name + ": " + d.children;})
+            .attr("class", "input_name");
 };
 
-createJSONInputFields(produce);
 
+function createJSONFromInputFields()  {
+  var nodeById = {};
+  var puppies = [];
+  // d3.select("form").selectAll("div").select("input")
+  d3.select("form").selectAll("input")
+    .each( function(d,i)  {
+      // console.log(d, "-->",d.name, d.value, ">>", this);
+      console.log(this, this.name, this.getAttribute("node_parent"));
+
+// console.log(this) from inside function(d,i) {} will log something like <div class="foo"></div> or whatever html element it is. And thats useful, because then you can call function on this this object in order change its CSS properties, contents or whatever. Usually, you use d3 to set these properties, as in
+// d3.select(this).style('color', '#c33');.
+
+
+//   //     name = d.name;
+//     // puppies.push(name);
+    }
+  );
+  return puppies;
+};
+
+
+// function tree(nodes) {
+//   var nodeById = {};
+//
+//   // Index the nodes by id, in case they come out of order.
+//   nodes.forEach(function(d) {
+//     nodeById[d.id] = d;
+//   });
+//
+//   // Lazily compute children.
+//   nodes.forEach(function(d) {
+  //   if ("node_parent" in d) {
+  //     var node_parent = nodeById[d.node_parent];
+  //     if (node_parent.children) node_parent.children.push(d);
+  //     else node_parent.children = [d];
+  //   }
+//   // });
+//
+//   return nodes[0];
+// }
+
+
+function showJSON(nodes, idToPutAfter)  {
+  // showJSON: Dump the JSON out in a nested format, so I can easily read it
+  var tree = d3.layout.tree().size([960, 2000]);    // NOTE: height and width here is arbitrary since I am not creating an SVG graphic
+  var nodes = tree.nodes(nodes);
+  d3.select('#' + idToPutAfter).selectAll("div")
+        .data(nodes)
+        .enter().append("div")
+          .style("margin-left", function(d,i) { return d.depth * 25})
+          .text( function(d,i) { return d.name})
+};
+
+
+createJSONInputFields(produce);
+console.log(createJSONFromInputFields());
+// showJSON(produce, 'test');
 
 </script>
+<br/><hr/>
+file:///C:/GitHub/d3_sandwich/sandwiches/Circle_Packing/test.html
+
 </body></html>
