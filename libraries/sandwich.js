@@ -119,3 +119,73 @@ function createJSONInputFields(toyID, nodes, updateFunctionName)  {
     .attr("value", "Update It")
     .attr("onClick", updateFunctionName + "('" + toyID + "')"  );
 };
+
+
+function createInputFieldsfromJSON(toyID, nodes, updateFunctionName)  {
+  // createInputFieldsfromJSON:
+  var myForm = getForm(toyID);
+
+  // Flatten the data into an array, so I know each node's parent, child, etc.
+  var tree = d3.layout.tree().size([960, 2000]);    // NOTE: height and width here is arbitrary since I am not creating an SVG graphic
+  var nodes = tree.nodes(nodes);
+
+  // Now create the div's for each node
+  var inputFields = myForm.selectAll("div")
+        .data(nodes)
+        .enter().append("div")
+          .style("margin-left", function(d,i) { return d.depth * 25})
+          .style("margin-top", function(d,i) { return d.children ? 10 : 2})
+          .attr("id", function(d,i) { return d.name})
+          .append("input").attr("type", "text")
+            .attr("name", function(d,i) { return d.name})
+            .attr("value", function(d,i) { return d.name})
+            .attr("node_parent", function(d,i) { return d.parent ? d.parent.name : "" ; })
+            .style("margin-right", 5)
+            .attr("class", "input_name");
+
+  myForm.selectAll("div").filter( function(d) {return d.quantity})
+    .append("input").attr("type", "text")
+      .attr("name", function(d,i) { return d.name + '-quantity'})
+      .attr("value", function(d,i) { return d.quantity;})
+      .attr("class", "input_quantity");
+
+  myForm.append("input").attr("type", "button")
+    .attr("value", "Update It")
+    .attr("onClick", updateFunctionName + "('" + toyID + "')"  );
+};
+
+
+function createJSONFromInputFields(toyID, oldJSON)  {
+  var toyForm = getForm(toyID);
+
+  var nodeById = {};
+  toyForm.selectAll("div")
+    .each( function(d,i)  {
+      nameField = d3.select(this).select(".input_name")[0][0];
+      inputName = nameField.value;
+      parentID = nameField.getAttribute("node_parent");
+      quantityField = d3.select(this).select(".input_quantity")[0][0];
+      if (quantityField)  nodeById[inputName] = {name: inputName, quantity: quantityField.value}
+      else                nodeById[inputName] = {name: inputName};
+      if (parentID) {
+        nodeParent = nodeById[parentID];
+        if (nodeParent.children) nodeParent.children.push(nodeById[inputName])
+        else nodeParent.children = [nodeById[inputName]];
+      };
+    });
+  return nodeById['produce'];
+};
+
+function showJSON(nodes, idToPutAfter)  {
+  // showJSON: Dump the JSON out in a nested format, so I can easily read it
+  var tree = d3.layout.tree().size([960, 2000]);    // NOTE: height and width here is arbitrary since I am not creating an SVG graphic
+  var nodes = tree.nodes(nodes);
+  d3.select('#' + idToPutAfter).selectAll("div")
+        .data(nodes)
+        .enter().append("div")
+          .style("margin-left", function(d,i) { return d.depth * 25})
+          .text( function(d,i) {
+            quantity = d.quantity ? ": " + d.quantity : "";
+            return d.name + quantity;
+          })
+};

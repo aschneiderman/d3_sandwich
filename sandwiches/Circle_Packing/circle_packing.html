@@ -56,16 +56,16 @@ var produce = {
 
 var diameter = 860;
 
+// Create the SVG area
+var svg = d3.select("body").append("svg")
+    .attr("width", diameter)
+    .attr("height", diameter);
+
 // Create a packed layout function and use it to do the calculations to turn produce into a packed layout
 var packedLayout = d3.layout.pack()
     .size([diameter, diameter])
     .value(function(d) { return d.quantity; });
 var packedNodes = packedLayout.nodes(produce);
-
-// Create the SVG area
-var svg = d3.select("body").append("svg")
-    .attr("width", diameter)
-    .attr("height", diameter);
 
 // For each item, add a group to hold the circle and the text
 var nodes = svg.selectAll("g")

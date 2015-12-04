@@ -34,36 +34,8 @@ var produce = {
 ] };
 
 
-var makeJSONInputFields = function (myDiv, nodes)  {
-  newDiv = myDiv.append("div");
-  newDiv
-    .style("margin-left", 25)
-    .attr("id", nodes.name);
-  newDiv.append("input").attr("type", "text")
-    .attr("name", nodes.name)
-    .attr("value", nodes.name)
-    .attr("class", "input_name");
-  if (nodes.children) {
-    nodes.children.forEach( function(child) {
-      makeJSONInputFields(newDiv, child)
-    } );
-  } else {
-    newDiv.append("input").attr("type", "text")
-      .attr("name", nodes.name + "-quantity")
-      .attr("value", nodes.quantity)
-      .attr("class", "input_value");
-  };
-};
 
-// function createJSONInputFields(nodes)  {
-//   var myForm = d3.select("form");
-//   makeJSONInputFields(myForm, nodes);
-//   myForm.append("input").attr("type", "button")
-//     .attr("value", "Update It");
-// };
-
-
-function createJSONInputFields(nodes)  {
+function createInputFieldsfromJSON(nodes)  {
 
   // Flatten the data into an array, so I know each node's parent, child, etc.
   var tree = d3.layout.tree().size([960, 2000]);    // NOTE: height and width here is arbitrary since I am not creating an SVG graphic
@@ -71,61 +43,45 @@ function createJSONInputFields(nodes)  {
 
   // Now create the div's for each node
   var myForm = d3.select("form"); // NOTE: need to fix this to use the toy get form function
-  var inputs = myForm.selectAll("div")
+  var inputFields = myForm.selectAll("div")
         .data(nodes)
         .enter().append("div")
           .style("margin-left", function(d,i) { return d.depth * 25})
+          .style("margin-top", function(d,i) { return d.children ? 10 : 2})
           .attr("id", function(d,i) { return d.name})
           .append("input").attr("type", "text")
             .attr("name", function(d,i) { return d.name})
             .attr("value", function(d,i) { return d.name})
             .attr("node_parent", function(d,i) { return d.parent ? d.parent.name : "" ; })
-            // .attr("value", function(d,i) { return d.name + ": " + d.children;})
+            .style("margin-right", 5)
             .attr("class", "input_name");
+
+  myForm.selectAll("div").filter( function(d) {return d.quantity})
+    .append("input").attr("type", "text")
+      .attr("name", function(d,i) { return d.name + '-quantity'})
+      .attr("value", function(d,i) { return d.quantity;})
+      .attr("class", "input_quantity");
 };
 
 
 function createJSONFromInputFields()  {
   var nodeById = {};
-  var puppies = [];
-  // d3.select("form").selectAll("div").select("input")
-  d3.select("form").selectAll("input")
+  d3.select("form").selectAll("div")
     .each( function(d,i)  {
-      // console.log(d, "-->",d.name, d.value, ">>", this);
-      console.log(this, this.name, this.getAttribute("node_parent"));
-
-// console.log(this) from inside function(d,i) {} will log something like <div class="foo"></div> or whatever html element it is. And thats useful, because then you can call function on this this object in order change its CSS properties, contents or whatever. Usually, you use d3 to set these properties, as in
-// d3.select(this).style('color', '#c33');.
-
-
-//   //     name = d.name;
-//     // puppies.push(name);
-    }
-  );
-  return puppies;
+      nameField = d3.select(this).select(".input_name")[0][0];
+      inputName = nameField.value;
+      parentID = nameField.getAttribute("node_parent");
+      quantityField = d3.select(this).select(".input_quantity")[0][0];
+      if (quantityField)  nodeById[inputName] = {name: inputName, quantity: quantityField.value}
+      else                nodeById[inputName] = {name: inputName};
+      if (parentID) {
+        nodeParent = nodeById[parentID];
+        if (nodeParent.children) nodeParent.children.push(nodeById[inputName])
+        else nodeParent.children = [nodeById[inputName]];
+      };
+    });
+  return nodeById['produce'];
 };
-
-
-// function tree(nodes) {
-//   var nodeById = {};
-//
-//   // Index the nodes by id, in case they come out of order.
-//   nodes.forEach(function(d) {
-//     nodeById[d.id] = d;
-//   });
-//
-//   // Lazily compute children.
-//   nodes.forEach(function(d) {
-  //   if ("node_parent" in d) {
-  //     var node_parent = nodeById[d.node_parent];
-  //     if (node_parent.children) node_parent.children.push(d);
-  //     else node_parent.children = [d];
-  //   }
-//   // });
-//
-//   return nodes[0];
-// }
-
 
 function showJSON(nodes, idToPutAfter)  {
   // showJSON: Dump the JSON out in a nested format, so I can easily read it
@@ -135,13 +91,16 @@ function showJSON(nodes, idToPutAfter)  {
         .data(nodes)
         .enter().append("div")
           .style("margin-left", function(d,i) { return d.depth * 25})
-          .text( function(d,i) { return d.name})
+          .text( function(d,i) {
+            quantity = d.quantity ? ": " + d.quantity : "";
+            return d.name + quantity;
+          })
 };
 
 
-createJSONInputFields(produce);
-console.log(createJSONFromInputFields());
-// showJSON(produce, 'test');
+createInputFieldsfromJSON(produce);
+updatedJSON = createJSONFromInputFields();
+showJSON(updatedJSON, 'test');
 
 </script>
 <br/><hr/>

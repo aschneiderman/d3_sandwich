@@ -64,54 +64,11 @@ var produce = {
 </div>  <!-- end toy -->
 
 <script type="text/javascript">
-
-// var makeJSONInputFields = function (toyID, nodes, depth)  {
-//   // console.log(nodes.name, depth * 30);
-//   var div = getForm(toyID).append("div")
-//     .style("margin-left", depth * 25)
-//     .attr("class", nodes.children ? "parent" : "child");
-//   div.append("input").attr("type", "text")
-//     .attr("name", nodes.name)
-//     .attr("value", nodes.name)
-//     .attr("class", "input_name");
-//   if (nodes.children) {
-//     nodes.children.forEach( function(child) {
-//       makeJSONInputFields(toyID, child, depth + 1)
-//     } );
-//   } else {
-//     div.append("input").attr("type", "text")
-//       .attr("name", nodes.name + "-quantity")
-//       .attr("value", nodes.quantity)
-//       .attr("class", "input_value");
-//   };
-// };
-//
-// function createJSONInputFields(toyID, nodes, updateFunctionName)  {
-//   // createJSONInputFields: uses makeJSONInputFields to create input fields
-//   //  for modifying JSON, then adds an update button
-//   makeJSONInputFields(toyID, nodes, 1);
-//   getForm(toyID).append("input")
-//     .attr("type", "button")
-//     .attr("value", "Update It")
-//     .attr("onClick", updateFunctionName + "('" + toyID + "')"  );
-// };
-
-
-
-
-
-
-
-
-
-
 var ToyID = 'create_JSON';
 
-oldJSON =  getCircleItems()
-
-makePackCircle('create_JSON', oldJSON);
-
-createJSONInputFields(ToyID, getCircleItems(), 'updateCirclePacking');
+currentJSON =  getCircleItems()
+makePackCircle('create_JSON', currentJSON, 0);
+createInputFieldsfromJSON(ToyID, currentJSON, 'updateCirclePacking');
 
 
 
@@ -130,31 +87,15 @@ function getDataFromInputFields(myForm)  {
 };
 
 
-
-
-function createJSONFromInputFields(toyID, oldJSON)  {
-  var toyForm = getForm(toyID);
-  var NewJSON = oldJSON;
-  return getDataFromInputFields(toyForm);  //, oldJSON, NewJSON)
-};
-
-
-
-
-
-//   NOTE:  d3.select(this) creates a 1-element selection containing the current
-// node. This allows you to use D3's operators to modify the element, or
-// do whatever else, rather than using the raw W3C DOM API.  -- Mike B
-
-
-
 updateCirclePacking = function(toyID)  {
   getSVG(toyID).selectAll('*').remove();      // Delete the old data viz
-  updatedJSON = createJSONFromInputFields(toyID, oldJSON);
+  updatedJSON = createJSONFromInputFields(toyID, currentJSON);
+  makePackCircle('create_JSON', updatedJSON, 1);
 
-  // Now all we need to do is:
-  // - turn the JSON input fields back into JSON
-  // - call makePackCirclewith that JSON
+  // Now all we need to do is
+  // - Clean it up so I am calling make and update pack circle
+  // - properly tagged the code in the pre-section
+  // - write the code to update it (unless I have it already :-)
 };
 
 
