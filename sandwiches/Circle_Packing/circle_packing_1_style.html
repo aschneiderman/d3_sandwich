@@ -21,16 +21,6 @@
             <p> In the <a href="../Abstract_Map_1/abstract_state_0_recipe.html">Abstract State Map</a>, all of the styling of the information on the screen was done through D3. In this step, we will learn another way to do it: using Cascading Style Sheets (CSS).</p>
 
 
-<!--
-CAPTAINS log:
-
-- Start building the functions I need in circle_packing.JS
-
-- learn how to do searching in coffeescript, so I can get the cursor to exactly where I want
-in this case, where we are going to put the ID
-(although in theory I could go look for it above and then deposited below)
- -->
-
 <div class="toy" id="pack-circle-style">
   <div class="recipe_row">
     <div class="recipe_text">
@@ -91,7 +81,8 @@ var StyleInfo = {'circle-fill': ['circle', 'fill'] ,  'circle-fill-opacity': ['c
                 'leaf-circle-fill': ['.leaf circle', 'fill'],  'leaf-circle-fill-opacity': ['.leaf circle', 'fill-opacity'],
                 'leaf-text-font-size': ['.leaf text', 'font-size']};    // The selector for each input field class, so it knows which style to modify
 
-makePackCircle('pack-circle-style', getCircleItems());
+DoCirclePacking('create', 'pack-circle-style', getCircleItems(), 'svg_location');
+
 </script>
 
 

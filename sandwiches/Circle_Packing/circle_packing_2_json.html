@@ -66,21 +66,9 @@ var produce = {
 <script type="text/javascript">
 var ToyID = 'create_JSON';
 currentJSON =  getCircleItems();
-doCirclePacking('create', 'create_JSON', currentJSON, 'svg_location');
-createInputFieldsfromJSON(ToyID, currentJSON, 'updateCirclePacking');
-
-updateCirclePacking = function(toyID)  {
-  getSVG(toyID).selectAll('*').remove();      // Delete the old data viz
-  updatedJSON = createJSONFromInputFields(toyID, currentJSON);
-  doCirclePacking('update', 'create_JSON', updatedJSON, 'svg_location');
-  updatePreCodes(toyID);
-};
-
-// CAPTAINS LOG:
-// - generalize updateCirclePacking so it will work for any JSON-driven data visualization
-// - as part of doing that, get rid of using 0 and 1 as flags
-
-
+DoCirclePacking('create', 'create_JSON', currentJSON, 'svg_location');
+UpdateFunction[ToyID] = DoCirclePacking;
+createInputFieldsfromJSON(ToyID, currentJSON);
 </script>
 
 

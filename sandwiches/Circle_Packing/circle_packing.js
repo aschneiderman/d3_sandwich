@@ -5,7 +5,7 @@
 var Diameter = 500, TextSize = "12";
 
 
-function doCirclePacking(createOrUpdate, toyID, items, svgLocation	)  {
+DoCirclePacking = function(createOrUpdate, toyID, items, svgLocation	)  {
 // makePackCircle: create a packed circle
 
   	if (createOrUpdate == 'update') {

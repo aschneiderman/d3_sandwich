@@ -5,69 +5,14 @@ do a video I break a couple of things and show the errors
 example: if a value is undefined
 if the value doesn't exist (e.g., Height instead of height)
 
-Recipes:
-- Radial Dendrogram: add comments
-
-- Zoomable Circle Packing: figure out, add comments
-
-Abstract Map 2:
-- Reading CSV file
-- Adding a Legend
+Error messages are like crying infant babies with a new parent.
+At the beginning, you know it's really upset, you just don't have any idea why.
+Over time, as you get to know the baby better you figure out what its particular sounds mean.
+The same is true for deciphering error messages.
 
 
-
-Harder:
-July:
-- kept turning a tab delimited text file into JSON
 
 
 
 ---------------------------------------------------------------------------------------
-
-
 <p> (NOTE: need to figure out where in Step 2 I explain what method chaining is and why you use it)
-
-
-On the bootstrap CSS list, Ask about how to deal with using paragraph tags inside the code text area
-so the explanation of the code doesn't get bumped down a line. Or ask Tom's folks
-
-assess where I am with Recipe Step #2's first interactive toy:
-Marking the pre-code:
-- switch to using italics marker
-- Create command: easier to put in the ID tags around italics
-
-Adding the code for updating the color
-
-Use that code as a template to create the form maker for individual values
-- Create the textarea and the code to take an array and create the form & input fields
-- Create the code to take an array and create a shell for each corresponding function
-
-
-
-- File navigation by voice, using keyboard shortcuts:
-http://www.shortcutworld.com//en/linux/Atom-%28text-editor%29_1.0.html
-
-
-- Remove Tags (from the front and back of the line): Using Atom, do a replace catching the first and last tag and replacing with the text between
-
-- Given an array of objects, create the pre stuff on the side, the input form, etc
-
-Cleanup Recipe Step #1:
-<td ><input type="text" class="state_input" value="0"  onChange="updateRow('ME', this)"></td>
-And while I am doing that, fix the Form so I can have multiple forms and associated svg areas:
-Parent element, attar from it, to get svg for a form
-How to get this's parent, to get the id of it
-http://stackoverflow.com/questions/20641953/how-to-select-parent-element-of-current-element-in-d3-js
-http://stackoverflow.com/questions/992115/custom-attributes-yea-or-nay
-http://idratherbewriting.com/events-and-listeners-javascript/
-- create functions to encapsulate the work I'll do frequently, such as highlighting sample code
-Rectangles: (I think)
-D3.select("div").style…  .Background color…    .on("click", function());
-e.g.: function () {console.log("you clicked a div")});
-- For each major semantic div, put a closing comment on the closing div
-
-
-- Error messages are like crying infant babies with a new parent.
-At the beginning, you know it's really upset, you just don't have any idea why.
-Over time, as you get to know the baby better you figure out what its particular sounds mean.
-The same is true for deciphering error messages.

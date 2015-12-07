@@ -103,7 +103,7 @@ function createJSONInputFields(toyID, nodes, updateFunctionName)  {
 };
 
 
-function createInputFieldsfromJSON(toyID, nodes, updateFunctionName)  {
+function createInputFieldsfromJSON(toyID, nodes)  {
   // createInputFieldsfromJSON:
   var myForm = getForm(toyID);
 
@@ -133,7 +133,7 @@ function createInputFieldsfromJSON(toyID, nodes, updateFunctionName)  {
 
   myForm.append("input").attr("type", "button")
     .attr("value", "Update It")
-    .attr("onClick", updateFunctionName + "('" + toyID + "')"  );
+    .attr("onClick", "updateJSONDataViz('" + toyID + "')"  );
 };
 
 
@@ -158,8 +158,18 @@ function createJSONFromInputFields(toyID, oldJSON)  {
   return nodeById['produce'];
 };
 
+
+function updateJSONDataViz(toyID, dataVizFunction)  {
+  // updateJSONDataViz: Read the JSON from the input formAnd use it to update the graph & preformatted code
+  getSVG(toyID).selectAll('*').remove();      // Delete the old data viz
+  updatedJSON = createJSONFromInputFields(toyID, currentJSON);
+  UpdateFunction[ToyID]('update', toyID, updatedJSON, 'svg_location');
+  updatePreCodes(toyID);
+};
+
+
 function showJSON(nodes, idToPutAfter)  {
-  // showJSON: Dump the JSON out in a nested format, so I can easily read it
+  // showJSON: helper function to dump JSON in a nested format on the screen, so I can easily read it
   var tree = d3.layout.tree().size([960, 2000]);    // NOTE: height and width here is arbitrary since I am not creating an SVG graphic
   var nodes = tree.nodes(nodes);
   d3.select('#' + idToPutAfter).selectAll("div")
