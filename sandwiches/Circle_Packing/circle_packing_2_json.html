@@ -72,10 +72,90 @@ UpdateFunction[ToyID] = DoCirclePacking;
 createInputFieldsfromJSON(ToyID, currentJSON);
 </script>
 
+<h3>How JSON is Structured</h3>
 
 
-<p> NOTE: the spacing and the code is just for you; JavaScript doesn't care. But if you don't indent things properly, it'll be a lot harder to see if you have a problem.
-<h4> Up Next: <a href="circle_packing_3_pack.html">Recipe Step #3: Generate the Data about Where to Put the Circles   </a></h4>
+<div class="recipe_row">
+  <div class="recipe_text">
+    <p>In the  <a href="../Abstract_Map_1/abstract_state_0_recipe.html">Abstract Map</a> recipe, we stored the info about the states in an <b>array</b> or list of <b>objects</b></p>
+    <ul><li> To tell the browser we wanted an array, we used brackets:  []</li>
+<li> To tell the browser we wanted an object, we used braces:  {}</li>
+<li> Each state object had 3 attributes: name, row, and column.</li></ul>
+</div>
+<div class="recipe_code">
+  <br/>    <!-- br is a temp fix; fix the css so it isn't needed -->
+<pre>
+  <b>var  stateMap =</b> [
+      { state: "ME", row: 0, col: 10 },
+      { state: "VT", row: 1, col: 9 },
+      { state: "NH", row: 1, col: 10 },
+      { state: "WA", row: 2, col: 0 },
+      { state: "ID", row: 2, col: 1 },
+      { state: "NY", row: 2, col: 8 }
+  ]<b>;</b>
+</pre>
+</div>
+</div>  <!-- recipe_row -->
+
+
+
+<p>To create a variable that has hierarchical data, we will use a variation of the same trick.</p>
+
+<div class="recipe_row">
+  <div class="recipe_text">
+    <ul><li> We will create a variable called <b>produce</b> contains one object</li>
+      <li> This object has 2 attributes:</li>
+      <ul><li> The object's name -- which for the top level object we basically don't use</li>
+        <li>children: an array or list of objects</li></ul>
+    </ul>
+  </div>
+  <div class="recipe_code">
+  <br/>    <!-- br is a temp fix; fix the css so it isn't needed -->
+<pre>
+  var produce = {
+  	name: "produce",
+  	children: [
+    ...
+
+  			] }
+  ] };
+
+</pre>
+</div>
+</div>  <!-- recipe_row -->
+
+<div class="recipe_row">
+  <div class="recipe_text">
+    <ul><li> For each level of the hierarchy up to the last one, we will use the same technique</li>
+      <li>For the last level, each object will have 2 attributes:</li>
+      <ul><li><b>name</b>: the produce's name</li>
+        <li><b>quantity</b>: the amount of produce that was sold</li></ul>
+      </ul>
+  </div>
+  <div class="recipe_code">
+  <br/>    <!-- br is a temp fix; fix the css so it isn't needed -->
+<pre>
+  		{ name: "Fruit",
+  			children: [
+  				{name: "Apple", quantity: 300},
+  				{name: "Banana", quantity: 200},
+  				{ name: "Berries",
+  					children: [
+  						{name: "Raspberries", quantity: 100},
+  						{name: "Strawberries", quantity: 200},
+  						{name: "Blueberries", quantity: 80}
+  					] }
+  			] },
+
+</pre>
+</div>
+</div>  <!-- recipe_row -->
+
+<p> Do the names of the attributes have a special meaning? Nope. You could have used produceName and produceQuantity -- and for that matter produceChildren instead of children -- and it would all still work. So long as your D3 code knows what attribute names you are using,You can use any names you want.</p>
+
+<p> How about the spacing of the code? Does it matter if the code is indented? Again, the answer is no; JavaScript and D3 don't care. But you will: if you don't indent the JSON code, it'll be a lot harder to see if there's a problem.</p>
+
+<h4> Up Next: <a href="circle_packing_3_pack.html">Recipe Step #3: Use the JSON To Calculate the Data about Where to Put the Circles   </a></h4>
 
 <div id= "sandwich-footer">
 </div> <!-- end sandwich-footer -->
