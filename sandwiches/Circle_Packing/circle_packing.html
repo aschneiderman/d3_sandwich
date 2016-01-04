@@ -36,14 +36,14 @@ var produce = {
 	children: [
 		{ name: "Fruit",
 			children: [
+        { name: "Berries",
+        children: [
+          {name: "Raspberries", quantity: 100},
+          {name: "Strawberries", quantity: 200},
+          {name: "Blueberries", quantity: 80}
+        ] },
 				{name: "Apple", quantity: 300},
 				{name: "Banana", quantity: 200},
-				{ name: "Berries",
-					children: [
-						{name: "Raspberries", quantity: 100},
-						{name: "Strawberries", quantity: 200},
-						{name: "Blueberries", quantity: 80}
-					] }
 			] },
 		{ name: "Veggies",
 			children:  [

@@ -48,23 +48,23 @@ function getCircleItems() {
   return {
 	name: "produce",
 	children: [
+    { name: "Veggies",
+    children:  [
+      {name: "Zucchini", quantity: 52},
+      {name: "Peas", quantity: 30},
+      {name: "Carrots", quantity: 60},
+      {name: "Onions", quantity: 70}
+    ] },
 		{ name: "Fruit",
 			children: [
-				{name: "Apple", quantity: 300},
-				{name: "Banana", quantity: 200},
 				{ name: "Berries",
 					children: [
 						{name: "Raspberries", quantity: 100},
 						{name: "Strawberries", quantity: 200},
 						{name: "Blueberries", quantity: 80}
-					] }
+					] },
+          {name: "Apple", quantity: 300},
+          {name: "Banana", quantity: 200},
 			] },
-		{ name: "Veggies",
-			children:  [
-				{name: "Zucchini", quantity: 52},
-				{name: "Peas", quantity: 30},
-				{name: "Carrots", quantity: 60},
-        {name: "Onions", quantity: 70}
-			] }
     ] };
 };

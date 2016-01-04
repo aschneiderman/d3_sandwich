@@ -31,24 +31,24 @@
 var produce = {
 	name: "<i class="produce">produce</i>",
 	children: [
-		{ name: "<i class="Fruit">Fruit</i>",
-			children: [
-				{name: "<i class="Apple">Apple</i>", quantity: <i class="Apple-quantity">300</i>},
-				{name: "<i class="Banana">Banana</i>", quantity: <i class="Banana-quantity">200</i>},
-				{ name: "<i class="Berries">Berries</i>",
-					children: [
-						{name: "<i class="Raspberries">Raspberries</i>", quantity: <i class="Raspberries-quantity">100</i>},
-						{name: "<i class="Strawberries">Strawberries</i>", quantity: <i class="Strawberries-quantity">200</i>},
-						{name: "<i class="Blueberries">Blueberries</i>", quantity: <i class="Blueberries-quantity">80</i>}
-					] }
-			] },
-		{ name: "<i class="Veggies">Veggies</i>",
-			children:  [
-				{name: "<i class="Zucchini">Zucchini</i>", quantity: <i class="Zucchini-quantity">52</i>},
-				{name: "<i class="Peas">Peas</i>", quantity: <i class="Peas-quantity">30</i>},
-				{name: "<i class="Carrots">Carrots</i>", quantity: <i class="Carrots-quantity">60</i>},
-        {name: "<i class="Onions">Onions</i>", quantity: <i class="Onions-quantity">70</i>}
-			] }
+  { name: "<i class="Veggies">Veggies</i>",
+  children:  [
+    {name: "<i class="Zucchini">Zucchini</i>", quantity: <i class="Zucchini-quantity">52</i>},
+    {name: "<i class="Peas">Peas</i>", quantity: <i class="Peas-quantity">30</i>},
+          {name: "<i class="Carrots">Carrots</i>", quantity: <i class="Carrots-quantity">60</i>},
+          {name: "<i class="Onions">Onions</i>", quantity: <i class="Onions-quantity">70</i>}
+  ] },
+	  { name: "<i class="Fruit">Fruit</i>",
+	  children: [
+        { name: "<i class="Berries">Berries</i>",
+        children: [
+                {name: "<i class="Raspberries">Raspberries</i>", quantity: <i class="Raspberries-quantity">100</i>},
+                {name: "<i class="Strawberries">Strawberries</i>", quantity: <i class="Strawberries-quantity">200</i>},
+                {name: "<i class="Blueberries">Blueberries</i>", quantity: <i class="Blueberries-quantity">80</i>}
+            ] },
+            {name: "<i class="Apple">Apple</i>", quantity: <i class="Apple-quantity">300</i>},
+            {name: "<i class="Banana">Banana</i>", quantity: <i class="Banana-quantity">200</i>},
+          ] }
 ] };
       </pre>
     </div>   <!-- end recipe_code -->
@@ -78,9 +78,9 @@ createInputFieldsfromJSON(ToyID, currentJSON);
 <div class="recipe_row">
   <div class="recipe_text">
     <p>In the  <a href="../Abstract_Map_1/abstract_state_0_recipe.html">Abstract Map</a> recipe, we stored the info about the states in an <b>array</b> or list of <b>objects</b></p>
-    <ul><li> To tell the browser we wanted an array, we used brackets:  []</li>
-<li> To tell the browser we wanted an object, we used braces:  {}</li>
-<li> Each state object had 3 attributes: name, row, and column.</li></ul>
+    <ul><li> To tell the browser we wanted an <b>array</b>, we used brackets:  <b>[]</b></li>
+<li> To tell the browser we wanted an <b>object</b>, we used braces:  <b>{}</b></li>
+<li> Each state object had 3 <b>attributes</b>: name, row, and column.</li></ul>
 </div>
 <div class="recipe_code">
   <br/>    <!-- br is a temp fix; fix the css so it isn't needed -->
@@ -103,10 +103,11 @@ createInputFieldsfromJSON(ToyID, currentJSON);
 
 <div class="recipe_row">
   <div class="recipe_text">
-    <ul><li> We will create a variable called <b>produce</b> contains one object</li>
-      <li> This object has 2 attributes:</li>
+    <ul><li> We will create a variable called produce contains one <b>object</b></li>
+      <li> This object has 2 <b>attributes</b>:</li>
       <ul><li> The object's name -- which for the top level object we basically don't use</li>
-        <li>children: an array or list of objects</li></ul>
+        <li>children: an <b>array</b> of <b>objects</b></li></ul>
+      <li> For each level of the hierarchy up to the last one, we will use the same technique</li>
     </ul>
   </div>
   <div class="recipe_code">
@@ -115,45 +116,36 @@ createInputFieldsfromJSON(ToyID, currentJSON);
   var produce = {
   	name: "produce",
   	children: [
-    ...
-
-  			] }
-  ] };
-
+        { name: "Veggies",
+          children: [
+          ...
+          ] }
+    };
 </pre>
 </div>
 </div>  <!-- recipe_row -->
 
 <div class="recipe_row">
   <div class="recipe_text">
-    <ul><li> For each level of the hierarchy up to the last one, we will use the same technique</li>
-      <li>For the last level, each object will have 2 attributes:</li>
+      For the last level, each object will have 2 <b>attributes</b>:
       <ul><li><b>name</b>: the produce's name</li>
-        <li><b>quantity</b>: the amount of produce that was sold</li></ul>
+        <li><b>quantity</b>: the amount of produce that was sold</li>
       </ul>
   </div>
   <div class="recipe_code">
   <br/>    <!-- br is a temp fix; fix the css so it isn't needed -->
 <pre>
-  		{ name: "Fruit",
-  			children: [
-  				{name: "Apple", quantity: 300},
-  				{name: "Banana", quantity: 200},
-  				{ name: "Berries",
-  					children: [
-  						{name: "Raspberries", quantity: 100},
-  						{name: "Strawberries", quantity: 200},
-  						{name: "Blueberries", quantity: 80}
-  					] }
-  			] },
-
+  {name: "Zucchini", quantity: 52},
+  {name: "Peas", quantity: 30},
+  {name: "Carrots", quantity: 60},
+  {name: "Onions", quantity: 70}
 </pre>
 </div>
 </div>  <!-- recipe_row -->
 
-<p> Do the names of the attributes have a special meaning? Nope. You could have used produceName and produceQuantity -- and for that matter produceChildren instead of children -- and it would all still work. So long as your D3 code knows what attribute names you are using,You can use any names you want.</p>
+<p> Do the names of the attributes have a special meaning? Nope. You could have used produceName and produceQuantity -- and for that matter produceChildren instead of children -- and it would all still work. So long as your D3 code knows what attribute names you are using, you can use any names you want.</p>
 
-<p> How about the spacing of the code? Does it matter if the code is indented? Again, the answer is no; JavaScript and D3 don't care. But you will: if you don't indent the JSON code, it'll be a lot harder to see if there's a problem.</p>
+<p>Does it matter if the code is indented? Again, the answer is no; JavaScript and D3 don't care. But if you don't indent the JSON code, it'll be a lot harder to see if there's a problem.</p>
 
 <h4> Up Next: <a href="circle_packing_3_pack.html">Recipe Step #3: Use the JSON To Calculate the Data about Where to Put the Circles   </a></h4>
 
